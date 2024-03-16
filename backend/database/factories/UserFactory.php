@@ -21,10 +21,17 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'nev' => fake()->name(),
+            'telefon' => fake()->text($minNbChars = 11, $maxNbChars = 20),
+            'cim' => fake()->address(),
+            'szulido' => fake()->date(),
+            'szerepkor' =>'ugyfel',
+            'adoazonosito' => fake()->text($minNbChars = 8, $maxNbChars = 8),
+            'adoszam' => fake()->text($minNbChars = 11, $maxNbChars = 11),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
