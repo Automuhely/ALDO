@@ -20,9 +20,9 @@ class MunkalapTetel extends Model
 
     protected $fillable = [
        // 'sorszam',
+       'feladat_id',
         'munkalapszam',
         'szerelo',
-       // 'feladat_id',
         'leiras',
         'alkatresz',
         'alk_megnevezes',
