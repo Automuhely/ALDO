@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('munkavezeto')->references('id')->on('users');
             $table->string('leiras');
             $table->string('elvitel_ido');
+            $table->boolean('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');
             $table->timestamps();
         });

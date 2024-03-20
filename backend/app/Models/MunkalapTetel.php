@@ -33,5 +33,6 @@ class MunkalapTetel extends Model
         'alk_beerk_ido',
         'munka_kezd_ido',
         'munka_vegz_ido',
+        'statusz'
     ];
 }
