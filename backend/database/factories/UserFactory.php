@@ -26,12 +26,13 @@ class UserFactory extends Factory
     {
         return [
             'nev' => fake()->name(),
-            'telefon' => fake()->text($minNbChars = 11, $maxNbChars = 20),
+            'telefon' => fake()->phoneNumber(),
             'cim' => fake()->address(),
             'szulido' => fake()->date(),
             'szerepkor' =>'ugyfel',
-            'adoazonosito' => fake()->text($minNbChars = 8, $maxNbChars = 8),
-            'adoszam' => fake()->text($minNbChars = 11, $maxNbChars = 11),
+            // generál egy fake 10/11 jegyű számot, az aktuális idő alapján, így nem fordul elő duplikálás
+            'adoazonosito' => floor(time()-9999999999),
+            'adoszam' => floor(time()-99999999999),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
