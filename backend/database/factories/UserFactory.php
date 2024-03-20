@@ -31,8 +31,8 @@ class UserFactory extends Factory
             'szulido' => fake()->date(),
             'szerepkor' =>'ugyfel',
             // generál egy fake 10/11 jegyű számot, az aktuális idő alapján, így nem fordul elő duplikálás
-            'adoazonosito' => floor(time()-9999999999),
-            'adoszam' => floor(time()-99999999999),
+            'adoazonosito' => -1*(floor(time()-9999999999)),
+            'adoszam' => -1*(floor(time()-99999999999)),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
