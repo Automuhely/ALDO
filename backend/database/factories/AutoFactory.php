@@ -19,11 +19,23 @@ class AutoFactory extends Factory
     public function definition(): array
     {
         return [
-            'alvazszam' => fake()->text($minNbChars = 17, $maxNbChars = 17),
+            'alvazszam' => $this->generateRandomString(17),
             'marka' => fake()->name(),
-            'motorkod' => fake()->text(),
+            'motorkod' => $this->generateRandomString(3),
             'ugyfel' => User::all()->random(),
-            'evjarat' => rand(1890,2024),
+            'evjarat' => rand(1890, 2024),
         ];
+    }
+
+    protected function generateRandomString($lenght)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $randomString = '';
+
+        for ($i = 0; $i < $lenght; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $randomString;
     }
 }
