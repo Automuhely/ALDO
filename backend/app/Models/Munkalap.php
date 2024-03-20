@@ -17,6 +17,7 @@ class Munkalap extends Model
         'munkavezeto',
         'leiras',
         'elvitel_ido',
-        'uzembentarto'
+        'uzembentarto',
+        'statusz'
     ];
 }

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('alk_beerk_ido');
             $table->date('munka_kezd_ido');
             $table->date('munka_vegz_ido');
+            $table->boolean('statusz');
             $table->timestamps();
         });
     }
