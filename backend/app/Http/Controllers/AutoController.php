@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Auto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AutoController extends Controller
 {
@@ -26,9 +27,17 @@ class AutoController extends Controller
     {
         Auto::findorFail($id)->fill($request->all())->save();
     }
-    
+
     public function destroy($id)
     {
         Auto::findOrFail($id)->delete();
+    }
+
+    // adott ügyfél autóinak kilistázása
+    public function autoja($user)
+    {
+        return DB::table('autos')
+            ->where('ugyfel', $user)
+            ->get();
     }
 }
