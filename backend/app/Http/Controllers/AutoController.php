@@ -9,7 +9,7 @@ class AutoController extends Controller
 {
     public function index()
     {
-        return response()->json(Auto::all());
+        return Auto::all();
     }
 
     public function show($id)
