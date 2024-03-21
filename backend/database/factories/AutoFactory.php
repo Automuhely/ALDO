@@ -26,7 +26,7 @@ class AutoFactory extends Factory
             'alvazszam' => $this->generateRandomString(17),
             'marka' => $markak[array_rand($markak)],
             'motorkod' => $this->generateRandomString(3),
-            'ugyfel' => User::all()->random()->getKeyName(),
+            'ugyfel' => User::all()->random(),
             'evjarat' => rand(1890, 2024),
         ];
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('marka');
             $table->string('motorkod');
             $table->integer('evjarat');
-            $table->foreignId('ugyfel')->references('id')->on('users');
+            $table->foreignId('ugyfel')->constrained('users');
             $table->timestamps();
         });
     }

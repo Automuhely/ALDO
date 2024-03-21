@@ -18,9 +18,11 @@ return new class extends Migration
             $table->foreignId('ugyfel')->references('id')->on('users');
             $table->foreignId('munkavezeto')->references('id')->on('users');
             $table->string('leiras');
-            $table->string('elvitel_ido');
+            $table->date('elvitel_ido')->nullable();
             $table->boolean('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');
+            // frontenden lévő mappában található útvonal, amint létrejön a munkalap pdf
+            $table->string('fajl_utvonala')->default('nincs');
             $table->timestamps();
         });
     }
