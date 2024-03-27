@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Auto;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,13 @@ class MunkalapFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'auto' => Auto::all()->random(),
+            'ugyfel' => User::all()->random(),
+            'munkavezeto' => User::all()->random(),
+            'leiras' => fake()->realText(50),
+            'elvitel_ido' => null,
+            'statusz' => rand(0,1),
+            'uzembentarto' => User::all()->random(),
         ];
     }
 }

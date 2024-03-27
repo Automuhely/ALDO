@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Nette\Utils\Random;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Auto>
@@ -18,9 +19,12 @@ class AutoFactory extends Factory
 
     public function definition(): array
     {
+        // teszteléshez márkanevek
+        $markak = ["BMW", "Skoda", "Mercedes", "Audi", "Ford", "Opel"];
+
         return [
             'alvazszam' => $this->generateRandomString(17),
-            'marka' => fake()->name(),
+            'marka' => $markak[array_rand($markak)],
             'motorkod' => $this->generateRandomString(3),
             'ugyfel' => User::all()->random(),
             'evjarat' => rand(1890, 2024),

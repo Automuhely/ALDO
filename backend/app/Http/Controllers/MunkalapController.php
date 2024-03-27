@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Munkalap;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MunkalapController extends Controller
 {
@@ -26,9 +28,66 @@ class MunkalapController extends Controller
     {
         Munkalap::findorFail($id)->fill($request->all())->save();
     }
-    
+
     public function destroy($id)
     {
         Munkalap::findOrFail($id)->delete();
+    }
+
+    public function szamlaim()
+    {
+        // bejelentkezett felhasználó összes eddigi munkalapja
+        $user = Auth::user();
+        return DB::table('munkalaps as m')
+            ->join('users as u', 'u.id', 'm.ugyfel')
+            ->select('munkalapszam', 'auto', 'statusz', 'm.created_at as letrehozva', 'm.updated_at as modosult', 'fajl_utvonala')
+            ->where('m.ugyfel', $user->id)
+            ->get();
+    }
+
+    public function autoim()
+    {
+        // Bejelentkezett felhasználó autóinak db száma
+        $user = Auth::user();
+        return
+            DB::table('autos')
+            ->select()
+            ->where('ugyfel', $user->id)
+            ->count();
+    }
+
+
+    public function legfrissebb()
+    {
+        /* 
+        aktuális autónak a legutoljára létrehozott munkalapjának
+    
+            státusza
+            dátuma
+            alvázszáma
+            munkalapszáma       
+                  
+        */
+
+        $user = Auth::user();
+
+        $autos = DB::table('autos')
+            ->where('ugyfel', 6)
+            ->pluck('alvazszam');
+
+        $result = DB::table('munkalaps as m')
+            ->whereIn('auto', $autos)
+            ->select('ugyfel', 'munkalapszam', 'auto as alvazszam', 'statusz', 'created_at as letrehozva')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return $result;
+    }
+
+    public function ugyfel($user)
+    {
+        // adott ügyfélnek kiállított összes munkalap
+        return DB::table('munkalaps')
+            ->where('ugyfel', $user)
+            ->get();
     }
 }

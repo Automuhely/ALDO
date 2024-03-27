@@ -9,7 +9,7 @@ class Munkalap extends Model
 {
     use HasFactory;
 
-    protected $primary = 'munkalapszam';
+    protected $primaryKey = 'munkalapszam';
 
     protected $fillabe = [
         'auto',
@@ -18,6 +18,8 @@ class Munkalap extends Model
         'leiras',
         'elvitel_ido',
         'uzembentarto',
-        'statusz'
+        'statusz',
+        // frontenden lévő mappában található útvonal, amint létrejön a munkalap pdf
+        'fajl_utvonala'
     ];
 }

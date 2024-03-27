@@ -17,3 +17,18 @@ Route::apiResource('/autos', AutoController::class);
 Route::apiResource('/feladats', FeladatController::class);
 Route::apiResource('/munkalaps', MunkalapController::class);
 Route::apiResource('/munkalaptetels', MunkalapTetelController::class);
+
+/*                              user                             */
+//bejelentkezett felh. számlái
+Route::get('/szamlaim', [MunkalapController::class, 'szamlaim']);
+//autóinak száma
+Route::get('/autoim', [MunkalapController::class, 'autoim']);
+//összes autóinak legfrissebb munkalapja, avagy státusza
+Route::get('/legfrissebb', [MunkalapController::class, 'legfrissebb']);
+
+
+/*                              szerelő                           */
+// autói listázása
+Route::get('/autoja/{ugyfel}', [AutoController::class, 'autoja']);
+// ügyfélnek kiállított munkalapok
+Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);
