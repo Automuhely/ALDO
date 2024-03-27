@@ -1,4 +1,6 @@
 export default function Home() {
-    return <div>Főoldal</div>;
+    return (
+    <div>Főoldal</div>
+    );
   }
   

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -31,5 +32,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
+    }
+
+    // bejelentkezett felhasználó
+    
+    public function bejelentkezettFelhasznalo(){
+        $user = Auth::user();
+        return $user;
     }
 }
