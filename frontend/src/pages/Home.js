@@ -1,6 +1,19 @@
+import { useEffect } from "react";
+import useAuthContext from "../contexts/AuthContext";
+
 export default function Home() {
-    return (
-    <div>Főoldal</div>
-    );
-  }
-  
+  const { user, getUser } = useAuthContext();
+  /* useEffect(() => {
+    console.log(user);
+    if (!user) {
+      getUser();
+    }
+  }); */
+
+  return (
+    <>
+      <div>Főoldal</div>
+      <p>Bejelentkezett felhasználó: {user?.nev}</p>
+    </>
+  );
+}

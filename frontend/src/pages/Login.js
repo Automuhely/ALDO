@@ -4,26 +4,37 @@ import Container from "react-bootstrap/Container";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "../api/axios";
+import useAuthContext from "../contexts/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-  });
 
-  let token = "";
+  const { loginReg, errors } = useAuthContext();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //bejelentkezés
+    //Összegyűjtjük egyetlen objektumban az űrlap adatokat
+    const adat = {
+      email: email,
+      password: password,
+    };
+    console.log(adat)
+    loginReg(adat, "/login");
+
+  };
+
+  /* let token = "";
   const csrf = () =>
     axios.get("/token").then((response) => {
       console.log(response);
       token = response.data;
-    });
+    }); */
 
-  const handleSubmit = async (e) => {
+  /*   const handleSubmit = async (e) => {
     e.preventDefault();
     await csrf();
     const user = { email: email, password: password, _token: token };
@@ -39,7 +50,7 @@ export default function Login() {
         setErrors(err.response.data.errors);
       }
     }
-  };
+  }; */
 
   return (
     <Container fluid className="w-25 mt-5 m-auto">
