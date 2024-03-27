@@ -40,7 +40,7 @@ class MunkalapController extends Controller
         $user = Auth::user();
         return DB::table('munkalaps as m')
             ->join('users as u', 'u.id', 'm.ugyfel')
-            ->select('munkalapszam', 'auto', 'statusz', 'm.created_at as letrehozva', 'm.updated_at as modosult', 'fajl_utvonala')
+            ->select('munkalapszam', 'auto', 'statusz', 'm.created_at as letrehozva', 'm.updated_at as modosult', 'szamlasorszam')
             ->where('m.ugyfel', $user->id)
             ->get();
     }
