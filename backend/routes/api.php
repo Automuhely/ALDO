@@ -32,3 +32,9 @@ Route::get('/legfrissebb', [MunkalapController::class, 'legfrissebb']);
 Route::get('/autoja/{ugyfel}', [AutoController::class, 'autoja']);
 // ügyfélnek kiállított munkalapok
 Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);
+
+// 
+Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);
+// a 0= folyamat 1=befejezett
+Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);
+Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);

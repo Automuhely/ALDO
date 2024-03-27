@@ -22,4 +22,6 @@ class Munkalap extends Model
         // frontenden lévő mappában található útvonal, amint létrejön a munkalap pdf
         'fajl_utvonala'
     ];
+
+    
 }

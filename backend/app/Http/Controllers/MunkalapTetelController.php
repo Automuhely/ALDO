@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MunkalapTetel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MunkalapTetelController extends Controller
 {
@@ -31,4 +32,6 @@ class MunkalapTetelController extends Controller
     {
         MunkalapTetel::findOrFail($id)->delete();
     }
+
+    
 }

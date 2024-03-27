@@ -35,4 +35,5 @@ class MunkalapTetel extends Model
         'munka_vegz_ido',
         'statusz'
     ];
+    
 }

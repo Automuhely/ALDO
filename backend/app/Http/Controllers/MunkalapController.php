@@ -90,4 +90,20 @@ class MunkalapController extends Controller
             ->where('ugyfel', $user)
             ->get();
     }
+
+    public function folyamatmunka()
+    {
+        return DB::table('munkalaps as m')
+            ->where("statusz" , "=","0")
+            ->get();
+    }
+
+    public function befejezettmunka()
+    {
+        return DB::table('munkalaps as m')
+            ->where("statusz" , "=","1")
+            ->get();
+    }
+
+    
 }
