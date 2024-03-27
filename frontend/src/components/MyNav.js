@@ -1,8 +1,11 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import useAuthContext from "../contexts/AuthContext";
 
 export default function MyNav() {
+  const { user, logout } = useAuthContext();
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -11,7 +14,19 @@ export default function MyNav() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Főoldal</Nav.Link>
-            <Nav.Link href="/login">Bejelentkezés</Nav.Link>
+            {user ? (
+              <>
+                <Nav.Link href="#" onClick={logout}>
+                  Kijelentkezés
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link href="/login">Bejelentkezés</Nav.Link>
+
+                <Nav.Link href="/register">Regisztráció</Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

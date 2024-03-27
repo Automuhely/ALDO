@@ -19,8 +19,8 @@ class Munkalap extends Model
         'elvitel_ido',
         'uzembentarto',
         'statusz',
-        // frontenden lévő mappában található útvonal, amint létrejön a munkalap pdf
-        'fajl_utvonala'
+        // frontenden lévő mappában található útvonal, amint létrejön a számla pdf
+        'szamlasorszam'
     ];
 
     
