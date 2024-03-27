@@ -22,7 +22,5 @@ class DatabaseSeeder extends Seeder
          Munkalap::factory(10)->create();
          Feladat::factory(10)->create();
          MunkalapTetel::factory(10)->create();
-         
-         MunkalapTetel::factory(10)->create();
     }
 }
