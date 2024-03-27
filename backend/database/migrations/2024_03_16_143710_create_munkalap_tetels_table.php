@@ -18,15 +18,15 @@ return new class extends Migration
             $table->foreignId('munkalapszam')->references('munkalapszam')->on('munkalaps');
             $table->foreignId('szerelo')->references('id')->on('users');
             $table->string('leiras');
-            $table->string('alkatresz');
-            $table->string('alk_marka');
-            $table->tinyInteger('mennyiseg');
-            $table->integer('alkatresz_ar');
-            $table->date('alk_rend_ido');
-            $table->date('alk_beerk_ido');
-            $table->date('munka_kezd_ido');
-            $table->date('munka_vegz_ido');
-            $table->boolean('statusz');
+            $table->string('alkatresz')->nullable()->default(null);
+            $table->string('alk_marka')->nullable()->default(null);
+            $table->tinyInteger('mennyiseg')->nullable()->default(null);
+            $table->integer('alkatresz_ar')->nullable()->default(null);
+            $table->date('alk_rend_ido')->nullable()->default(null);
+            $table->date('alk_beerk_ido')->nullable()->default(null);
+            $table->date('munka_kezd_ido')->nullable()->default('2024-01-01');
+            $table->date('munka_vegz_ido')->nullable()->default(null);
+            $table->boolean('statusz')->nullable()->default(null);
             $table->timestamps();
         });
     }

@@ -17,7 +17,8 @@ class FeladatFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'megnevezes' => fake()->realText(25, 5),
+            'munkadij' => rand(20000, 100000),
         ];
     }
 }

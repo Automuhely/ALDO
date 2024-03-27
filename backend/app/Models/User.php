@@ -21,7 +21,7 @@ class User extends Authenticatable
         'telefon',
         'cim',
         'szulido',
-        'szerep',
+        'szerepkor',
         'email',
         'adoazonosito',
         'adoszam',
