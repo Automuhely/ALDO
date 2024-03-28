@@ -91,17 +91,26 @@ class MunkalapController extends Controller
             ->get();
     }
 
-    public function folyamatmunka()
+    public function elnemkezdetmunka()
     {
         return DB::table('munkalaps as m')
             ->where("statusz" , "=","0")
             ->get();
     }
 
-    public function befejezettmunka()
+    public function folyamatmunka()
     {
         return DB::table('munkalaps as m')
             ->where("statusz" , "=","1")
+            ->get();
+    }
+
+
+
+    public function befejezettmunka()
+    {
+        return DB::table('munkalaps as m')
+            ->where("statusz" , "=","2")
             ->get();
     }
 

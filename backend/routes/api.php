@@ -38,3 +38,4 @@ Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);
 // a 0= folyamat 1=befejezett
 Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);
 Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
+Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);

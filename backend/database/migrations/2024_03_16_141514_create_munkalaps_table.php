@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('munkavezeto')->references('id')->on('users');
             $table->string('leiras');
             $table->date('elvitel_ido')->nullable();
-            $table->boolean('statusz');
+            $table->tinyInteger('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');
             // frontenden lévő mappában található útvonal, amint létrejön a munkalap pdf
             $table->string('szamlasorszam')->default('nincs');
