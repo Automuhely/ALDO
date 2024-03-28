@@ -10,8 +10,11 @@ class Munkalap extends Model
     use HasFactory;
 
     protected $primaryKey = 'munkalapszam';
+    const STATUS_EL_SEM_KEZDETT = 0;
+    const STATUS_FOLYAMATBAN = 1;
+    const STATUS_BEFEJEZETT = 2;
 
-    protected $fillabe = [
+    protected $fillable = [
         'auto',
         'ugyfel',
         'munkavezeto',

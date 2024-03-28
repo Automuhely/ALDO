@@ -24,7 +24,7 @@ class MunkalapFactory extends Factory
             'munkavezeto' => User::all()->random(),
             'leiras' => fake()->realText(50),
             'elvitel_ido' => null,
-            'statusz' => rand(0,1),
+            'statusz' => rand(0,2),
             'uzembentarto' => User::all()->random(),
         ];
     }
