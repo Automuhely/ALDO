@@ -25,7 +25,7 @@ class Auto extends Model
     public function getUgyfelnevAttribute()
     {
         // az ügyfél mező alapján, a másik táblából a nevét kérdezem le
-        return User::find($this->ugyfel)->nev;
+        return User::find($this->ugyfel)->name;
     }
 
     protected $hidden = ["created_at", "updated_at"];

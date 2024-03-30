@@ -22,7 +22,7 @@ return new class extends Migration
             $table->tinyInteger('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');
             // frontenden lévő mappában található útvonal, amint létrejön a munkalap pdf
-            $table->string('szamlasorszam')->default('nincs');
+            $table->string('szamlasorszam')->nullable()->default(null);
             $table->timestamps();
         });
     }

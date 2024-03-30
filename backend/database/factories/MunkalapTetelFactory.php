@@ -24,7 +24,7 @@ class MunkalapTetelFactory extends Factory
         do {
             $feladat_id = Feladat::all()->random()->id;
             $munkalapszam = Munkalap::all()->random()->munkalapszam;
-            $szerelo = User::where('nev', 'Szerelo Janos')->first()->id; // Retrieve the first User with name 'Szerelo Janos' and get its id
+            $szerelo = User::where('name', 'Szerelo Janos')->first()->id; // Retrieve the first User with name 'Szerelo Janos' and get its id
             $munkalapTetel = MunkalapTetel::where('feladat_id', $feladat_id)
                 ->where('munkalapszam', $munkalapszam)
                 ->get();

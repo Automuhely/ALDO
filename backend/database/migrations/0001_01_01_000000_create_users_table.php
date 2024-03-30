@@ -16,13 +16,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nev');
-            $table->string('telefon');
-            $table->string('cim');
+            $table->string('name');
+            $table->string('telefon')->nullable()->default(null);
+            $table->string('cim')->nullable()->default(null);
             $table->date('szulido')->nullable()->default('2000-01-01');
-            $table->string('szerepkor');
-            $table->string('adoazonosito')->nullable()->default('nincs');
-            $table->string('adoszam')->nullable()->default('nincs');
+            $table->string('szerepkor')->default(0);
+            $table->string('adoazonosito')->nullable()->default(null);
+            $table->string('adoszam')->nullable()->default(null);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -46,7 +46,7 @@ return new class extends Migration
         });
 
         User::create([
-            'nev' => "Szerelo Pista",
+            'name' => "Szerelo Pista",
             'telefon' => '06702001234',
             'cim' => '1234 Budapest, Szerelők útja 1.',
             'szulido' => '1980-01-01',
@@ -59,7 +59,7 @@ return new class extends Migration
         ]);
 
         User::create([
-            'nev' => "Szerelo Janos",
+            'name' => "Szerelo Janos",
             'telefon' => '06702001235',
             'cim' => '1234 Budapest, Szerelők útja 1.',
             'szulido' => '1980-01-02',

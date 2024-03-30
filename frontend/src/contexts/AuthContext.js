@@ -12,6 +12,8 @@ export const AuthProvider = ({ children }) => {
     email: "",
     password: "",
     password_confirmation: "",
+    cim: "",
+    telefon: "",
   });
   //const csrf = () => axios.get("/sanctum/csrf-cookie");
   let token = "";
@@ -38,7 +40,6 @@ export const AuthProvider = ({ children }) => {
 
   const loginReg = async ({ ...adat }, vegpont) => {
     await csrf();
-    console.log(token);
     adat._token = token;
     console.log(adat);
     //lekérjük a csrf tokent
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     //bejelentkezés
     //Összegyűjtjük egyetlen objektumban az űrlap adatokat
 
-    // Megrpóbáljuk elküldeni a /login végpontra az adatot
+    // Megpróbáljuk elküldeni a /login végpontra az adatot
     // hiba esetén kiiratjuk a hibaüzenetet
     try {
       await axios.post(vegpont, adat);

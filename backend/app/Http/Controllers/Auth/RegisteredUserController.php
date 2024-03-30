@@ -24,12 +24,19 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+         /* Hibaüzenetek megjelenítéséhez */  
+            'cim' => ['required', 'string', 'max:255'],
+            'telefon' => ['required', 'string', 'max:255', 'unique:'.User::class],
+            'szulido' => ['required', 'date']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'cim' => $request->cim,
+            'telefon' => $request->telefon,
+            'szulido' => $request->szulido, 
         ]);
 
         event(new Registered($user));

@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <div>Főoldal</div>
-      <p>Bejelentkezett felhasználó: {user?.nev}</p>
+      <p>Bejelentkezett felhasználó: {user?.name}</p>
     </>
   );
 }

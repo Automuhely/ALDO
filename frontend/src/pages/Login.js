@@ -7,7 +7,6 @@ import axios from "../api/axios";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function Login() {
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,36 +26,11 @@ export default function Login() {
 
   };
 
-  /* let token = "";
-  const csrf = () =>
-    axios.get("/token").then((response) => {
-      console.log(response);
-      token = response.data;
-    }); */
-
-  /*   const handleSubmit = async (e) => {
-    e.preventDefault();
-    await csrf();
-    const user = { email: email, password: password, _token: token };
-    try {
-      await axios.post("/login", user);
-      console.log("Bejelentkezés");
-      console.log("email:", email);
-      console.log("password:", password);
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-      if (err.response.status === 422) {
-        setErrors(err.response.data.errors);
-      }
-    }
-  }; */
-
   return (
     <Container fluid className="w-25 mt-5 m-auto">
       Bejelentkezés
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
@@ -72,7 +46,7 @@ export default function Login() {
             )}
           </div>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="password">
           <Form.Label>Jelszó</Form.Label>
           <Form.Control
             type="password"
