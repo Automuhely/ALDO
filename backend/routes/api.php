@@ -18,6 +18,7 @@ Route::apiResource('/feladats', FeladatController::class);
 Route::apiResource('/munkalaps', MunkalapController::class);
 Route::apiResource('/munkalaptetels', MunkalapTetelController::class);
 
+
 /*                              user                             */
 //bejelentkezett felh. számlái
 Route::get('/szamlaim', [MunkalapController::class, 'szamlaim']);
@@ -35,7 +36,6 @@ Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);
 
 // 
 Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);
-// a 0= folyamat 1=befejezett
 Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);
 Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
 Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);

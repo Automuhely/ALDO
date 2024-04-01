@@ -56,7 +56,6 @@ class MunkalapController extends Controller
             ->count();
     }
 
-
     public function legfrissebb()
     {
         /* 
@@ -104,8 +103,6 @@ class MunkalapController extends Controller
             ->where("statusz" , "=","1")
             ->get();
     }
-
-
 
     public function befejezettmunka()
     {
