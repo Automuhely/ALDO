@@ -5,6 +5,8 @@ import Register from "./pages/Register.js";
 import NoPage from "./pages/NoPage.js";import './App.css';
 import BasicLayout from "./layouts/BasicLayout.js";
 import MunkaAr from "./pages/MunkaAr.js";
+import Kapcsolat from "./pages/Kapcsolat.js";
+import Galeria from "./pages/Galeria.js";
 import { AuthProvider } from "./contexts/AuthContext.js";
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NoPage />} />
         <Route path="/munkaar" element={<MunkaAr/>}/> 
+        <Route path="/kapcsolat" element={<Kapcsolat/>}/>
+        <Route path="/galeria" element={<Galeria/>}/>
       </Route>
     </Routes>
  //  </BrowserRouter>

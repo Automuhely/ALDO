@@ -11,7 +11,7 @@ export default function MunkaAr(){
                 const response = await axios.get('/api/arak'); 
                 setMunkak(response.data); 
             } catch (error) {
-                console.error('Hiba történt a munkák lekérésekor:', error);
+                console.error('Hiba történt a munkadíjak lekérésekor:', error);
             }
         }
   
