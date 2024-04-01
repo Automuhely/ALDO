@@ -14,6 +14,7 @@ export default function MyNav() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Főoldal</Nav.Link>
+            <Nav.Link href="/munkaar">Munkadíjak</Nav.Link>
             {user ? (
               <>
                 <Nav.Link href="#" onClick={logout}>
