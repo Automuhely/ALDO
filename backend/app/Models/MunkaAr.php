@@ -11,4 +11,6 @@ class MunkaAr extends Model
         'megnevezes',
         'ara'
     ];
+
+    
 }
