@@ -4,7 +4,7 @@ import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
 import NoPage from "./pages/NoPage.js";import './App.css';
 import BasicLayout from "./layouts/BasicLayout.js";
-import { AuthProvider } from "./contexts/AuthContext.js";
+import Profile from "./pages/Profile.js";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
       <Route path="/" element={<BasicLayout/>}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profil" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NoPage />} />
       </Route>
