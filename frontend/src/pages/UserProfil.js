@@ -7,7 +7,7 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "../api/axios";
 
-export default function Profile() {
+export default function UserProfile() {
   // const [password, setPassword] = useState("");
   // const [password_confirmation, setPasswordConfirmation] = useState("");
   const [name, setName] = useState("");
