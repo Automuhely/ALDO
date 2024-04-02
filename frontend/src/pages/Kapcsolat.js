@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import useAuthContext from "../contexts/AuthContext";
 
 export default function Kapcsolat() {
+  const { user, getUser } = useAuthContext();
+
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    }
+  }, [user]);
   return (
     <>
       <Form.Group className="mb-3">
