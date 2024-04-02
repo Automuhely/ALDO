@@ -20,10 +20,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profil" element={<Profile />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<NoPage />} />
         <Route path="/munkaar" element={<MunkaAr/>}/> 
         <Route path="/kapcsolat" element={<Kapcsolat/>}/>
         <Route path="/galeria" element={<Galeria/>}/>
+        <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
  //  </BrowserRouter>
