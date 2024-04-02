@@ -14,10 +14,12 @@ export default function MyNav() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Főoldal</Nav.Link>
-
-             {/* Bejelentkezett felhasználó láthatja */}
+            <Nav.Link href="/galeria">Galéria</Nav.Link>
+            <Nav.Link href="/munkaar">Munkadíjak</Nav.Link>
+            <Nav.Link href="/kapcsolat">Kapcsolat</Nav.Link>
             {user ? (
               <>
+              {/* Bejelentkezett felhasználó láthatja */}
                 <Nav.Link href="#" onClick={logout}>Kijelentkezés</Nav.Link>
                 <Nav.Link href="/profil">Profilom</Nav.Link>
               </>
