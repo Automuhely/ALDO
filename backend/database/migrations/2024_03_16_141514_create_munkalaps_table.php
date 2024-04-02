@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('auto')->references('alvazszam')->on('autos');
             $table->foreignId('ugyfel')->references('id')->on('users');
             $table->foreignId('munkavezeto')->references('id')->on('users');
-            $table->string('leiras');
+            $table->string('altalanosLeiras');
             $table->date('elvitel_ido')->nullable();
             $table->tinyInteger('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');

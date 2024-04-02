@@ -18,7 +18,7 @@ class Munkalap extends Model
         'auto',
         'ugyfel',
         'munkavezeto',
-        'leiras',
+        'altalanosLeiras',
         'elvitel_ido',
         'uzembentarto',
         'statusz',
