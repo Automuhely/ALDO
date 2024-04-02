@@ -7,7 +7,7 @@ import axios from "../api/axios";
 
 export default function Profile() {
   // const [password, setPassword] = useState("");
-  //const [password_confirmation, setPasswordConfirmation] = useState("");
+  // const [password_confirmation, setPasswordConfirmation] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [telefon, setTelefon] = useState("");
@@ -15,8 +15,9 @@ export default function Profile() {
   const [szulido, setSzulido] = useState("");
   const [adoszam, setAdoszam] = useState("");
   const [adoazonosito, setAdoazonosito] = useState("");
+  // const [_token, setToken] = useState("");
 
-  const { user, getUser } = useAuthContext();
+  const { user, getUser, } = useAuthContext();
 
   useEffect(() => {
     if (!user) {
@@ -34,7 +35,7 @@ export default function Profile() {
 
   const bekuld = async (e) => {
     e.preventDefault();
-
+  //  setToken(axios.get("/token"));
     const adat = {
       name: name,
       email: email,
@@ -44,16 +45,14 @@ export default function Profile() {
       adoazonosito: adoazonosito,
       adoszam: adoszam,
       szerepkor: user.szerepkor,
+     // _token: _token,
     };
 
     console.log(adat);
 
-    try {
-      const response = await axios.put("/api/users/" + user.id, adat);
-      console.log("Siker: ", response.data);
-    } catch (error) {
-      console.error("Hiba:", error);
-    }
+
+    /* sadasdasdasdasdasdsad */
+
   };
 
   return (
