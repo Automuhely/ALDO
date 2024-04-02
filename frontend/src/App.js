@@ -7,6 +7,8 @@ import BasicLayout from "./layouts/BasicLayout.js";
 import MunkaAr from "./pages/MunkaAr.js";
 import Kapcsolat from "./pages/Kapcsolat.js";
 import Galeria from "./pages/Galeria.js";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { AuthProvider } from "./contexts/AuthContext.js";
 
 function App() {
