@@ -70,8 +70,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const szamlak = async () => {
+    try {
+      const autoim = await axios.get("/api/szamlaim");
+      console.log("Számláim: ",autoim.data);
+      return autoim.data
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 422) {
+        console.log(error.response.data.errors);
+      }
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ logout, loginReg, errors, getUser, user }}>
+    <AuthContext.Provider value={{ logout, loginReg, errors, getUser, user, szamlak }}>
       {children}
     </AuthContext.Provider>
   );
