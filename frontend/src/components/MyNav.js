@@ -19,11 +19,12 @@ export default function MyNav() {
             <Nav.Link href="/kapcsolat">Kapcsolat</Nav.Link>
             {user ? (
               <>
-                <Nav.Link href="#" onClick={logout}>
-                  Kijelentkezés
-                </Nav.Link>
+              {/* Bejelentkezett felhasználó láthatja */}
+                <Nav.Link href="#" onClick={logout}>Kijelentkezés</Nav.Link>
+                <Nav.Link href="/profil">Profilom</Nav.Link>
               </>
             ) : (
+              /* Guest, vendég láthatja */
               <>
                 <Nav.Link href="/login">Bejelentkezés</Nav.Link>
 

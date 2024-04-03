@@ -1,5 +1,14 @@
 .required-field::before {
-    content: "*";
-    color: red;
-    float: right;
-  }
+  content: "*";
+  color: red;
+  float: right;
+}
+
+.profilInputok:disabled {
+  background-color: transparent;
+}
+
+.profilInputok:not(:disabled) {
+  border: solid 2px rgb(79, 122, 178);
+  padding: calc(0.375rem - 1px) calc(0.75rem - 1px);
+}

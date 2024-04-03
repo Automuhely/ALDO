@@ -3,17 +3,18 @@ import useAuthContext from "../contexts/AuthContext";
 
 export default function Home() {
   const { user, getUser } = useAuthContext();
-  /* useEffect(() => {
+
+  useEffect(() => {
     console.log(user);
     if (!user) {
       getUser();
     }
-  }); */
+  }, [user]);
 
   return (
     <>
       <div>Főoldal</div>
-      <p>Bejelentkezett felhasználó: {user?.name}</p>
+      {/* <p>Bejelentkezett felhasználó: {user?.name}</p> */}
     </>
   );
 }

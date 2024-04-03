@@ -1,0 +1,10 @@
+
+
+npm install axios
+npm install react-bootstrap bootstrap
+npm i -D react-router-dom
+
+
+
+
+npm install react-table

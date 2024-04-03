@@ -22,7 +22,7 @@ class MunkalapFactory extends Factory
             'auto' => Auto::all()->random(),
             'ugyfel' => User::all()->random(),
             'munkavezeto' => User::all()->random(),
-            'leiras' => fake()->realText(50),
+            'altalanosLeiras' => fake()->realText(50),
             'elvitel_ido' => null,
             'statusz' => rand(0,2),
             'uzembentarto' => User::all()->random(),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Munkalap;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -40,12 +41,23 @@ class MunkalapController extends Controller
         $user = Auth::user();
         return DB::table('munkalaps as m')
             ->join('users as u', 'u.id', 'm.ugyfel')
-            ->select('munkalapszam', 'auto', 'statusz', 'm.created_at as letrehozva', 'm.updated_at as modosult', 'szamlasorszam')
+            ->select('*')
             ->where('m.ugyfel', $user->id)
             ->get();
     }
 
     public function autoim()
+    {
+        // Bejelentkezett felhasználó autóinak db száma
+        $user = Auth::user();
+        return
+            DB::table('autos')
+            ->select()
+            ->where('ugyfel', $user->id)
+            ->get();
+    }
+
+    public function autoimCount()
     {
         // Bejelentkezett felhasználó autóinak db száma
         $user = Auth::user();

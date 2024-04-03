@@ -6,16 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   
+
     public function up(): void
     {
         Schema::create('munkalaps', function (Blueprint $table) {
             $table->id('munkalapszam');
-            $table->string('auto');
-            $table->foreign('auto')->references('alvazszam')->on('autos');
+            $table->foreignId('auto')->references('id')->on('autos');
             $table->foreignId('ugyfel')->references('id')->on('users');
             $table->foreignId('munkavezeto')->references('id')->on('users');
-            $table->string('leiras');
+            $table->string('altalanosLeiras');
             $table->date('elvitel_ido')->nullable();
             $table->tinyInteger('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');
