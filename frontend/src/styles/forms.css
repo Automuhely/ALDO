@@ -5,21 +5,10 @@
 }
 
 .profilInputok:disabled {
-  margin: 0;
-  padding: 5px;
-}
-.profilInputok:not(:disabled) {
-  margin: 0;
-  padding: 4px;
-}
-
-.profilInputok:disabled {
   background-color: transparent;
-  color: black;
-  border: none;
 }
 
 .profilInputok:not(:disabled) {
-  border: solid 1px rgb(228, 228, 228);
-  border-radius: 5px;
+  border: solid 2px rgb(79, 122, 178);
+  padding: calc(0.375rem - 1px) calc(0.75rem - 1px);
 }
