@@ -54,6 +54,17 @@ class MunkalapController extends Controller
             DB::table('autos')
             ->select()
             ->where('ugyfel', $user->id)
+            ->get();
+    }
+
+    public function autoimCount()
+    {
+        // Bejelentkezett felhasználó autóinak db száma
+        $user = Auth::user();
+        return
+            DB::table('autos')
+            ->select()
+            ->where('ugyfel', $user->id)
             ->count();
     }
 
