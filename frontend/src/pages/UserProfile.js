@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useAuthContext, { AuthProvider } from "../contexts/AuthContext";
+import useAuthContext from "../contexts/AuthContext";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -48,7 +48,7 @@ export default function UserProfile() {
       // meghívjuk az adatot a backendről külső függvénnyel, aszinkron módon
       szamlakBetolt();
     }
-  }, [user, getUser]);
+  }, [user]);
 
   async function szamlakBetolt() {
     /*                                                                          CSRF ??????    */
@@ -177,9 +177,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={name}
-                        onChange={(e) => (
-                          setName(e.target.value), console.log(e.target.value)
-                        )}
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -191,10 +189,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={telefon}
-                        onChange={(e) => (
-                          setTelefon(e.target.value),
-                          console.log(e.target.value)
-                        )}
+                        onChange={(e) => setTelefon(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -206,9 +201,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={cim}
-                        onChange={(e) => (
-                          setCim(e.target.value), console.log(e.target.value)
-                        )}
+                        onChange={(e) => setCim(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -220,10 +213,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={szulido}
-                        onChange={(e) => (
-                          setSzulido(e.target.value),
-                          console.log(e.target.value)
-                        )}
+                        onChange={(e) => setSzulido(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -236,10 +226,7 @@ export default function UserProfile() {
                           disabled
                           type="text"
                           value={adoazonosito}
-                          onChange={(e) => (
-                            setAdoazonosito(e.target.value),
-                            console.log(e.target.value)
-                          )}
+                          onChange={(e) => setAdoazonosito(e.target.value)}
                         />
                       </td>
                     </tr>
@@ -252,10 +239,7 @@ export default function UserProfile() {
                           disabled
                           type="text"
                           value={adoszam}
-                          onChange={(e) => (
-                            setAdoszam(e.target.value),
-                            console.log(e.target.value)
-                          )}
+                          onChange={(e) => setAdoszam(e.target.value)}
                         />
                       </td>
                     </tr>
@@ -269,9 +253,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={email}
-                        onChange={(e) => (
-                          setEmail(e.target.value), console.log(e.target.value)
-                        )}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </td>
                   </tr>
