@@ -7,6 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [tokenem, setTokenem] = useState("");
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -19,11 +20,14 @@ export const AuthProvider = ({ children }) => {
     szulido: "",
   });
   //const csrf = () => axios.get("/sanctum/csrf-cookie");
-  let token = "";
+
   const csrf = () =>
     axios.get("/token").then((response) => {
       console.log(response);
-      token = response.data;
+      console.log(response.data);
+      setTokenem(response.data);
+      console.log("AuthContext Token: ", response.data);
+      return tokenem;
     });
 
   //bejelentkezett felhasználó adatainak lekérdezése
@@ -31,11 +35,11 @@ export const AuthProvider = ({ children }) => {
     const { data } = await axios.get("/api/user");
     setUser(data);
   };
-  
+
   const logout = async () => {
     await csrf();
-    console.log(token);
-    axios.post("/logout", { _token: token }).then((resp) => {
+    console.log(tokenem);
+    axios.post("/logout", { _token: tokenem }).then((resp) => {
       setUser(null);
       console.log(resp);
     });
@@ -43,12 +47,12 @@ export const AuthProvider = ({ children }) => {
 
   const loginReg = async ({ ...adat }, vegpont) => {
     await csrf();
-    adat._token = token;
-    console.log(adat);
+    adat._token = tokenem;
+    console.log("token", adat);
     //lekérjük a csrf tokent
-   
-  //  await csrf();
-   
+
+    //  await csrf();
+
     //bejelentkezés
     //Összegyűjtjük egyetlen objektumban az űrlap adatokat
 
@@ -73,8 +77,8 @@ export const AuthProvider = ({ children }) => {
   const szamlak = async () => {
     try {
       const autoim = await axios.get("/api/szamlaim");
-      console.log("Számláim: ",autoim.data);
-      return autoim.data
+      // console.log("Számláim: ",autoim.data);
+      return autoim.data;
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status === 422) {
@@ -84,7 +88,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ logout, loginReg, errors, getUser, user, szamlak }}>
+    <AuthContext.Provider
+      value={{ logout, loginReg, errors, getUser, user, szamlak, csrf }}
+    >
       {children}
     </AuthContext.Provider>
   );
