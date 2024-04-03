@@ -9,11 +9,10 @@ class Auto extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'alvazszam';
-    public $incrementing = false;
-    protected $keyType = 'string';
-
     protected $fillable = [
+        'alvazszam',
+        'becenev',
+        'rendszam',
         'marka',
         'motorkod',
         'evjarat',
