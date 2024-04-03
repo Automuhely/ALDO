@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useAuthContext, { AuthProvider } from "../contexts/AuthContext";
+import useAuthContext from "../contexts/AuthContext";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,8 +9,7 @@ import Button from "react-bootstrap/Button";
 import axios from "../api/axios";
 
 export default function UserProfile() {
-  // const [password, setPassword] = useState("");
-  // const [password_confirmation, setPasswordConfirmation] = useState("");
+  /* Profiladatok módosításához */
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [telefon, setTelefon] = useState("");
@@ -18,7 +17,6 @@ export default function UserProfile() {
   const [szulido, setSzulido] = useState("");
   const [adoszam, setAdoszam] = useState("");
   const [adoazonosito, setAdoazonosito] = useState("");
-  const [szamlaim, setSzamlaim] = useState([{}]);
 
   /* Új autó hozzáadásához */
   const [becenev, setBecenev] = useState("");
@@ -28,10 +26,15 @@ export default function UserProfile() {
   const [motorkod, setMotorkod] = useState("");
   const [evjarat, setEvjarat] = useState("");
 
+  /* Szerkesztéshez */
   const [isAutoUrlapNyitva, setIsAutoUrlapNyitva] = useState(0);
   const [isProfilSzerkesztheto, setIsProfilSzerkesztheto] = useState(0);
 
-  // const [token, setToken] = useState("");
+  /* Profilhoz tartozó elemek, táblák */
+  const [szamlaim, setSzamlaim] = useState([{}]);
+  const [autoim, setAutoim] = useState([{}]);
+
+  /* Contextek */
   const { user, getUser, csrf } = useAuthContext();
 
   useEffect(() => {
@@ -48,20 +51,26 @@ export default function UserProfile() {
       // meghívjuk az adatot a backendről külső függvénnyel, aszinkron módon
       szamlakBetolt();
     }
-  }, [user, getUser]);
+  }, [user]);
 
   async function szamlakBetolt() {
     /*                                                                          CSRF ??????    */
     await csrf();
     try {
       const szamlakAdat = await axios.get("/api/szamlaim").then((e) => {
-        console.log("e.data:", e.data);
+        // console.log("számlák betölt....:", e.data);
+        return e.data;
+      });
+      const autoimAdat = await axios.get("/api/autoim").then((e) => {
+        //console.log("autóim betölt....:", e.data);
         return e.data;
       });
       /*                                                                        try catch ?????  */
-      //const token = await csrf();
+      // const token = await csrf();
       setSzamlaim(szamlakAdat);
-      console.log("setSzámláim: ", szamlaim);
+      // console.log("setSzámláim: ", szamlaim);
+      setAutoim(autoimAdat);
+      //console.log("setAutoim: ", autoim);
     } catch (error) {
       console.log(error);
     }
@@ -80,11 +89,11 @@ export default function UserProfile() {
       evjarat: evjarat,
       _token: token,
     };
-    console.log("ADAT", adat);
+    console.log("Új autó beküldés...", adat);
     /* Beküldés kódja */
     try {
       const response = await axios.post("/api/autos", adat);
-      console.log("Siker:", response.data);
+      console.log("Új autó elküldve SIKERESEN:", response.data);
     } catch (error) {
       console.error("Hiba:", error);
     }
@@ -105,12 +114,12 @@ export default function UserProfile() {
       szerepkor: user.szerepkor,
       _token: token,
     };
-    console.log(adat);
+    console.log("Profil Beküldés....", adat);
     try {
       let vegpont = "/api/users/" + user.id;
       // console.log("VÉGPONT:", vegpont);
       const response = await axios.put(vegpont, adat);
-      console.log("Siker:", response.data);
+      console.log("Profil beküldés SIKERES", response.data);
     } catch (error) {
       console.error("Hiba:", error);
     }
@@ -135,7 +144,7 @@ export default function UserProfile() {
                         setIsProfilSzerkesztheto(1);
                         let profilInputok =
                           document.querySelectorAll(".profilInputok");
-                        console.log(profilInputok);
+                        // console.log("profilInputlista", profilInputok);
                         profilInputok.forEach((input) => {
                           input.removeAttribute("disabled");
                         });
@@ -146,7 +155,7 @@ export default function UserProfile() {
                         setIsProfilSzerkesztheto(0);
                         let profilInputok =
                           document.querySelectorAll(".profilInputok");
-                        console.log(profilInputok);
+                        // console.log("profilInputlista", profilInputok);
                         profilInputok.forEach((input) => {
                           input.setAttribute("disabled", true);
                         });
@@ -177,9 +186,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={name}
-                        onChange={(e) => (
-                          setName(e.target.value), console.log(e.target.value)
-                        )}
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -191,10 +198,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={telefon}
-                        onChange={(e) => (
-                          setTelefon(e.target.value),
-                          console.log(e.target.value)
-                        )}
+                        onChange={(e) => setTelefon(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -206,9 +210,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={cim}
-                        onChange={(e) => (
-                          setCim(e.target.value), console.log(e.target.value)
-                        )}
+                        onChange={(e) => setCim(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -220,10 +222,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={szulido}
-                        onChange={(e) => (
-                          setSzulido(e.target.value),
-                          console.log(e.target.value)
-                        )}
+                        onChange={(e) => setSzulido(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -236,10 +235,7 @@ export default function UserProfile() {
                           disabled
                           type="text"
                           value={adoazonosito}
-                          onChange={(e) => (
-                            setAdoazonosito(e.target.value),
-                            console.log(e.target.value)
-                          )}
+                          onChange={(e) => setAdoazonosito(e.target.value)}
                         />
                       </td>
                     </tr>
@@ -252,10 +248,7 @@ export default function UserProfile() {
                           disabled
                           type="text"
                           value={adoszam}
-                          onChange={(e) => (
-                            setAdoszam(e.target.value),
-                            console.log(e.target.value)
-                          )}
+                          onChange={(e) => setAdoszam(e.target.value)}
                         />
                       </td>
                     </tr>
@@ -269,9 +262,7 @@ export default function UserProfile() {
                         disabled
                         type="text"
                         value={email}
-                        onChange={(e) => (
-                          setEmail(e.target.value), console.log(e.target.value)
-                        )}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </td>
                   </tr>
@@ -409,9 +400,9 @@ export default function UserProfile() {
               </div>
             </Col>
             <Col className="col-sm-12 m-auto szamlakMezo">
-              <h1 className="text-center">Autóim</h1>
+              <h1 className="text-center">Számlák</h1>
 
-              <Table bordered hover responsive>
+              <Table bordered striped hover responsive className="munkalapokTable">
                 <thead>
                   <tr>
                     {/* Munkalapszám helyett számlaszám kellene */}
@@ -421,7 +412,7 @@ export default function UserProfile() {
                     <th>Munkavezető</th>
                     <th>Leírás</th>
                     <th>Módosult</th>
-                    <th colSpan={2}>Módosítás</th>
+                    <th colSpan={2}></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -435,6 +426,37 @@ export default function UserProfile() {
                         <td>{e.updated_at}</td>
                         <td>Megtekint</td>
                         <td>Letölt</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </Col>
+            <Col className="col-sm-12 m-auto autokMezo pt-4">
+              <h1 className="text-center">Autóim</h1>
+              <Table bordered striped hover responsive>
+                <thead>
+                  <tr>
+                    <th>Becenév</th>
+                    <th>Rendszám</th>
+                    <th>Alvázszám</th>
+                    <th>Motorkód</th>
+                    <th>Évjárat</th>
+                    <th>Módosít</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {Object.values(autoim).map((e, i) => {
+                    return (
+                      <tr key={i}>
+                    
+                        <td> <Form.Control type="text" disabled value={e.becenev} onChange={(e) => console.log(e)}/></td>
+                        <td> <Form.Control type="text" disabled value={e.rendszam} onChange={(e) => console.log(e)}/></td>
+                        <td> <Form.Control type="text" disabled value={e.alvazszam} onChange={(e) => console.log(e)}/></td>
+                        <td> <Form.Control type="text" disabled value={e.motorkod} onChange={(e) => console.log(e)}/></td>
+                        <td> <Form.Control type="text" disabled value={e.evjarat} onChange={(e) => console.log(e)}/></td>
+                        <td> <Button className="primary">Szerkeszt</Button></td>
+                        <td> <Button className="danger">Töröl</Button></td>
                       </tr>
                     );
                   })}
