@@ -2,10 +2,12 @@ import React from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+
 export default function Kapcsolat() {
   return (
-    <>
-      <Form.Group className="mb-3">
+    <div style={{backgroundImage:"url('/img/FormBackGroundImg.jpg')",backgroundSize:"100%"}}>
+        <div style={{marginTop:"50px",width:"50%",margin:"0 auto"}}>
+        <Form.Group className="mb-3">
         <Form.Label>Vezetéknév</Form.Label>
         <Form.Control  type="text" placeholder="Vezetéknév" />
       </Form.Group>
@@ -26,8 +28,11 @@ export default function Kapcsolat() {
         <Form.Control as="textarea" rows={3} />
       </Form.Group>
         <Button type="submit">Küldés</Button>
+        </div>
       
-    </>
+        
+    </div>
+    
 
   );
 }
