@@ -3,6 +3,7 @@ import useAuthContext, { AuthProvider } from "../contexts/AuthContext";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "../api/axios";
@@ -18,10 +19,17 @@ export default function UserProfile() {
   const [adoszam, setAdoszam] = useState("");
   const [adoazonosito, setAdoazonosito] = useState("");
   const [szamlaim, setSzamlaim] = useState([{}]);
-  //  const [autoim, setAutoim] = useState({});
-  // const [_token, setToken] = useState("");
 
-  const { user, getUser, szamlak } = useAuthContext();
+  /* Új autó hozzáadásához */
+  const [becenev, setBecenev] = useState("");
+  const [rendszam, setRendszam] = useState("");
+  const [marka, setMarka] = useState("");
+  const [alvazszam, setAlvazszam] = useState("");
+  const [motorkod, setMotorkod] = useState("");
+  const [evjarat, setEvjarat] = useState("");
+
+  const [token, setToken] = useState("");
+  const { user, getUser, szamlak, csrf } = useAuthContext();
 
   useEffect(() => {
     if (!user) {
@@ -34,25 +42,49 @@ export default function UserProfile() {
       setSzulido(user.szulido);
       setAdoazonosito(user.adoazonosito);
       setAdoszam(user.adoszam);
-
       // meghívjuk az adatot a backendről külső függvénnyel, aszinkron módon
       szamlakBetolt();
     }
-  }, [user]);
+  }, [user, getUser]);
 
   async function szamlakBetolt() {
     try {
+      const tokenem = await csrf();
+      setToken(tokenem)
+      console.log("UserProfile Token: ", tokenem);
       const szamlakData = await szamlak();
-      // beállítjuk a state-t hozzá
       setSzamlaim(szamlakData);
     } catch (error) {
       console.log(error);
     }
   }
+ 
+
+  const ujAuto = async (e) => {
+    e.preventDefault();
+    const adat = {
+      ugyfel: user.id,
+      becenev: becenev,
+      rendszam: rendszam,
+      marka: marka,
+      alvazszam: alvazszam,
+      motorkod: motorkod,
+      evjarat: evjarat,
+      _token: token,
+    };
+    console.log("ADAT", adat);
+    /* Beküldés kódja */
+    try {
+      const response = await axios.post("/api/autos", adat);
+      console.log("Siker:", response.data);
+    } catch (error) {
+      console.error("Hiba:", error);
+    }
+  };
 
   const bekuld = async (e) => {
     e.preventDefault();
-    //  setToken(axios.get("/token"));
+    //setToken(token);
     const adat = {
       name: name,
       email: email,
@@ -62,11 +94,17 @@ export default function UserProfile() {
       adoazonosito: adoazonosito,
       adoszam: adoszam,
       szerepkor: user.szerepkor,
-      // _token: _token,
+      _token: token,
     };
-
     console.log(adat);
-    /* Beküldés kódja */
+    try {
+      let vegpont = "/api/users/" + user.id;
+      // console.log("VÉGPONT:", vegpont);
+      const response = await axios.put(vegpont, adat);
+      console.log("Siker:", response.data);
+    } catch (error) {
+      console.error("Hiba:", error);
+    }
   };
 
   return (
@@ -74,9 +112,7 @@ export default function UserProfile() {
       <Container className="col-sm-12 m-0">
         {user ? (
           <Row>
-          
-            
-            <Col className="col-sm-6 m-0">
+            <Col className="col-sm-6 m-auto">
               <h1 className="text-center">Profil</h1>
               <Table striped bordered responsive>
                 <thead>
@@ -187,10 +223,104 @@ export default function UserProfile() {
                 </tbody>
               </Table>
             </Col>
+            <Col className="col-sm-6 m-auto">
+              <h1>Új autó hozzáadása</h1>
+              <Form onSubmit={(e) => ujAuto(e)}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Becenév</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={becenev}
+                    onChange={(e) => setBecenev(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Rendszám</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={rendszam}
+                    onChange={(e) => setRendszam(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Márka</Form.Label>
+                  <Form.Select
+                    id="marka"
+                    value={marka}
+                    onChange={(e) => setMarka(e.target.value)}
+                  >
+                    <option value={""}>Kérlek válassz....</option>
+                    <option value={"Alfa Romeo"}>Alfa Romeo</option>
+                    <option value={"Aston Martin"}>Aston Martin</option>
+                    <option value={"Audi"}>Audi</option>
+                    <option value={"BMW"}>BMW</option>
+                    <option value={"Bugatti"}>Bugatti</option>
+                    <option value={"Cadillac"}>Cadillac</option>
+                    <option value={"Chevrolet"}>Chevrolet</option>
+                    <option value={"Chrysler"}>Chrysler</option>
+                    <option value={"Citroen"}>Citroen</option>
+                    <option value={"Dacia"}>Dacia</option>
+                    <option value={"Dodge"}>Dodge</option>
+                    <option value={"Fiat"}>Fiat</option>
+                    <option value={"Ford"}>Ford</option>
+                    <option value={"Honda"}>Honda</option>
+                    <option value={"Hyundai"}>Hyundai</option>
+                    <option value={"Jaguar"}>Jaguar</option>
+                    <option value={"Jeep"}>Jeep</option>
+                    <option value={"Kia"}>Kia</option>
+                    <option value={"Lada"}>Lada</option>
+                    <option value={"Land Rover"}>Land Rover</option>
+                    <option value={"Lexus"}>Lexus</option>
+                    <option value={"Maserati"}>Maserati</option>
+                    <option value={"Mazda"}>Mazda</option>
+                    <option value={"Mercedes"}>Mercedes</option>
+                    <option value={"Mini Cooper"}>Mini Cooper</option>
+                    <option value={"Mitsubishi"}>Mitsubishi</option>
+                    <option value={"Nissan"}>Nissan</option>
+                    <option value={"Opel"}>Opel</option>
+                    <option value={"Peugeot"}>Peugeot</option>
+                    <option value={"Porsche"}>Porsche</option>
+                    <option value={"Seat"}>Seat</option>
+                    <option value={"Skoda"}>Skoda</option>
+                    <option value={"Smart"}>Smart</option>
+                    <option value={"Subaru"}>Subaru</option>
+                    <option value={"Suzuki"}>Suzuki</option>
+                    <option value={"Tesla"}>Tesla</option>
+                    <option value={"Toyota"}>Toyota</option>
+                    <option value={"Volkswagen"}>Volkswagen</option>
+                    <option value={"Volvo"}>Volvo</option>
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Alvázszám</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={alvazszam}
+                    onChange={(e) => setAlvazszam(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Motorkód</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={motorkod}
+                    onChange={(e) => setMotorkod(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Évjárat</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={evjarat}
+                    onChange={(e) => setEvjarat(e.target.value)}
+                  />
+                </Form.Group>
+                <Button type="submit">Submit</Button>
+              </Form>
+            </Col>
             <Col className="col-sm-12 m-auto">
               <h1 className="text-center">Autóim</h1>
 
-              
               <Table bordered hover responsive>
                 <thead>
                   <tr>
