@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
         adat._token = token;
         console.log(adat)
         //lekérjük a csrf tokent
-        await csrf();
+        //await csrf();
         //bejelentkezés
         //Összegyűjtjük egyetlen objektumban az űrlap adatokat
 
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
             //Lekérdezzük a usert
             await getUser();
             //elmegyünk  a kezdőlapra
-            navigate("/");
+            navigate("/profil");
         } catch (error) {
             console.log(error);
             if (error.response.status === 422) {
