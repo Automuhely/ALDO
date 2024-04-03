@@ -28,7 +28,7 @@ export default function UserProfile() {
   const [motorkod, setMotorkod] = useState("");
   const [evjarat, setEvjarat] = useState("");
 
- // const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const { user, getUser, csrf } = useAuthContext();
 
   useEffect(() => {
@@ -48,12 +48,17 @@ export default function UserProfile() {
   }, [user, getUser]);
 
   async function szamlakBetolt() {
+    /*                                                                          CSRF ??????    */
+    await csrf();
     try {
-      const token = await csrf();
-    //  setToken(tokenem);
-      console.log("UserProfile Token: ", token);
-      //const szamlakData = await szamlak();
-      //setSzamlaim(szamlakData);
+      const szamlakAdat = await axios.get("/api/szamlaim").then((e) => {
+        console.log("e.data:", e.data);
+        return e.data;
+      });
+      /*                                                                        try catch ?????  */
+      //const token = await csrf();
+      setSzamlaim(szamlakAdat);
+      console.log("setSzámláim: ", szamlaim);
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +118,7 @@ export default function UserProfile() {
       <Container className="col-sm-12 m-0">
         {user ? (
           <Row>
-            <Col className="col-sm-6 m-auto">
+            <Col className="col-sm-6 m-auto profilMezo">
               <h1 className="text-center">Profil</h1>
               <Table striped bordered responsive>
                 <thead>
@@ -224,7 +229,7 @@ export default function UserProfile() {
                 </tbody>
               </Table>
             </Col>
-            <Col className="col-sm-6 m-auto">
+            <Col className="col-sm-6 m-auto ujAutoMezo">
               <h1>Új autó hozzáadása</h1>
               <Form onSubmit={(e) => ujAuto(e)}>
                 <Form.Group className="mb-3">
@@ -319,7 +324,7 @@ export default function UserProfile() {
                 <Button type="submit">Submit</Button>
               </Form>
             </Col>
-            <Col className="col-sm-12 m-auto">
+            <Col className="col-sm-12 m-auto szamlakMezo">
               <h1 className="text-center">Autóim</h1>
 
               <Table bordered hover responsive>
