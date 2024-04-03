@@ -28,6 +28,8 @@ export default function UserProfile() {
   const [motorkod, setMotorkod] = useState("");
   const [evjarat, setEvjarat] = useState("");
 
+  const [ujAutoUrlapNyitva, setUjAutoUrlapNyitva] = useState(0);
+
   // const [token, setToken] = useState("");
   const { user, getUser, csrf } = useAuthContext();
 
@@ -230,99 +232,120 @@ export default function UserProfile() {
               </Table>
             </Col>
             <Col className="col-sm-6 m-auto ujAutoMezo">
-              <h1>Új autó hozzáadása</h1>
-              <Form onSubmit={(e) => ujAuto(e)}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Becenév</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={becenev}
-                    onChange={(e) => setBecenev(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Rendszám</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={rendszam}
-                    onChange={(e) => setRendszam(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Márka</Form.Label>
-                  <Form.Select
-                    id="marka"
-                    value={marka}
-                    onChange={(e) => setMarka(e.target.value)}
-                  >
-                    <option value={""}>Kérlek válassz....</option>
-                    <option value={"Alfa Romeo"}>Alfa Romeo</option>
-                    <option value={"Aston Martin"}>Aston Martin</option>
-                    <option value={"Audi"}>Audi</option>
-                    <option value={"BMW"}>BMW</option>
-                    <option value={"Bugatti"}>Bugatti</option>
-                    <option value={"Cadillac"}>Cadillac</option>
-                    <option value={"Chevrolet"}>Chevrolet</option>
-                    <option value={"Chrysler"}>Chrysler</option>
-                    <option value={"Citroen"}>Citroen</option>
-                    <option value={"Dacia"}>Dacia</option>
-                    <option value={"Dodge"}>Dodge</option>
-                    <option value={"Fiat"}>Fiat</option>
-                    <option value={"Ford"}>Ford</option>
-                    <option value={"Honda"}>Honda</option>
-                    <option value={"Hyundai"}>Hyundai</option>
-                    <option value={"Jaguar"}>Jaguar</option>
-                    <option value={"Jeep"}>Jeep</option>
-                    <option value={"Kia"}>Kia</option>
-                    <option value={"Lada"}>Lada</option>
-                    <option value={"Land Rover"}>Land Rover</option>
-                    <option value={"Lexus"}>Lexus</option>
-                    <option value={"Maserati"}>Maserati</option>
-                    <option value={"Mazda"}>Mazda</option>
-                    <option value={"Mercedes"}>Mercedes</option>
-                    <option value={"Mini Cooper"}>Mini Cooper</option>
-                    <option value={"Mitsubishi"}>Mitsubishi</option>
-                    <option value={"Nissan"}>Nissan</option>
-                    <option value={"Opel"}>Opel</option>
-                    <option value={"Peugeot"}>Peugeot</option>
-                    <option value={"Porsche"}>Porsche</option>
-                    <option value={"Seat"}>Seat</option>
-                    <option value={"Skoda"}>Skoda</option>
-                    <option value={"Smart"}>Smart</option>
-                    <option value={"Subaru"}>Subaru</option>
-                    <option value={"Suzuki"}>Suzuki</option>
-                    <option value={"Tesla"}>Tesla</option>
-                    <option value={"Toyota"}>Toyota</option>
-                    <option value={"Volkswagen"}>Volkswagen</option>
-                    <option value={"Volvo"}>Volvo</option>
-                  </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Alvázszám</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={alvazszam}
-                    onChange={(e) => setAlvazszam(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Motorkód</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={motorkod}
-                    onChange={(e) => setMotorkod(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Évjárat</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={evjarat}
-                    onChange={(e) => setEvjarat(e.target.value)}
-                  />
-                </Form.Group>
-                <Button type="submit">Submit</Button>
-              </Form>
+              <Button
+                className="primary ujAutoGomb"
+                onClick={() => {
+                  if (!ujAutoUrlapNyitva) {
+                    setUjAutoUrlapNyitva(1);
+                    document.querySelector(".ujAutoUrlap").style.visibility =
+                      "visible";
+                    document.querySelector(".ujAutoGomb").innerHTML = "Bezár";
+                  } else {
+                    setUjAutoUrlapNyitva(0);
+                    document.querySelector(".ujAutoUrlap").style.visibility =
+                      "hidden";
+                    document.querySelector(".ujAutoGomb").innerHTML =
+                      "Új autó felvitele";
+                  }
+                }}
+              >
+                Új autó felvitele
+              </Button>
+              <div className="ujAutoUrlap" style={{ visibility: "hidden" }}>
+                <h1>Új autó hozzáadása</h1>
+                <Form onSubmit={(e) => ujAuto(e)}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Becenév</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={becenev}
+                      onChange={(e) => setBecenev(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Rendszám</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={rendszam}
+                      onChange={(e) => setRendszam(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Márka</Form.Label>
+                    <Form.Select
+                      id="marka"
+                      value={marka}
+                      onChange={(e) => setMarka(e.target.value)}
+                    >
+                      <option value={""}>Kérlek válassz....</option>
+                      <option value={"Alfa Romeo"}>Alfa Romeo</option>
+                      <option value={"Aston Martin"}>Aston Martin</option>
+                      <option value={"Audi"}>Audi</option>
+                      <option value={"BMW"}>BMW</option>
+                      <option value={"Bugatti"}>Bugatti</option>
+                      <option value={"Cadillac"}>Cadillac</option>
+                      <option value={"Chevrolet"}>Chevrolet</option>
+                      <option value={"Chrysler"}>Chrysler</option>
+                      <option value={"Citroen"}>Citroen</option>
+                      <option value={"Dacia"}>Dacia</option>
+                      <option value={"Dodge"}>Dodge</option>
+                      <option value={"Fiat"}>Fiat</option>
+                      <option value={"Ford"}>Ford</option>
+                      <option value={"Honda"}>Honda</option>
+                      <option value={"Hyundai"}>Hyundai</option>
+                      <option value={"Jaguar"}>Jaguar</option>
+                      <option value={"Jeep"}>Jeep</option>
+                      <option value={"Kia"}>Kia</option>
+                      <option value={"Lada"}>Lada</option>
+                      <option value={"Land Rover"}>Land Rover</option>
+                      <option value={"Lexus"}>Lexus</option>
+                      <option value={"Maserati"}>Maserati</option>
+                      <option value={"Mazda"}>Mazda</option>
+                      <option value={"Mercedes"}>Mercedes</option>
+                      <option value={"Mini Cooper"}>Mini Cooper</option>
+                      <option value={"Mitsubishi"}>Mitsubishi</option>
+                      <option value={"Nissan"}>Nissan</option>
+                      <option value={"Opel"}>Opel</option>
+                      <option value={"Peugeot"}>Peugeot</option>
+                      <option value={"Porsche"}>Porsche</option>
+                      <option value={"Seat"}>Seat</option>
+                      <option value={"Skoda"}>Skoda</option>
+                      <option value={"Smart"}>Smart</option>
+                      <option value={"Subaru"}>Subaru</option>
+                      <option value={"Suzuki"}>Suzuki</option>
+                      <option value={"Tesla"}>Tesla</option>
+                      <option value={"Toyota"}>Toyota</option>
+                      <option value={"Volkswagen"}>Volkswagen</option>
+                      <option value={"Volvo"}>Volvo</option>
+                    </Form.Select>
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Alvázszám</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={alvazszam}
+                      onChange={(e) => setAlvazszam(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Motorkód</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={motorkod}
+                      onChange={(e) => setMotorkod(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Évjárat</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={evjarat}
+                      onChange={(e) => setEvjarat(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Button type="submit">Submit</Button>
+                </Form>
+              </div>
             </Col>
             <Col className="col-sm-12 m-auto szamlakMezo">
               <h1 className="text-center">Autóim</h1>
