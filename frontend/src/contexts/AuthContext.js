@@ -5,84 +5,82 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null);
-    const [tokenem, setTokenem] = useState("");
-    const [errors, setErrors] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
-        cim: "",
-        telefon: "",
-        adoszam: "",
-        adoazonosito: "",
-        szulido: "",
-    });
-    //const csrf = () => axios.get("/sanctum/csrf-cookie");
-    let token = "";
-    const csrf = () =>
-        axios.get("/token").then((response) => {
-            console.log(response);
-            token = response.data;
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [tokenem, setTokenem] = useState("");
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    cim: "",
+    telefon: "",
+    adoszam: "",
+    adoazonosito: "",
+    szulido: "",
+  });
+  //const csrf = () => axios.get("/sanctum/csrf-cookie");
+  let token = "";
+  const csrf = () =>
+    axios.get("/token").then((response) => {
+      // console.log("Token lekérés response: ", response);
+      token = response.data;
 
-            
-             setTokenem(response.data);
-      console.log("AuthContext Token: ", response.data);
+      setTokenem(response.data);
+      //console.log("AuthContext Token: ", response.data);
       return tokenem;
-            
-        });
+    });
 
-    //bejelentkezett felhasználó adatainak lekérdezése
-    const getUser = async () => {
-        const { data } = await axios.get("/api/user");
-        setUser(data);
-    };
-    const logout = async () => {
-        await csrf()
-        console.log(token)
-        axios.post("/logout",{_token:token}).then((resp) => {
-            setUser(null);
-            console.log(resp);
-        });
-    };
-    
-    const loginReg = async ({ ...adat }, vegpont) => {
-        await csrf()
-        console.log(token)
-        adat._token = token;
-        console.log(adat)
-        //lekérjük a csrf tokent
-        //await csrf();
-        //bejelentkezés
-        //Összegyűjtjük egyetlen objektumban az űrlap adatokat
+  //bejelentkezett felhasználó adatainak lekérdezése
+  const getUser = async () => {
+    const { data } = await axios.get("/api/user");
+    setUser(data);
+  };
+  const logout = async () => {
+    await csrf();
+    console.log(token);
+    axios.post("/logout", { _token: token }).then((resp) => {
+      setUser(null);
+      console.log(resp);
+    });
+  };
 
-        // Megrpóbáljuk elküldeni a /login végpontra az adatot
-        // hiba esetén kiiratjuk a hibaüzenetet
-        try {
-            await axios.post(vegpont, adat);
-            console.log("siker");
-            //sikeres bejelentkezés/regisztráció esetén
-            //Lekérdezzük a usert
-            await getUser();
-            //elmegyünk  a kezdőlapra
-            navigate("/profil");
-        } catch (error) {
-            console.log(error);
-            if (error.response.status === 422) {
-                setErrors(error.response.data.errors);
-            }
-        }
-    };
+  const loginReg = async ({ ...adat }, vegpont) => {
+    await csrf();
+    console.log(token);
+    adat._token = token;
+    console.log(adat);
+    //lekérjük a csrf tokent
+    //await csrf();
+    //bejelentkezés
+    //Összegyűjtjük egyetlen objektumban az űrlap adatokat
 
-    return (
-        <AuthContext.Provider
-            value={{ logout, loginReg, errors, getUser, user, csrf}}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+    // Megrpóbáljuk elküldeni a /login végpontra az adatot
+    // hiba esetén kiiratjuk a hibaüzenetet
+    try {
+      await axios.post(vegpont, adat);
+      console.log("siker");
+      //sikeres bejelentkezés/regisztráció esetén
+      //Lekérdezzük a usert
+      await getUser();
+      //elmegyünk  a kezdőlapra
+      navigate("/profil");
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 422) {
+        setErrors(error.response.data.errors);
+      }
+    }
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ logout, loginReg, errors, getUser, user, csrf }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 export default function useAuthContext() {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }
