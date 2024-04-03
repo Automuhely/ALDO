@@ -28,8 +28,8 @@ export default function UserProfile() {
   const [motorkod, setMotorkod] = useState("");
   const [evjarat, setEvjarat] = useState("");
 
-  const [token, setToken] = useState("");
-  const { user, getUser, szamlak, csrf } = useAuthContext();
+ // const [token, setToken] = useState("");
+  const { user, getUser, csrf } = useAuthContext();
 
   useEffect(() => {
     if (!user) {
@@ -49,19 +49,19 @@ export default function UserProfile() {
 
   async function szamlakBetolt() {
     try {
-      const tokenem = await csrf();
-      setToken(tokenem)
-      console.log("UserProfile Token: ", tokenem);
-      const szamlakData = await szamlak();
-      setSzamlaim(szamlakData);
+      const token = await csrf();
+    //  setToken(tokenem);
+      console.log("UserProfile Token: ", token);
+      //const szamlakData = await szamlak();
+      //setSzamlaim(szamlakData);
     } catch (error) {
       console.log(error);
     }
   }
- 
 
   const ujAuto = async (e) => {
     e.preventDefault();
+    const token = await csrf();
     const adat = {
       ugyfel: user.id,
       becenev: becenev,
@@ -83,6 +83,7 @@ export default function UserProfile() {
   };
 
   const bekuld = async (e) => {
+    const token = await csrf();
     e.preventDefault();
     //setToken(token);
     const adat = {
