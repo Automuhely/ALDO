@@ -14,6 +14,8 @@ export default function Register() {
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [cim, setCim] = useState("");
   const [szulido, setSzulido] = useState("");
+  const [adoszam, setAdoszam] = useState(null);
+  const [adoazonosito, setAdoazonosito] = useState(null);
 
   const { loginReg, errors } = useAuthContext();
 
@@ -30,6 +32,8 @@ export default function Register() {
       telefon: telefon,
       szulido: szulido,
       szerepkor: 0,
+      adoazonosito: adoazonosito,
+      adoszam: adoszam,
     };
 
     loginReg(adat, "/register");
@@ -37,8 +41,38 @@ export default function Register() {
 
   return (
     <Container fluid className="w-25 mt-5 m-auto">
-      Regisztráció
+      <h1 className="text-center">Regisztráció</h1>
       <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="adoazonosito">
+          <Form.Label className="adoazonosito">Adóazonosító</Form.Label>
+          <Form.Control
+            // required
+            type="text"
+            onChange={(e) => {
+              setAdoazonosito(e.target.value);
+            }}
+          />
+        </Form.Group>
+        <div>
+          {errors.adoazonosito && (
+            <span className="text-danger">{errors.adoazonosito[0]}</span>
+          )}
+        </div>
+        <Form.Group className="mb-3" controlId="adoszam">
+          <Form.Label>Adószám</Form.Label>
+          <Form.Control
+            // required
+            type="text"
+            onChange={(e) => {
+              setAdoszam(e.target.value);
+            }}
+          />
+        </Form.Group>
+        <div>
+          {errors.adoszam && (
+            <span className="text-danger">{errors.adoszam[0]}</span>
+          )}
+        </div>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label className="required-field">Név</Form.Label>
           <Form.Control
