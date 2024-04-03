@@ -160,7 +160,7 @@ export default function UserProfile() {
                   </Button>
                 </Col>
               </Row>
-              <Table striped bordered responsive>
+              <Table bordered responsive>
                 <thead>
                   <tr>
                     <th colSpan="2" className="text-center">
@@ -172,7 +172,7 @@ export default function UserProfile() {
                   <tr>
                     <td>Név</td>
                     <td>
-                      <input
+                      <Form.Control
                         className="profilInputok"
                         disabled
                         type="text"
@@ -186,7 +186,7 @@ export default function UserProfile() {
                   <tr>
                     <td>Telefon</td>
                     <td>
-                      <input
+                      <Form.Control
                         className="profilInputok"
                         disabled
                         type="text"
@@ -201,7 +201,7 @@ export default function UserProfile() {
                   <tr>
                     <td>Cím</td>
                     <td>
-                      <input
+                      <Form.Control
                         className="profilInputok"
                         disabled
                         type="text"
@@ -215,7 +215,7 @@ export default function UserProfile() {
                   <tr>
                     <td>Születési idő</td>
                     <td>
-                      <input
+                      <Form.Control
                         className="profilInputok"
                         disabled
                         type="text"
@@ -231,7 +231,7 @@ export default function UserProfile() {
                     <tr>
                       <td>Adóazonosító</td>
                       <td>
-                        <input
+                        <Form.Control
                           className="profilInputok"
                           disabled
                           type="text"
@@ -247,7 +247,7 @@ export default function UserProfile() {
                     <tr>
                       <td>Adószám</td>
                       <td>
-                        <input
+                        <Form.Control
                           className="profilInputok"
                           disabled
                           type="text"
@@ -264,7 +264,7 @@ export default function UserProfile() {
                   <tr>
                     <td>Email</td>
                     <td>
-                      <input
+                      <Form.Control
                         className="profilInputok"
                         disabled
                         type="text"
