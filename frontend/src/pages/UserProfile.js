@@ -28,7 +28,8 @@ export default function UserProfile() {
   const [motorkod, setMotorkod] = useState("");
   const [evjarat, setEvjarat] = useState("");
 
-  const [ujAutoUrlapNyitva, setUjAutoUrlapNyitva] = useState(0);
+  const [isAutoUrlapNyitva, setIsAutoUrlapNyitva] = useState(0);
+  const [isProfilSzerkesztheto, setIsProfilSzerkesztheto] = useState(0);
 
   // const [token, setToken] = useState("");
   const { user, getUser, csrf } = useAuthContext();
@@ -121,7 +122,44 @@ export default function UserProfile() {
         {user ? (
           <Row>
             <Col className="col-sm-6 m-auto profilMezo">
-              <h1 className="text-center">Profil</h1>
+              <Row>
+                <Col>
+                  <h1 className="text-center">Profil</h1>
+                </Col>
+                <Col>
+                  <Button
+                    className="primary"
+                    id="profilModosito"
+                    onClick={() => {
+                      if (!isProfilSzerkesztheto) {
+                        setIsProfilSzerkesztheto(1);
+                        let profilInputok =
+                          document.querySelectorAll(".profilInputok");
+                        console.log(profilInputok);
+                        profilInputok.forEach((input) => {
+                          input.removeAttribute("disabled");
+                        });
+                        document.querySelector(
+                          "#profilMentesGomb"
+                        ).style.visibility = "visible";
+                      } else {
+                        setIsProfilSzerkesztheto(0);
+                        let profilInputok =
+                          document.querySelectorAll(".profilInputok");
+                        console.log(profilInputok);
+                        profilInputok.forEach((input) => {
+                          input.setAttribute("disabled", true);
+                        });
+                        document.querySelector(
+                          "#profilMentesGomb"
+                        ).style.visibility = "hidden";
+                      }
+                    }}
+                  >
+                    Szerkeszt
+                  </Button>
+                </Col>
+              </Row>
               <Table striped bordered responsive>
                 <thead>
                   <tr>
@@ -135,6 +173,8 @@ export default function UserProfile() {
                     <td>Név</td>
                     <td>
                       <input
+                        className="profilInputok"
+                        disabled
                         type="text"
                         value={name}
                         onChange={(e) => (
@@ -147,6 +187,8 @@ export default function UserProfile() {
                     <td>Telefon</td>
                     <td>
                       <input
+                        className="profilInputok"
+                        disabled
                         type="text"
                         value={telefon}
                         onChange={(e) => (
@@ -160,6 +202,8 @@ export default function UserProfile() {
                     <td>Cím</td>
                     <td>
                       <input
+                        className="profilInputok"
+                        disabled
                         type="text"
                         value={cim}
                         onChange={(e) => (
@@ -172,6 +216,8 @@ export default function UserProfile() {
                     <td>Születési idő</td>
                     <td>
                       <input
+                        className="profilInputok"
+                        disabled
                         type="text"
                         value={szulido}
                         onChange={(e) => (
@@ -186,6 +232,8 @@ export default function UserProfile() {
                       <td>Adóazonosító</td>
                       <td>
                         <input
+                          className="profilInputok"
+                          disabled
                           type="text"
                           value={adoazonosito}
                           onChange={(e) => (
@@ -200,6 +248,8 @@ export default function UserProfile() {
                       <td>Adószám</td>
                       <td>
                         <input
+                          className="profilInputok"
+                          disabled
                           type="text"
                           value={adoszam}
                           onChange={(e) => (
@@ -215,6 +265,8 @@ export default function UserProfile() {
                     <td>Email</td>
                     <td>
                       <input
+                        className="profilInputok"
+                        disabled
                         type="text"
                         value={email}
                         onChange={(e) => (
@@ -223,35 +275,44 @@ export default function UserProfile() {
                       />
                     </td>
                   </tr>
-                  <tr>
+                  <tr
+                    style={{ visibility: "hidden", borderColor: "transparent" }}
+                  >
                     <td colSpan={2} className="text-center adatokMenteseGomb">
-                      <Button onClick={bekuld}>Mentés</Button>
+                      <Button
+                        onClick={bekuld}
+                        id="profilMentesGomb"
+                        style={{ visibility: "hidden" }}
+                      >
+                        Mentés
+                      </Button>
                     </td>
                   </tr>
                 </tbody>
               </Table>
             </Col>
-            <Col className="col-sm-6 m-auto ujAutoMezo">
+            <Col className="col-sm-6 m-auto" id="ujAutoMezo">
               <Button
-                className="primary ujAutoGomb"
+                className="primary"
+                id="ujAutoGomb"
                 onClick={() => {
-                  if (!ujAutoUrlapNyitva) {
-                    setUjAutoUrlapNyitva(1);
-                    document.querySelector(".ujAutoUrlap").style.visibility =
+                  if (!isAutoUrlapNyitva) {
+                    setIsAutoUrlapNyitva(1);
+                    document.querySelector("#ujAutoUrlap").style.visibility =
                       "visible";
-                    document.querySelector(".ujAutoGomb").innerHTML = "Bezár";
+                    document.querySelector("#ujAutoGomb").innerHTML = "Bezár";
                   } else {
-                    setUjAutoUrlapNyitva(0);
-                    document.querySelector(".ujAutoUrlap").style.visibility =
+                    setIsAutoUrlapNyitva(0);
+                    document.querySelector("#ujAutoUrlap").style.visibility =
                       "hidden";
-                    document.querySelector(".ujAutoGomb").innerHTML =
+                    document.querySelector("#ujAutoGomb").innerHTML =
                       "Új autó felvitele";
                   }
                 }}
               >
                 Új autó felvitele
               </Button>
-              <div className="ujAutoUrlap" style={{ visibility: "hidden" }}>
+              <div id="ujAutoUrlap" style={{ visibility: "hidden" }}>
                 <h1>Új autó hozzáadása</h1>
                 <Form onSubmit={(e) => ujAuto(e)}>
                   <Form.Group className="mb-3">
