@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTable } from "react-table";
-import useAuthContext from "../contexts/AuthContext";
 
 export default function MunkaTable({ munkak }) {
 
