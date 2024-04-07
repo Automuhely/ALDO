@@ -38,10 +38,13 @@ class MunkalapController extends Controller
     public function szamlaim()
     {
         // bejelentkezett felhasználó összes eddigi munkalapja
+        // + munkavezető nevének kiírása
         $user = Auth::user();
-        return DB::table('munkalaps as m')
+        return DB::table('autos as a')
+            ->join('munkalaps as m', 'm.auto', 'a.id')
             ->join('users as u', 'u.id', 'm.ugyfel')
-            ->select('*')
+            ->join('users as mv', 'mv.id', 'm.munkavezeto')
+            ->select('a.*', 'm.*', 'u.name as ugyfel_nev', 'mv.name as munkavezeto_nev')
             ->where('m.ugyfel', $user->id)
             ->get();
     }
@@ -105,23 +108,21 @@ class MunkalapController extends Controller
     public function elnemkezdetmunka()
     {
         return DB::table('munkalaps as m')
-            ->where("statusz" , "=","0")
+            ->where("statusz", "=", "0")
             ->get();
     }
 
     public function folyamatmunka()
     {
         return DB::table('munkalaps as m')
-            ->where("statusz" , "=","1")
+            ->where("statusz", "=", "1")
             ->get();
     }
 
     public function befejezettmunka()
     {
         return DB::table('munkalaps as m')
-            ->where("statusz" , "=","2")
+            ->where("statusz", "=", "2")
             ->get();
     }
-
-    
 }
