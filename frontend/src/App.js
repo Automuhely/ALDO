@@ -6,7 +6,7 @@ import NoPage from "./pages/NoPage.js";
 import "./App.css";
 import BasicLayout from "./layouts/BasicLayout.js";
 import MunkaAr from "./pages/MunkaAr.js";
-import Kapcsolat from "./pages/Kapcsolat.js";
+import Email from "./pages/Email.js";
 import Galeria from "./pages/Galeria.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -22,7 +22,7 @@ function App() {
         <Route path="/profil" element={<UserProfile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/munkaar" element={<MunkaAr />} />
-        <Route path="/kapcsolat" element={<Kapcsolat />} />
+        <Route path="/kapcsolat" element={<Email />} />
         <Route path="/galeria" element={<Galeria />} />
         <Route path="*" element={<NoPage />} />
       </Route>

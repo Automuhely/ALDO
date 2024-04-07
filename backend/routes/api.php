@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AutoController;
 use App\Http\Controllers\FeladatController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MunkaArController;
 use App\Http\Controllers\MunkalapController;
 use App\Http\Controllers\MunkalapTetelController;
@@ -19,7 +20,7 @@ Route::apiResource('/autos', AutoController::class);
 Route::apiResource('/feladats', FeladatController::class);
 Route::apiResource('/munkalaps', MunkalapController::class);
 Route::apiResource('/munkalaptetels', MunkalapTetelController::class);
-
+Route::post('/send_mail', [MailController::class]);
 
 /*                              user                             */
 //bejelentkezett felh. számlái

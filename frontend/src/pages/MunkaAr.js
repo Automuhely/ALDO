@@ -22,7 +22,6 @@ export default function MunkaAr(){
                 console.error('Hiba történt a munkadíjak lekérésekor:', error);
             }
         }
-  
       fetchMunkak();
     }, []);
   

@@ -1,9 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useState } from "react";
-import axios from "../api/axios";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function Login() {
