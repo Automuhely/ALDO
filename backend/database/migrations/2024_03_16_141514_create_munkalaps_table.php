@@ -12,8 +12,8 @@ return new class extends Migration
         Schema::create('munkalaps', function (Blueprint $table) {
             $table->id('munkalapszam');
             $table->foreignId('auto')->references('id')->on('autos');
-            $table->foreignId('ugyfel')->references('id')->on('users');
-            $table->foreignId('munkavezeto')->references('id')->on('users');
+            $table->foreignId('ugyfel')->references('id')->on('users')->where('szerepkor', '!=', 'szerelo');
+            $table->foreignId('munkavezeto')->references('id')->on('users')->where('szerepkor', 'szerelo');
             $table->string('altalanosLeiras');
             $table->date('elvitel_ido')->nullable();
             $table->tinyInteger('statusz');
