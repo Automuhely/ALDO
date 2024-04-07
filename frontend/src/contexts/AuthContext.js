@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       await axios.post(vegpont, adat);
       console.log("Sikeres bejelentkezés/regisztráció");
       await getUser();
-      navigate("/profile");
+      navigate("/profil");
     } catch (error) {
       if (error.response && error.response.status === 422) {
         console.error("422-es hiba történt:", error);
