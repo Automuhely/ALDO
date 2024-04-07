@@ -18,7 +18,8 @@ class Auto extends Model
         'evjarat',
         'ugyfel',
     ];
-
+    protected $hidden = ["created_at", "updated_at"];
+    
     protected $appends = ['ugyfelnev'];
 
     public function getUgyfelnevAttribute()
@@ -26,6 +27,4 @@ class Auto extends Model
         // az ügyfél mező alapján, a másik táblából a nevét kérdezem le
         return User::find($this->ugyfel)->name;
     }
-
-    protected $hidden = ["created_at", "updated_at"];
 }
