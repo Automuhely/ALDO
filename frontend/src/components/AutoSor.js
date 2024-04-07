@@ -5,16 +5,12 @@ import { useEffect, useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function AutoSor(props) {
-  const autoid = props.auto.id;
   const [beceneve, setBeceneve] = useState(props.auto.becenev ?? "");
   const [szerkesztheto, setSzerkesztheto] = useState(false);
+
+  const autoid = props.auto.id;
   const vegpont = "api/autos/" + autoid;
   const { csrf } = useAuthContext();
-
-  useEffect(() => {
-    props.setBecenev(beceneve);
-    console.log("render AUTOSOR");
-  }, [beceneve, props.auto]);
 
   async function szerkeszt(e) {
     setSzerkesztheto(!szerkesztheto);
@@ -34,6 +30,10 @@ export default function AutoSor(props) {
         console.error("Hiba történt:", error);
       }
     }
+  }
+
+  function emailhezBetolt(e) {
+    console.log(props.auto);
   }
 
   return (
@@ -94,19 +94,19 @@ export default function AutoSor(props) {
           {szerkesztheto ? "Mentés" : "Szerkeszt"}
         </Button>
       </td>
-      <td>
+      {/*  <td>
         <Button
           variant="danger"
           autoid={`masodik${autoid ?? ""}`}
           id={`masodikGomb-${autoid ?? ""}`}
           className="autoimMasodikGomb"
           onClick={(e) => {
-            szerkeszt(e);
+            emailhezBetolt(e)
           }}
         >
           Töröl
         </Button>
-      </td>
+      </td> */}
     </tr>
   );
 }
