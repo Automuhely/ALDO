@@ -52,7 +52,7 @@ return new class extends Migration
             'szulido' => '1980-01-01',
             'szerepkor' => 'szerelo',
             'adoazonosito' => '12345678911',
-            'email' => 'szerelo.pista@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => 'szerelopista',
             'remember_token' => Str::random(10),
         ]);
