@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('autos', function (Blueprint $table) {
             $table->id();
-            $table->string('alvazszam');
+            $table->string('alvazszam')->unique();
             $table->string('marka');
-            $table->string('motorkod');
+            $table->string('motorkod')->unique();
             $table->integer('evjarat');
-            $table->string('rendszam');
+            $table->string('rendszam')->unique();
             $table->string('becenev')->nullable()->default(null);
             $table->foreignId('ugyfel')->constrained('users');
             $table->timestamps();
