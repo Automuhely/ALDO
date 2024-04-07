@@ -17,6 +17,7 @@ class Auto extends Model
         'motorkod',
         'evjarat',
         'ugyfel',
+        'hitelesitett'
     ];
     protected $hidden = ["created_at", "updated_at"];
     

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
   {
 
 
-    User::factory(10)->create();
+    User::factory(4)->create();
     Auto::factory(10)->create();
 
     $maxProbalkozasSzama = 3;
@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder
 
     do {
       try {
-        Munkalap::factory(10)->create();
-        Feladat::factory(10)->create();
-        MunkalapTetel::factory(10)->create();
+        Munkalap::factory(20)->create();
+        Feladat::factory(50)->create();
+        MunkalapTetel::factory(30)->create();
 
         // ha sikeres kilép
         break;

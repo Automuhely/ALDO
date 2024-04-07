@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('rendszam')->unique();
             $table->string('becenev')->nullable()->default(null);
             $table->foreignId('ugyfel')->constrained('users');
+            $table->boolean('hitelesitett')->default(false);
             $table->timestamps();
         });
         Auto::create([
