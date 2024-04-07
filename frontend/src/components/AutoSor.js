@@ -1,14 +1,39 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "../api/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAuthContext from "../contexts/AuthContext";
 
 export default function AutoSor(props) {
   const autoid = props.auto.id;
+  const [beceneve, setBeceneve] = useState(props.auto.becenev ?? "");
   const [szerkesztheto, setSzerkesztheto] = useState(false);
+  const vegpont = "api/autos/" + autoid;
+  const { csrf } = useAuthContext();
 
-  function szerkeszt() {
+  useEffect(() => {
+    props.setBecenev(beceneve);
+    console.log("render AUTOSOR");
+  }, [beceneve, props.auto]);
+
+  async function szerkeszt(e) {
     setSzerkesztheto(!szerkesztheto);
+
+    if (e.target.innerHTML === "Mentés") {
+      const token = await csrf();
+      try {
+        await axios
+          .put(vegpont, { becenev: beceneve, _token: token })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error("Hiba történt:", error);
+          });
+      } catch (error) {
+        console.error("Hiba történt:", error);
+      }
+    }
   }
 
   return (
@@ -18,23 +43,43 @@ export default function AutoSor(props) {
           className="becenev"
           type="text"
           disabled={!szerkesztheto}
-          value={props.auto.becenev ?? ""}
+          defaultValue={props.auto.becenev ?? ""}
           onChange={(e) => {
-            props.setBecenev(e.target.value);
+            setBeceneve(e.target.value);
           }}
         />
       </td>
       <td>
-        <Form.Control type="text" disabled value={props.auto.rendszam ?? ""} />
+        <Form.Control
+          type="text"
+          disabled
+          readOnly
+          value={props.auto.rendszam ?? ""}
+        />
       </td>
       <td>
-        <Form.Control type="text" disabled value={props.auto.alvazszam ?? ""} />
+        <Form.Control
+          type="text"
+          disabled
+          readOnly
+          value={props.auto.alvazszam ?? ""}
+        />
       </td>
       <td>
-        <Form.Control type="text" disabled value={props.auto.motorkod ?? ""} />
+        <Form.Control
+          type="text"
+          disabled
+          readOnly
+          value={props.auto.motorkod ?? ""}
+        />
       </td>
       <td>
-        <Form.Control type="text" disabled value={props.auto.evjarat ?? ""} />
+        <Form.Control
+          type="text"
+          disabled
+          readOnly
+          value={props.auto.evjarat ?? ""}
+        />
       </td>
       <td>
         <Button
