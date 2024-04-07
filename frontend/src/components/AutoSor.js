@@ -3,13 +3,13 @@ import Button from "react-bootstrap/Button";
 
 
 export default function AutoSor(props){
-    const autoId = props.auto.id
+    const autoid = props.auto.id
     let szerkNyitva = 0;
 
     function szerkeszt(e){
         if(!szerkNyitva){
             szerkNyitva = 1
-            let elsoGomb = document.getElementById(`elsoGomb-${autoId}`);
+            let elsoGomb = document.getElementById(`elsoGomb-${autoid}`);
             elsoGomb.innerHTML="Mentés"
             console.log(elsoGomb)
             elsoGomb.classList.toggle("btn-primary")
@@ -19,13 +19,13 @@ export default function AutoSor(props){
             console.log(elsoGomb)
 
 
-            let masodikGomb = document.getElementById(`masodikGomb-${autoId}`);
+            let masodikGomb = document.getElementById(`masodikGomb-${autoid}`);
             masodikGomb.innerHTML="Mégse"
         /*     masodikGomb.classList.toggle("btn-danger")
             masodikGomb.classList.toggle("btn-primary") */
         }else{
             szerkNyitva = 0
-            let elsoGomb = document.getElementById(`elsoGomb-${autoId}`);
+            let elsoGomb = document.getElementById(`elsoGomb-${autoid}`);
             elsoGomb.innerHTML="Szerkeszt"
             console.log("ITT KELLENE KÉKNEK LENNI")
             console.log(elsoGomb)
@@ -36,7 +36,7 @@ export default function AutoSor(props){
             elsoGomb.classList.toggle("btn-primary")
             console.log(elsoGomb)
             
-            let masodikGomb = document.getElementById(`masodikGomb-${autoId}`);
+            let masodikGomb = document.getElementById(`masodikGomb-${autoid}`);
             masodikGomb.innerHTML="Töröl"
             /* masodikGomb.classList.toggle("btn-danger")
             masodikGomb.classList.toggle("btn-primary") */
@@ -62,10 +62,10 @@ export default function AutoSor(props){
           <Form.Control type="text" disabled value={props.auto.evjarat??""} onChange={()=>{props.setEvjarat(props.auto.target.value)}}/>
         </td>
         <td>
-          <Button variant="primary" autoId={`elso${autoId}`} id={`elsoGomb-${autoId}`}  className="autoimElsoGomb" onClick={(e)=>{szerkeszt(e)}}>Szerkeszt</Button>
+          <Button variant="primary" autoid={`elso${autoid??""}`} id={`elsoGomb-${autoid??""}`}  className="autoimElsoGomb" onClick={(e)=>{szerkeszt(e)}}>Szerkeszt</Button>
         </td>
         <td>
-          <Button variant="danger"  autoId={`masodik${autoId}`} id={`masodikGomb-${autoId}`}  className="autoimMasodikGomb" onClick={(e)=>{szerkeszt(e)}}>Töröl</Button>
+          <Button variant="danger"  autoid={`masodik${autoid??""}`} id={`masodikGomb-${autoid??""}`}  className="autoimMasodikGomb" onClick={(e)=>{szerkeszt(e)}}>Töröl</Button>
         </td>
       </tr>
 
