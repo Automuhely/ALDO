@@ -26,6 +26,7 @@ class MunkalapFactory extends Factory
             'elvitel_ido' => null,
             'statusz' => rand(0,2),
             'uzembentarto' => User::all()->random(),
+            'szamlaszam' => rand(111111,999999)
         ];
     }
 }

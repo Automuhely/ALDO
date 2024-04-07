@@ -37,6 +37,8 @@ class AutoController extends Controller
     public function autoja($user)
     {
         return DB::table('autos')
+            ->join('users', 'autos.ugyfel', '=', 'users.id')
+            ->select('autos.*', 'users.name as ugyfelnev')
             ->where('ugyfel', $user)
             ->get();
     }

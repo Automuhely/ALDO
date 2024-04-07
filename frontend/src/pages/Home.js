@@ -9,7 +9,7 @@ export default function Home() {
     if (!user) {
       getUser();
     }
-  }, [user]);
+  }, [user, getUser]);
 
   return (
     <>
