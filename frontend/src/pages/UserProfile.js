@@ -28,8 +28,8 @@ export default function UserProfile() {
   const [evjarat, setEvjarat] = useState("");
 
   /* Szerkesztéshez logikai operátorok */
-  const [isAutoUrlapNyitva, setIsAutoUrlapNyitva] = useState(0);
-  const [isProfilSzerkesztheto, setIsProfilSzerkesztheto] = useState(0);
+  const [isAutoUrlapNyitva, setIsAutoUrlapNyitva] = useState(false);
+  const [isProfilSzerkesztheto, setIsProfilSzerkesztheto] = useState(false);
 
   /* Profilhoz tartozó elemek, táblák */
   const [szamlaim, setSzamlaim] = useState([{}]);
@@ -49,16 +49,16 @@ export default function UserProfile() {
       setSzulido(user.szulido);
       setAdoazonosito(user.adoazonosito);
       setAdoszam(user.adoszam);
-      szamlakBetolt(); // Adatok betöltése
+      szamlakBetolt();
 
       // meghívjuk az adatot a backendről külső függvénnyel, aszinkron módon
     }
-    console.log("useEffect profil")
+    console.log("useEffect profil");
   }, [user]);
 
   async function szamlakBetolt() {
     /*                                                                          CSRF ??????    */
-    await csrf();
+    // await csrf();
     try {
       const szamlakAdat = await axios.get("/api/szamlaim").then((e) => {
         // console.log("számlák betölt....:", e.data);
@@ -97,36 +97,52 @@ export default function UserProfile() {
     try {
       const response = await axios.post("/api/autos", adat);
       console.log("Új autó elküldve SIKERESEN:", response.data);
-      szamlakBetolt()
+      szamlakBetolt();
     } catch (error) {
-      console.error("Hiba:", error);
+      console.log(
+        error.response.status +
+          " - " +
+          error.response.data.message +
+          " - " +
+          error.response.statusText
+      );
     }
   };
 
   const bekuld = async (e) => {
-    const token = await csrf();
+    const token = await csrf(); // CSRF token lekérése
     e.preventDefault();
-    //setToken(token);
-    const adat = {
-      name: name,
-      email: email,
-      telefon: telefon,
-      cim: cim,
-      szulido: szulido,
-      adoazonosito: adoazonosito,
-      adoszam: adoszam,
-      szerepkor: user.szerepkor,
-      _token: token,
-    };
-    console.log("Profil Beküldés....", adat);
     try {
+      const adat = {
+        name: name,
+        email: email,
+        telefon: telefon,
+        cim: cim,
+        szulido: szulido,
+        adoazonosito: adoazonosito,
+        adoszam: adoszam,
+        szerepkor: user.szerepkor,
+        _token: token,
+      };
+      console.log("Profil Beküldés....", adat);
+
       let vegpont = "/api/users/" + user.id;
       // console.log("VÉGPONT:", vegpont);
       const response = await axios.put(vegpont, adat);
       console.log("Profil beküldés SIKERES", response.data);
-      szamlakBetolt()
+      szamlakBetolt();
     } catch (error) {
-      console.error("Hiba:", error);
+      if (error.response && error.response.status === 419) {
+        console.log(
+          error.response.status +
+            " - " +
+            error.response.data.message +
+            " - " +
+            error.response.statusText
+        );
+      } else if (error.request) {
+        console.error("Hiba:", error);
+      }
     }
   };
 
@@ -145,29 +161,7 @@ export default function UserProfile() {
                     variant="primary"
                     id="profilModosito"
                     onClick={() => {
-                      if (!isProfilSzerkesztheto) {
-                        setIsProfilSzerkesztheto(1);
-                        let profilInputok =
-                          document.querySelectorAll(".profilInputok");
-                        // console.log("profilInputlista", profilInputok);
-                        profilInputok.forEach((input) => {
-                          input.removeAttribute("disabled");
-                        });
-                        document.querySelector(
-                          "#profilMentesGomb"
-                        ).style.visibility = "visible";
-                      } else {
-                        setIsProfilSzerkesztheto(0);
-                        let profilInputok =
-                          document.querySelectorAll(".profilInputok");
-                        // console.log("profilInputlista", profilInputok);
-                        profilInputok.forEach((input) => {
-                          input.setAttribute("disabled", true);
-                        });
-                        document.querySelector(
-                          "#profilMentesGomb"
-                        ).style.visibility = "hidden";
-                      }
+                      setIsProfilSzerkesztheto((prevState) => !prevState);
                     }}
                   >
                     Szerkeszt
@@ -187,8 +181,8 @@ export default function UserProfile() {
                     <td>Név</td>
                     <td>
                       <Form.Control
-                        className="profilInputok"
-                        disabled
+                        /*   className="profilInputok" */
+                        disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -199,8 +193,8 @@ export default function UserProfile() {
                     <td>Telefon</td>
                     <td>
                       <Form.Control
-                        className="profilInputok"
-                        disabled
+                        /*   className="profilInputok" */
+                        disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={telefon}
                         onChange={(e) => setTelefon(e.target.value)}
@@ -211,8 +205,8 @@ export default function UserProfile() {
                     <td>Cím</td>
                     <td>
                       <Form.Control
-                        className="profilInputok"
-                        disabled
+                        /*   className="profilInputok" */
+                        disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={cim}
                         onChange={(e) => setCim(e.target.value)}
@@ -223,8 +217,8 @@ export default function UserProfile() {
                     <td>Születési idő</td>
                     <td>
                       <Form.Control
-                        className="profilInputok"
-                        disabled
+                        /*   className="profilInputok" */
+                        disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={szulido}
                         onChange={(e) => setSzulido(e.target.value)}
@@ -236,8 +230,8 @@ export default function UserProfile() {
                       <td>Adóazonosító</td>
                       <td>
                         <Form.Control
-                          className="profilInputok"
-                          disabled
+                          /*   className="profilInputok" */
+                          disabled={!isProfilSzerkesztheto}
                           type="text"
                           value={adoazonosito}
                           onChange={(e) => setAdoazonosito(e.target.value)}
@@ -249,8 +243,8 @@ export default function UserProfile() {
                       <td>Adószám</td>
                       <td>
                         <Form.Control
-                          className="profilInputok"
-                          disabled
+                          /*   className="profilInputok" */
+                          disabled={!isProfilSzerkesztheto}
                           type="text"
                           value={adoszam}
                           onChange={(e) => setAdoszam(e.target.value)}
@@ -263,20 +257,31 @@ export default function UserProfile() {
                     <td>Email</td>
                     <td>
                       <Form.Control
-                        className="profilInputok"
-                        disabled
+                        /*   className="profilInputok" */
+                        disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </td>
                   </tr>
-                  <tr style={{ borderColor: "transparent" }}>
+                  <tr
+                    style={{
+                      visibility: isProfilSzerkesztheto ? "visible" : "hidden",
+                    }}
+                  >
                     <td colSpan={2} className="text-center">
                       <Button
-                        onClick={bekuld}
+                        onClick={(e) => {
+                          setIsProfilSzerkesztheto((prevState) => !prevState);
+                          bekuld(e);
+                        }}
                         id="profilMentesGomb"
-                        style={{ visibility: "hidden" }}
+                        style={{
+                          visibility: isProfilSzerkesztheto
+                            ? "visible"
+                            : "hidden",
+                        }}
                       >
                         Mentés
                       </Button>
@@ -297,25 +302,7 @@ export default function UserProfile() {
                     variant="primary"
                     id="ujAutoGomb"
                     onClick={() => {
-                      if (!isAutoUrlapNyitva) {
-                        setIsAutoUrlapNyitva(1);
-                        document.querySelector("#ujAutoUrlap").style.display =
-                          "block";
-                        document.querySelector(
-                          "#ujAutoUrlapCim"
-                        ).style.display = "block";
-                        document.querySelector("#ujAutoGomb").innerHTML =
-                          "Bezár";
-                      } else {
-                        setIsAutoUrlapNyitva(0);
-                        document.querySelector("#ujAutoUrlap").style.display =
-                          "none";
-                        document.querySelector(
-                          "#ujAutoUrlapCim"
-                        ).style.display = "none";
-                        document.querySelector("#ujAutoGomb").innerHTML =
-                          "Új autó felvitele";
-                      }
+                      setIsAutoUrlapNyitva((prevState) => !prevState);
                     }}
                   >
                     Új autó felvitele
@@ -324,11 +311,15 @@ export default function UserProfile() {
               </Row>
 
               <Row>
-                <Col id="ujAutoUrlap" style={{ display: "none" }}>
+                <Col
+                  id="ujAutoUrlap"
+                  style={{ display: isAutoUrlapNyitva ? "block" : "none" }}
+                >
                   <Form onSubmit={(e) => ujAuto(e)}>
                     <Form.Group className="mb-3">
                       <Form.Label>Becenév</Form.Label>
                       <Form.Control
+                        required
                         type="text"
                         value={becenev}
                         onChange={(e) => setBecenev(e.target.value)}
@@ -337,6 +328,7 @@ export default function UserProfile() {
                     <Form.Group className="mb-3">
                       <Form.Label>Rendszám</Form.Label>
                       <Form.Control
+                        required
                         type="text"
                         value={rendszam}
                         onChange={(e) => setRendszam(e.target.value)}
@@ -345,6 +337,7 @@ export default function UserProfile() {
                     <Form.Group className="mb-3">
                       <Form.Label>Márka</Form.Label>
                       <Form.Select
+                      required
                         id="marka"
                         value={marka}
                         onChange={(e) => setMarka(e.target.value)}
@@ -394,6 +387,7 @@ export default function UserProfile() {
                     <Form.Group className="mb-3">
                       <Form.Label>Alvázszám</Form.Label>
                       <Form.Control
+                        required
                         type="text"
                         value={alvazszam}
                         onChange={(e) => setAlvazszam(e.target.value)}
@@ -402,6 +396,7 @@ export default function UserProfile() {
                     <Form.Group className="mb-3">
                       <Form.Label>Motorkód</Form.Label>
                       <Form.Control
+                        required
                         type="text"
                         value={motorkod}
                         onChange={(e) => setMotorkod(e.target.value)}
@@ -410,12 +405,13 @@ export default function UserProfile() {
                     <Form.Group className="mb-3">
                       <Form.Label>Évjárat</Form.Label>
                       <Form.Control
+                        required
                         type="text"
                         value={evjarat}
                         onChange={(e) => setEvjarat(e.target.value)}
                       />
                     </Form.Group>
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">Küldés</Button>
                   </Form>
                 </Col>
               </Row>
@@ -428,8 +424,8 @@ export default function UserProfile() {
                   <tr>
                     {/* Munkalapszám helyett számlaszám kellene */}
                     <th>Munkalapszám</th>
-                    {/* rendszám, becenév átláthatóbb lenne */}
-                    <th>Autó</th>
+                    <th>Becenév</th>
+                    <th>Rendszám</th>
                     <th>Munkavezető</th>
                     <th>Leírás</th>
                     <th>Módosult</th>
@@ -441,8 +437,9 @@ export default function UserProfile() {
                     return (
                       <tr key={i}>
                         <td>{e.munkalapszam}</td>
-                        <td>{e.auto}</td>
-                        <td>{e.munkavezeto}</td>
+                        <td>{e.becenev}</td>
+                        <td>{e.rendszam}</td>
+                        <td>{e.munkavezeto_nev}</td>
                         <td>{e.altalanosLeiras}</td>
                         <td>{e.updated_at}</td>
                         <td>Megtekint</td>
@@ -469,7 +466,17 @@ export default function UserProfile() {
                 <tbody>
                   {Object.values(autoim).map((e, i) => {
                     return (
-                      <AutoSor key={i} auto={e} autoim={autoim} becenev={becenev} setBecenev={setBecenev} setRendszam={setRendszam} setAlvazszam={setAlvazszam} setMotorkod={setMotorkod} setEvjarat={setEvjarat}/>
+                      <AutoSor
+                        key={i}
+                        auto={e}
+                        autoim={autoim}
+                        becenev={becenev}
+                        setBecenev={setBecenev}
+                        setRendszam={setRendszam}
+                        setAlvazszam={setAlvazszam}
+                        setMotorkod={setMotorkod}
+                        setEvjarat={setEvjarat}
+                      />
                     );
                   })}
                 </tbody>
