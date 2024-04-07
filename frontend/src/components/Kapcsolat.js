@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import useAuthContext from "../contexts/AuthContext";
 
 export default function Kapcsolat() {
+  const { csrf } = useAuthContext();
   const [form, setForm] = useState({
-    vezeteknev: "",
-    keresztnev: "",
-    email: "",
-    message: "",
-    subject:"",
+    vezeteknev: "asd",
+    keresztnev: "asd",
+    email: "szlucska.dora@gmail.com",
+    message: "asd",
+    subject: "sad",
     attachment: null,
   });
 
@@ -29,6 +31,7 @@ export default function Kapcsolat() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = await csrf();
 
     const formData = new FormData();
     formData.append("vezeteknev", form.vezeteknev);
@@ -39,7 +42,7 @@ export default function Kapcsolat() {
     if (form.attachment) {
       formData.append("attachment", form.attachment);
     }
-
+    formData.append("_token", token);
     try {
       const response = await fetch("/send_mail", {
         method: "POST",
@@ -98,7 +101,7 @@ export default function Kapcsolat() {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Tárgy</Form.Label> 
+            <Form.Label>Tárgy</Form.Label>
             <Form.Control
               type="text"
               name="subject"

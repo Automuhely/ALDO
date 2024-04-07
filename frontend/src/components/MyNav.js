@@ -23,7 +23,7 @@ export default function MyNav() {
                 <Nav.Link href="#" onClick={logout}>Kijelentkezés</Nav.Link>
                 {/* csak a szerelő szerepkörben lévő user láthatja */}
                 {user.szerepkor === 'szerelo' && (
-                  <Nav.Link href="/szerelo">Szerelők oldala</Nav.Link>
+                  <Nav.Link href="/munkafolyamatok">Munkafolyamatok</Nav.Link>
                 )}
                 {/* csak a vezetőszerelő szerepkörben lévő user láthatja */}
                 {user.szerepkor === 'vezetoszerelo' && (
