@@ -62,7 +62,7 @@ return new class extends Migration
             'telefon' => '06702001235',
             'cim' => '1234 Budapest, Szerelők útja 1.',
             'szulido' => '1980-01-02',
-            'szerepkor' => 'szerelo',
+            'szerepkor' => 'vezetoszerelo',
             'adoazonosito' => '12345674911',
             'email' => 'szerelo.janos@gmail.com',
             'password' => 'szerelojanos',

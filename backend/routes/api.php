@@ -20,7 +20,7 @@ Route::apiResource('/autos', AutoController::class);
 Route::apiResource('/feladats', FeladatController::class);
 Route::apiResource('/munkalaps', MunkalapController::class);
 Route::apiResource('/munkalaptetels', MunkalapTetelController::class);
-Route::post('send_mail', [MailController::class]);
+Route::post('/send_mail', [MailController::class]);
 
 /*                              user                             */
 //bejelentkezett felh. számlái
