@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Munkalap;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +13,7 @@ return new class extends Migration
         Schema::create('munkalaps', function (Blueprint $table) {
             $table->id('munkalapszam');
             $table->foreignId('auto')->references('id')->on('autos');
-            $table->foreignId('ugyfel')->references('id')->on('users')->where('szerepkor', '!=', 'szerelo');
+            $table->foreignId('ugyfel')->references('id')->on('users');
             $table->foreignId('munkavezeto')->references('id')->on('users')->where('szerepkor', 'szerelo');
             $table->string('altalanosLeiras');
             $table->date('elvitel_ido')->nullable();
@@ -21,6 +22,34 @@ return new class extends Migration
             $table->string('szamlaszam');
             $table->timestamps();
         });
+
+        Munkalap::create([
+            'auto' => 1,
+            'ugyfel' => 1,
+            'munkavezeto' => 2,
+            'altalanosLeiras' => "asddas",
+            'statusz' => 1,
+            'uzembentarto' => 1,
+            'szamlaszam' => "1234568",
+        ]);
+        Munkalap::create([
+            'auto' => 1,
+            'ugyfel' => 1,
+            'munkavezeto' => 2,
+            'altalanosLeiras' => "asddas",
+            'statusz' => 1,
+            'uzembentarto' => 1,
+            'szamlaszam' => "1234567",
+        ]);
+        Munkalap::create([
+            'auto' => 1,
+            'ugyfel' => 1,
+            'munkavezeto' => 2,
+            'altalanosLeiras' => "asddas",
+            'statusz' => 1,
+            'uzembentarto' => 1,
+            'szamlaszam' => "12345613",
+        ]);
     }
 
     public function down(): void

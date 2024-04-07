@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Feladat;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,34 @@ return new class extends Migration
             $table-> integer('munkadij');
             $table->timestamps();
         });
+        Feladat::create([
+            "megnevezes" => "Gumicsere",
+            "munkadij" => 15000,
+        ]);
+        Feladat::create([
+            "megnevezes" => "Általános ellenőrzés",
+            "munkadij" => 15000,
+        ]);
+        Feladat::create([
+            "megnevezes" => " a",
+            "munkadij" => 15000,
+        ]);
+        Feladat::create([
+            "megnevezes" => " ab",
+            "munkadij" => 15000,
+        ]);
+        Feladat::create([
+            "megnevezes" => " ac",
+            "munkadij" => 15000,
+        ]);
+        Feladat::create([
+            "megnevezes" => " ad",
+            "munkadij" => 15000,
+        ]);
+        Feladat::create([
+            "megnevezes" => " ae",
+            "munkadij" => 15000,
+        ]);
     }
 
     /**

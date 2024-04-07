@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Auto;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,24 @@ return new class extends Migration
             $table->foreignId('ugyfel')->constrained('users');
             $table->timestamps();
         });
+        Auto::create([
+            'alvazszam' => "asd",
+            'marka' => "Mercedes",
+            'motorkod' => "asd",
+            'evjarat' => "2000",
+            'rendszam' => "asd123",
+            'becenev' => "Macika",
+            'ugyfel' => "1",
+        ]);
+        Auto::create([
+            'alvazszam' => "asdef",
+            'marka' => "Bmw",
+            'motorkod' => "asdef",
+            'evjarat' => "2001",
+            'rendszam' => "efef12",
+            'becenev' => "Kicsi",
+            'ugyfel' => "1",
+        ]);
     }
 
     /**

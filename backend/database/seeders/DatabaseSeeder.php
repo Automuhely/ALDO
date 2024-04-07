@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
     do {
       try {
         Munkalap::factory(10)->create();
-        MunkalapTetel::factory(10)->create();
         Feladat::factory(10)->create();
+        MunkalapTetel::factory(10)->create();
 
         // ha sikeres kilép
         break;
