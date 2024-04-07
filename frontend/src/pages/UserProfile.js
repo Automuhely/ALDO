@@ -49,9 +49,11 @@ export default function UserProfile() {
       setSzulido(user.szulido);
       setAdoazonosito(user.adoazonosito);
       setAdoszam(user.adoszam);
+      szamlakBetolt(); // Adatok betöltése
+
       // meghívjuk az adatot a backendről külső függvénnyel, aszinkron módon
-      szamlakBetolt();
     }
+    console.log("useEffect profil")
   }, [user]);
 
   async function szamlakBetolt() {
@@ -95,6 +97,7 @@ export default function UserProfile() {
     try {
       const response = await axios.post("/api/autos", adat);
       console.log("Új autó elküldve SIKERESEN:", response.data);
+      szamlakBetolt()
     } catch (error) {
       console.error("Hiba:", error);
     }
@@ -121,6 +124,7 @@ export default function UserProfile() {
       // console.log("VÉGPONT:", vegpont);
       const response = await axios.put(vegpont, adat);
       console.log("Profil beküldés SIKERES", response.data);
+      szamlakBetolt()
     } catch (error) {
       console.error("Hiba:", error);
     }
@@ -465,7 +469,7 @@ export default function UserProfile() {
                 <tbody>
                   {Object.values(autoim).map((e, i) => {
                     return (
-                      <AutoSor key={i} auto={e} setBecenev={setBecenev} setRendszam={setRendszam} setAlvazszam={setAlvazszam} setMotorkod={setMotorkod} setEvjarat={setEvjarat}/>
+                      <AutoSor key={i} auto={e} autoim={autoim} becenev={becenev} setBecenev={setBecenev} setRendszam={setRendszam} setAlvazszam={setAlvazszam} setMotorkod={setMotorkod} setEvjarat={setEvjarat}/>
                     );
                   })}
                 </tbody>
