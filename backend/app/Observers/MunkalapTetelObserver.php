@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Feladat;
 use App\Models\MunkalapTetel;
 use Exception;
 
@@ -12,14 +13,15 @@ class MunkalapTetelObserver
      */
     public function created(MunkalapTetel $munkalapTetel): void
     {
+        
         // dd("MunkalapTétel observer meghívva - create");
-        $letezoTetel = MunkalapTetel::where('munkalapszam', $munkalapTetel->munkalapszam)
-            ->where('feladat_id', $munkalapTetel->feladat_id)
-            ->exists();
+      /*   $letezoTetel = MunkalapTetel::where('munkalapszam', $munkalapTetel->munkalapszam)
+        ->where('feladat_id', $munkalapTetel->feladat_id)
+        ->exists();
 
-        if ($letezoTetel) {
-            throw new Exception('MunkalapTétel Observer: Ez a munkalap már tartalmazza ezt a tételt.');
-        }
+    if ($letezoTetel) {
+        throw new Exception('MunkalapTétel Observer: Ez a munkalap már tartalmazza ezt a tételt.');
+    } */
     }
 
     /**
