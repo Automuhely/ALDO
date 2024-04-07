@@ -18,8 +18,7 @@ return new class extends Migration
             $table->date('elvitel_ido')->nullable();
             $table->tinyInteger('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');
-            // frontenden lévő mappában található útvonal, amint létrejön a munkalap pdf
-            $table->string('szamlasorszam')->nullable()->default(null);
+            $table->string('szamlaszam');
             $table->timestamps();
         });
     }

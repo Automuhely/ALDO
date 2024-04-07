@@ -15,6 +15,7 @@ class Munkalap extends Model
     const STATUS_BEFEJEZETT = 2;
 
     protected $fillable = [
+        'szamlaszam',
         'auto',
         'ugyfel',
         'munkavezeto',
@@ -22,8 +23,6 @@ class Munkalap extends Model
         'elvitel_ido',
         'uzembentarto',
         'statusz',
-        // frontenden lévő mappában található útvonal, amint létrejön a számla pdf
-        'szamlasorszam'
     ];
 
     
