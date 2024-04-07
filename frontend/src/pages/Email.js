@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import useAuthContext from "../contexts/AuthContext";
 import Kapcsolat from "../components/Kapcsolat";
 
@@ -13,8 +13,8 @@ export default function Emial() {
 
   return (
     <div>
-        <h1>Kapcsolati űrlap</h1>
-        <Kapcsolat></Kapcsolat>
+      <h1>Kapcsolati űrlap</h1>
+      <Kapcsolat></Kapcsolat>
     </div>
   );
-  }
+}
