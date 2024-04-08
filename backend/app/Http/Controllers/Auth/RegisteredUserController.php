@@ -21,15 +21,15 @@ class RegisteredUserController extends Controller
     public function store(Request $request): Response
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'name' => ['required', 'string', 'max:255', 'regex:/^([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*)(\s([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*))*$/'],
+            'cim' => ['required', 'string', 'regex:/^[A-Za-z0-9\s\.,\/\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{1,255}$/', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             /* Hibaüzenetek megjelenítéséhez */
             'cim' => ['required', 'string', 'regex:/^[A-Za-z0-9\s\.,\/\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{1,255}$/'],
-            'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', 'unique'],
+            'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', 'unique:users'],
             'szulido' => ['required', 'date'],
-            'adoazonosito' => ['required_without:adoszam', 'regex:/^[0-9]{10}$/'],
-            'adoszam' => ['required_without:adoazonosito', 'regex:/^((\d{8})-\d{1}-\d{1})|(\d{8}-\d{1})$/'],
+            'adoazonosito' => ['nullable', 'required_without_all:adoszam', 'regex:/^\d{10}$/'],
+            'adoszam' => ['nullable', 'required_without_all:adoazonosito', 'regex:/^\d{8}\-\d{1}\-\d{1}|\d{8}\-\d{1}$/'],
         ]);
 
         $user = User::create([
@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'szerepkor' => 'ugyfel',
             'adoazonosito' => $request->adoazonosito,
             'adoszam' => $request->adoszam,
-            
+
         ]);
 
         event(new Registered($user));
