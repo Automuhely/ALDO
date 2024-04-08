@@ -58,7 +58,7 @@ export default function UserProfile() {
     szulido: "",
     adoazonosito: "",
     adoszam: "",
-    szerepkor: "",
+    // szerepkor: "",
   });
 
   /* Contextek */
@@ -146,13 +146,13 @@ export default function UserProfile() {
     try {
       const adat = {
         name: name,
-        email: email,
+        // email: email,
         telefon: telefon,
         cim: cim,
-        szulido: szulido,
-        adoazonosito: adoazonosito,
+        // szulido: szulido,
+        // adoazonosito: adoazonosito,
         adoszam: adoszam,
-        szerepkor: user.szerepkor,
+        // szerepkor: user.szerepkor,
         _token: token,
       };
       console.log("Profil Beküldés....", adat);
@@ -318,12 +318,7 @@ export default function UserProfile() {
                   <tr>
                     <td>Születési idő</td>
                     <td>
-                      <Form.Control
-                        disabled={!isProfilSzerkesztheto}
-                        type="date"
-                        value={szulido}
-                        onChange={(e) => setSzulido(e.target.value)}
-                      />
+                      <Form.Control disabled type="date" value={szulido} />
                       <Form.Text>
                         {profilErrors.szulido && (
                           <span className="text-danger">
@@ -338,18 +333,17 @@ export default function UserProfile() {
                       <td>Adóazonosító</td>
                       <td>
                         <Form.Control
-                          disabled={!isProfilSzerkesztheto}
+                          disabled
                           type="text"
                           value={adoazonosito}
-                          onChange={(e) => setAdoazonosito(e.target.value)}
                         />
-                        <Form.Text>
+                        {/*  <Form.Text>
                           {profilErrors.adoazonosito && (
                             <span className="text-danger">
                               {profilErrors.adoazonosito[0]}
                             </span>
                           )}
-                        </Form.Text>
+                        </Form.Text> */}
                       </td>
                     </tr>
                   ) : (
@@ -376,19 +370,14 @@ export default function UserProfile() {
                   <tr>
                     <td>Email</td>
                     <td>
-                      <Form.Control
-                        disabled={!isProfilSzerkesztheto}
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                      <Form.Text>
+                      <Form.Control disabled type="text" value={email} />
+                      {/*  <Form.Text>
                         {profilErrors.email && (
                           <span className="text-danger">
                             {profilErrors.email[0]}
                           </span>
                         )}
-                      </Form.Text>
+                      </Form.Text> */}
                     </td>
                   </tr>
                   <tr
