@@ -45,8 +45,8 @@ class UserController extends Controller
                     }
                 }],
                 //'szulido' => ['required', 'date'],
-                'adoazonosito' => ['nullable', 'required_without_all:adoszam', 'regex:/^\d{10}$/'],
-                'adoszam' => ['nullable', 'required_without_all:adoazonosito', 'regex:/^\d{8}\-\d{1}\-\d{1}|\d{8}\-\d{1}$/'],
+                // 'adoazonosito' => ['nullable', 'required_without_all:adoszam', 'regex:/^\d{10}$/'],
+                // 'adoszam' => ['nullable', 'required_without_all:adoazonosito', 'regex:/^\d{8}\-\d{1}\-\d{1}|\d{8}\-\d{1}$/'],
             ],
             [
                 'required_without' => 'A(z) :attribute mező kötelező, ha a(z) :values mező nincs megadva.',
