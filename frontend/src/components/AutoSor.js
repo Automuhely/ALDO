@@ -13,9 +13,8 @@ export default function AutoSor(props) {
   const { csrf } = useAuthContext();
 
   async function szerkeszt(e) {
-    setSzerkesztheto(!szerkesztheto);
-
-    if (e.target.innerHTML === "Mentés") {
+    setSzerkesztheto((prevState) => !prevState);
+    if (szerkesztheto) {
       const token = await csrf();
       try {
         await axios
@@ -30,10 +29,6 @@ export default function AutoSor(props) {
         console.error("Hiba történt:", error);
       }
     }
-  }
-
-  function emailhezBetolt(e) {
-    console.log(props.auto);
   }
 
   return (
@@ -84,6 +79,7 @@ export default function AutoSor(props) {
       <td>
         <Button
           variant={szerkesztheto ? "success" : "primary"}
+          style={{ width: "2em", fontSize: "1.5em", margin: "0", padding: "0" }}
           autoid={`elso${autoid ?? ""}`}
           id={`elsoGomb-${autoid ?? ""}`}
           className="autoimElsoGomb"
@@ -91,22 +87,13 @@ export default function AutoSor(props) {
             szerkeszt(e);
           }}
         >
-          {szerkesztheto ? "Mentés" : "Szerkeszt"}
+          {szerkesztheto ? (
+            <i className="fa-solid fa-floppy-disk"></i>
+          ) : (
+            <i className="fa-regular fa-pen-to-square"></i>
+          )}
         </Button>
       </td>
-      {/*  <td>
-        <Button
-          variant="danger"
-          autoid={`masodik${autoid ?? ""}`}
-          id={`masodikGomb-${autoid ?? ""}`}
-          className="autoimMasodikGomb"
-          onClick={(e) => {
-            emailhezBetolt(e)
-          }}
-        >
-          Töröl
-        </Button>
-      </td> */}
     </tr>
   );
 }
