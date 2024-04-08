@@ -28,9 +28,31 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        User::findorFail($id)->fill($request->all())->save();
-    }
 
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'regex:/^([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*)(\s([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*))*$/'],
+            'cim' => ['required', 'string', 'regex:/^[A-Za-z0-9\s\.,\/\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{1,255}$/'],
+            'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/'],
+            'szulido' => ['required', 'date'],
+            'adoazonosito' => ['required_without:adoszam', 'regex:/^\d{10}$/'],
+            'adoszam' => ['nullable', 'regex:/^\d{8}-\d{1}-\d{1}|\d{8}-\d{1}$/'],
+        ], [
+            'name.required' => 'A név megadása kötelező.',
+            'cim.required' => 'A cím megadása kötelező.',
+            'telefon.required' => 'A telefonszám megadása kötelező.',
+            'szulido.required' => 'A születési idő megadása kötelező.',
+            'adoazonosito.required_without' => 'Az adóazonosító megadása kötelező, ha az adószám nincs megadva.',
+            'adoszam.required_without' => 'Az adószám megadása kötelező, ha az adóazonosító nincs megadva.',
+            'name.regex' => 'Helytelen formátum',
+            'cim.regex' => 'Helytelen formátum',
+            'telefon.regex' => 'Helytelen formátum',
+            'szulido.date' => 'Helytelen formátum',
+            'adoazonosito.regex' => 'Helytelen formátum',
+            'adoszam.regex' => 'Helytelen formátum',
+        ]);
+
+        User::findOrFail($id)->update($request->all());
+    }
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
@@ -61,7 +83,4 @@ class UserController extends Controller
             )
             ->get();
     }
-
-    
-    
 }

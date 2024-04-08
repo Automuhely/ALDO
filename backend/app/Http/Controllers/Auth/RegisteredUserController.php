@@ -25,11 +25,11 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             /* Hibaüzenetek megjelenítéséhez */
-            'cim' => ['required', 'string', 'max:255'],
-            'telefon' => ['required', 'string', 'max:255', 'unique:' . User::class],
+            'cim' => ['required', 'string', 'regex:/^[A-Za-z0-9\s\.,\/\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{1,255}$/'],
+            'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', 'unique'],
             'szulido' => ['required', 'date'],
-            'adoazonosito' => 'required_without:adoszam',
-            'adoszam' => 'required_without:adoazonosito',
+            'adoazonosito' => ['required_without:adoszam', 'regex:/^[0-9]{10}$/'],
+            'adoszam' => ['required_without:adoazonosito', 'regex:/^((\d{8})-\d{1}-\d{1})|(\d{8}-\d{1})$/'],
         ]);
 
         $user = User::create([
