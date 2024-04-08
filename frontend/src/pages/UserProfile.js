@@ -35,6 +35,25 @@ export default function UserProfile() {
   const [szamlaim, setSzamlaim] = useState([{}]);
   const [autoim, setAutoim] = useState([{}]);
 
+  const [autoErrors, setAutoErrors] = useState({
+    becenev: "",
+    rendszam: "",
+    marka: "",
+    alvazszam: "",
+    motorkod: "",
+    evjarat: "",
+  });
+  const [profilErrors, setProfilErrors] = useState({
+    name: "",
+    email: "",
+    telefon: "",
+    cim: "",
+    szulido: "",
+    adoazonosito: "",
+    adoszam: "",
+    szerepkor: "",
+  });
+
   /* Contextek */
   const { user, getUser, csrf } = useAuthContext();
 
@@ -50,11 +69,11 @@ export default function UserProfile() {
       setAdoazonosito(user.adoazonosito);
       setAdoszam(user.adoszam);
       szamlakBetolt();
-
-      // meghívjuk az adatot a backendről külső függvénnyel, aszinkron módon
+      setProfilErrors("");
+      setAutoErrors("");
     }
     console.log("useEffect profil");
-  }, [user]);
+  }, [user, getUser]);
 
   async function szamlakBetolt() {
     /*                                                                          CSRF ??????    */
@@ -99,16 +118,21 @@ export default function UserProfile() {
       console.log("Új autó elküldve SIKERESEN:", response.data);
       szamlakBetolt();
     } catch (error) {
-      console.log(
-        error.response.status +
-          " - " +
-          error.response.data.message +
-          " - " +
-          error.response.statusText
-      );
+      console.log(error.response);
+      if (error.response && error.response.data.errors) {
+        setAutoErrors(error.response.data.errors);
+        console.log("ERRRROOOOOOS: ", autoErrors);
+      } else {
+        console.log(
+          error.response.status +
+            " - " +
+            error.response.data.message +
+            " - " +
+            error.response.statusText
+        );
+      }
     }
   };
-
   const bekuld = async (e) => {
     const token = await csrf(); // CSRF token lekérése
     e.preventDefault();
@@ -140,8 +164,19 @@ export default function UserProfile() {
             " - " +
             error.response.statusText
         );
-      } else if (error.request) {
-        console.error("Hiba:", error);
+      }
+      if (error.response && error.response.status === 422) {
+        console.log(error.response);
+        setProfilErrors(error.response.data.errors);
+        console.log("PROFIL ERRORS: ", autoErrors);
+      } else {
+        console.log(
+          error.response.status +
+            " - " +
+            error.response.data.message +
+            " - " +
+            error.response.statusText
+        );
       }
     }
   };
@@ -151,28 +186,60 @@ export default function UserProfile() {
       <Container fluid>
         {user ? (
           <Row>
+            {/* <ProfilMezo
+              user={user}
+              bekuld={bekuld}
+              setName={setName}
+              setEmail={setEmail}
+              setTelefon={setTelefon}
+              setCim={setCim}
+              setSzulido={setSzulido}
+              setAdoazonosito={setAdoazonosito}
+              setAdoszam={setAdoszam}
+              szamlakBetolt={szamlakBetolt}
+              name={name}
+              email={email}
+              telefon={telefon}
+              cim={cim}
+              szulido={szulido}
+              adoszam={adoszam}
+              adoazonosito={adoazonosito}
+              isAutoUrlapNyitva={isAutoUrlapNyitva}
+            ></ProfilMezo> */}
             <Col className="col-sm-12 col-md-6 m-auto profilMezo">
               <Row>
                 <Col>
                   <h1 className="text-center">Profil</h1>
                 </Col>
-                <Col>
-                  <Button
-                    variant="primary"
-                    id="profilModosito"
-                    onClick={() => {
-                      setIsProfilSzerkesztheto((prevState) => !prevState);
-                    }}
-                  >
-                    Szerkeszt
-                  </Button>
-                </Col>
               </Row>
               <Table bordered responsive>
                 <thead>
                   <tr>
-                    <th colSpan="2" className="text-center">
+                    <th
+                      colSpan="2"
+                      className="text-center"
+                      style={{ position: "relative" }}
+                    >
                       Személyes adatok
+                      <Button
+                        variant="primary"
+                        style={{
+                          position: "absolute",
+                          right: 10,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          width: "2em",
+                          fontSize: "1.5em",
+                          margin: "0",
+                          padding: "0",
+                        }}
+                        id="profilModosito"
+                        onClick={() => {
+                          setIsProfilSzerkesztheto((prevState) => !prevState);
+                        }}
+                      >
+                        <i className="fa-regular fa-pen-to-square"></i>
+                      </Button>
                     </th>
                   </tr>
                 </thead>
@@ -181,48 +248,72 @@ export default function UserProfile() {
                     <td>Név</td>
                     <td>
                       <Form.Control
-                        /*   className="profilInputok" */
                         disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                       />
+                      <Form.Text>
+                        {profilErrors.name && (
+                          <span className="text-danger">
+                            {profilErrors.name[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </td>
                   </tr>
                   <tr>
                     <td>Telefon</td>
                     <td>
                       <Form.Control
-                        /*   className="profilInputok" */
                         disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={telefon}
                         onChange={(e) => setTelefon(e.target.value)}
                       />
+                      <Form.Text>
+                        {profilErrors.telefon && (
+                          <span className="text-danger">
+                            {profilErrors.telefon[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </td>
                   </tr>
                   <tr>
                     <td>Cím</td>
                     <td>
                       <Form.Control
-                        /*   className="profilInputok" */
                         disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={cim}
                         onChange={(e) => setCim(e.target.value)}
                       />
+                      <Form.Text>
+                        {profilErrors.cim && (
+                          <span className="text-danger">
+                            {profilErrors.cim[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </td>
                   </tr>
                   <tr>
                     <td>Születési idő</td>
                     <td>
                       <Form.Control
-                        /*   className="profilInputok" */
                         disabled={!isProfilSzerkesztheto}
-                        type="text"
+                        type="date"
                         value={szulido}
                         onChange={(e) => setSzulido(e.target.value)}
                       />
+                      <Form.Text>
+                        {profilErrors.szulido && (
+                          <span className="text-danger">
+                            {profilErrors.szulido[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </td>
                   </tr>
                   {user.adoazonosito ? (
@@ -230,12 +321,18 @@ export default function UserProfile() {
                       <td>Adóazonosító</td>
                       <td>
                         <Form.Control
-                          /*   className="profilInputok" */
                           disabled={!isProfilSzerkesztheto}
                           type="text"
                           value={adoazonosito}
                           onChange={(e) => setAdoazonosito(e.target.value)}
                         />
+                        <Form.Text>
+                          {profilErrors.adoazonosito && (
+                            <span className="text-danger">
+                              {profilErrors.adoazonosito[0]}
+                            </span>
+                          )}
+                        </Form.Text>
                       </td>
                     </tr>
                   ) : (
@@ -243,12 +340,18 @@ export default function UserProfile() {
                       <td>Adószám</td>
                       <td>
                         <Form.Control
-                          /*   className="profilInputok" */
                           disabled={!isProfilSzerkesztheto}
                           type="text"
                           value={adoszam}
                           onChange={(e) => setAdoszam(e.target.value)}
                         />
+                        <Form.Text>
+                          {profilErrors.adoszam && (
+                            <span className="text-danger">
+                              {profilErrors.adoszam[0]}
+                            </span>
+                          )}
+                        </Form.Text>
                       </td>
                     </tr>
                   )}
@@ -257,12 +360,18 @@ export default function UserProfile() {
                     <td>Email</td>
                     <td>
                       <Form.Control
-                        /*   className="profilInputok" */
                         disabled={!isProfilSzerkesztheto}
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
+                      <Form.Text>
+                        {profilErrors.email && (
+                          <span className="text-danger">
+                            {profilErrors.email[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </td>
                   </tr>
                   <tr
@@ -273,7 +382,7 @@ export default function UserProfile() {
                     <td colSpan={2} className="text-center">
                       <Button
                         onClick={(e) => {
-                          setIsProfilSzerkesztheto((prevState) => !prevState);
+                          //setIsProfilSzerkesztheto((prevState) => !prevState);
                           bekuld(e);
                         }}
                         id="profilMentesGomb"
@@ -324,6 +433,13 @@ export default function UserProfile() {
                         value={becenev}
                         onChange={(e) => setBecenev(e.target.value)}
                       />
+                      <Form.Text>
+                        {autoErrors.becenev && (
+                          <span className="text-danger">
+                            {autoErrors.becenev[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Rendszám</Form.Label>
@@ -333,11 +449,18 @@ export default function UserProfile() {
                         value={rendszam}
                         onChange={(e) => setRendszam(e.target.value)}
                       />
+                      <Form.Text>
+                        {autoErrors.rendszam && (
+                          <span className="text-danger">
+                            {autoErrors.rendszam[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Márka</Form.Label>
                       <Form.Select
-                      required
+                        required
                         id="marka"
                         value={marka}
                         onChange={(e) => setMarka(e.target.value)}
@@ -383,6 +506,13 @@ export default function UserProfile() {
                         <option value={"Volkswagen"}>Volkswagen</option>
                         <option value={"Volvo"}>Volvo</option>
                       </Form.Select>
+                      <Form.Text>
+                        {autoErrors.marka && (
+                          <span className="text-danger">
+                            {autoErrors.marka[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Alvázszám</Form.Label>
@@ -392,6 +522,13 @@ export default function UserProfile() {
                         value={alvazszam}
                         onChange={(e) => setAlvazszam(e.target.value)}
                       />
+                      <Form.Text>
+                        {autoErrors.alvazszam && (
+                          <span className="text-danger">
+                            {autoErrors.alvazszam[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Motorkód</Form.Label>
@@ -401,6 +538,13 @@ export default function UserProfile() {
                         value={motorkod}
                         onChange={(e) => setMotorkod(e.target.value)}
                       />
+                      <Form.Text>
+                        {autoErrors.motorkod && (
+                          <span className="text-danger">
+                            {autoErrors.motorkod[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3">
                       <Form.Label>Évjárat</Form.Label>
@@ -410,8 +554,17 @@ export default function UserProfile() {
                         value={evjarat}
                         onChange={(e) => setEvjarat(e.target.value)}
                       />
+                      <Form.Text>
+                        {autoErrors.evjarat && (
+                          <span className="text-danger">
+                            {autoErrors.evjarat[0]}
+                          </span>
+                        )}
+                      </Form.Text>
                     </Form.Group>
-                    <Button type="submit">Küldés</Button>
+                    <Button type="submit" className="m-auto d-block">
+                      Küldés
+                    </Button>
                   </Form>
                 </Col>
               </Row>
@@ -419,17 +572,23 @@ export default function UserProfile() {
             <Col className="col-sm-12 m-auto szamlakMezo">
               <h1 className="text-center">Számlák</h1>
 
-              <Table bordered striped hover className="munkalapokTable">
+              <Table
+                bordered
+                striped
+                hover
+                responsive="sm"
+                className="munkalapokTable"
+              >
                 <thead>
                   <tr>
                     {/* Munkalapszám helyett számlaszám kellene */}
-                    <th>Munkalapszám</th>
+                    <th>Számlaszám</th>
                     <th>Becenév</th>
                     <th>Rendszám</th>
                     <th>Munkavezető</th>
                     <th>Leírás</th>
                     <th>Módosult</th>
-                    <th colSpan={2}></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -442,8 +601,14 @@ export default function UserProfile() {
                         <td>{e.munkavezeto_nev}</td>
                         <td>{e.altalanosLeiras}</td>
                         <td>{e.updated_at}</td>
-                        <td>Megtekint</td>
-                        <td>Letölt</td>
+                        <td>
+                          <i
+                            className="fa-solid fa-eye d-block m-auto"
+                            style={{
+                              fontSize: "1.5em",
+                            }}
+                          ></i>
+                        </td>
                       </tr>
                     );
                   })}
