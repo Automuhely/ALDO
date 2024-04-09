@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auto;
+use App\Validation\AutoValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class AutoController extends Controller
 {
@@ -20,24 +22,13 @@ class AutoController extends Controller
 
     public function store(Request $request)
     {
-        $validaltAuto = $request->validate([
-            'rendszam' => ['required', 'unique:autos', 'regex:/^(?=.*[a-zA-Z]{3,})(?=.*[0-9]{3,}).{6,10}$/'],
-            'marka' => 'required',
-            'alvazszam' => ['required', 'unique:autos', 'regex:/^[A-HJ-NPR-Z0-9]{17}$/'],
-            'motorkod' => ['required', 'unique:autos', 'regex:/^[A-Za-z0-9]{3,6}$/'],
-            'evjarat' => 'required|digits:4',
-        ], [
-            'rendszam.unique' => 'A rendszám már foglalt.',
-            'alvazszam.unique' => 'Az alvázszám már foglalt.',
-            'motorkod.unique' => 'A motorkód már foglalt.',
-            'rendszam.regex' => 'Helytelen formátum',
-            'alvazszam.regex' => 'Helytelen formátum',
-            'motorkod.regex' => 'Helytelen formátum',
-            'evjarat.digits' => 'Helytelen formátum.',
-            'marka.required' => 'Válaszd ki a márkáját'
-        ]);
+        $rules = AutoValidation::rules();
+        $attributes = AutoValidation::attributes();
+        $messages = AutoValidation::messages();
 
-        $auto = Auto::create($validaltAuto);
+        $validatedData = $request->validate($rules, $messages, $attributes);
+
+        $auto = Auto::create($validatedData);
         if (!empty($auto)) {
             return response()->json($auto, 201);
         } else {
