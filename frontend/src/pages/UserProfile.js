@@ -76,30 +76,21 @@ export default function UserProfile() {
       setAdoazonosito(user.adoazonosito);
       setAdoszam(user.adoszam);
       szamlakBetolt();
-      setProfilErrors("");
-      setAutoErrors("");
     }
     console.log("useEffect profil");
   }, [user, getUser]);
 
   async function szamlakBetolt() {
-    /*                                                                          CSRF ??????    */
-    // await csrf();
     try {
       const szamlakAdat = await axios.get("/api/szamlaim").then((e) => {
-        // console.log("számlák betölt....:", e.data);
         return e.data;
       });
       const autoimAdat = await axios.get("/api/autoim").then((e) => {
-        //console.log("autóim betölt....:", e.data);
         return e.data;
       });
       /*                                                                        try catch ?????  */
-      // const token = await csrf();
       setSzamlaim(szamlakAdat);
-      // console.log("setSzámláim: ", szamlaim);
       setAutoim(autoimAdat);
-      //console.log("setAutoim: ", autoim);
     } catch (error) {
       console.log(error);
     }
@@ -124,6 +115,8 @@ export default function UserProfile() {
       const response = await axios.post("/api/autos", adat);
       console.log("Új autó elküldve SIKERESEN:", response.data);
       szamlakBetolt();
+      setAutoErrors("");
+      alert("Sikeres beküldés.");
     } catch (error) {
       console.log(error.response);
       if (error.response && error.response.data.errors) {
@@ -142,27 +135,24 @@ export default function UserProfile() {
   };
   const bekuld = async (e) => {
     e.preventDefault();
-    const token = await csrf(); // CSRF token lekérése
+    const token = await csrf();
     try {
       const adat = {
         name: name,
-        // email: email,
         telefon: telefon,
         cim: cim,
-        // szulido: szulido,
-        // adoazonosito: adoazonosito,
         adoszam: adoszam,
-        // szerepkor: user.szerepkor,
         _token: token,
       };
       console.log("Profil Beküldés....", adat);
 
       let vegpont = "/api/users/" + user.id;
-      // console.log("VÉGPONT:", vegpont);
       const response = await axios.put(vegpont, adat);
       console.log("Profil beküldés SIKERES", response.data);
       szamlakBetolt();
       setIsProfilSzerkesztheto(false);
+      setProfilErrors("");
+      alert("Sikeres beküldés.");
     } catch (error) {
       if (error.response && error.response.status === 419) {
         console.log(
@@ -178,13 +168,7 @@ export default function UserProfile() {
         setProfilErrors(error.response.data.errors);
         console.log("PROFIL ERRORS: ", autoErrors);
       } else {
-        console.log(
-          error.response.status +
-            " - " +
-            error.response.data.message +
-            " - " +
-            error.response.statusText
-        );
+        console.log(error.response);
       }
     }
   };
@@ -205,26 +189,6 @@ export default function UserProfile() {
         {user ? (
           <>
             <Row>
-              {/* <ProfilMezo
-      user={user}
-      bekuld={bekuld}
-      setName={setName}
-      setEmail={setEmail}
-      setTelefon={setTelefon}
-      setCim={setCim}
-      setSzulido={setSzulido}
-      setAdoazonosito={setAdoazonosito}
-      setAdoszam={setAdoszam}
-      szamlakBetolt={szamlakBetolt}
-      name={name}
-      email={email}
-      telefon={telefon}
-      cim={cim}
-      szulido={szulido}
-      adoszam={adoszam}
-      adoazonosito={adoazonosito}
-      isAutoUrlapNyitva={isAutoUrlapNyitva}
-    ></ProfilMezo> */}
               <Col className="col-sm-12 col-md-6 m-auto profilMezo">
                 <Row>
                   <Col>
@@ -339,13 +303,6 @@ export default function UserProfile() {
                             type="text"
                             value={adoazonosito}
                           />
-                          {/*  <Form.Text>
-              {profilErrors.adoazonosito && (
-                <span className="text-danger">
-                  {profilErrors.adoazonosito[0]}
-                </span>
-              )}
-            </Form.Text> */}
                         </td>
                       </tr>
                     ) : (
@@ -373,13 +330,6 @@ export default function UserProfile() {
                       <td>Email</td>
                       <td>
                         <Form.Control disabled type="text" value={email} />
-                        {/*  <Form.Text>
-      {profilErrors.email && (
-        <span className="text-danger">
-          {profilErrors.email[0]}
-        </span>
-      )}
-    </Form.Text> */}
                       </td>
                     </tr>
                     <tr
@@ -393,7 +343,6 @@ export default function UserProfile() {
                         <Button
                           className="mx-auto d-block"
                           onClick={(e) => {
-                            //setIsProfilSzerkesztheto((prevState) => !prevState);
                             bekuld(e);
                           }}
                           id="profilMentesGomb"
@@ -598,7 +547,6 @@ export default function UserProfile() {
                   >
                     <thead>
                       <tr>
-                        {/* Munkalapszám helyett számlaszám kellene */}
                         <th>Számlaszám</th>
                         <th>Becenév</th>
                         <th>Rendszám</th>
@@ -634,7 +582,7 @@ export default function UserProfile() {
                 )}
               </Col>
               <Col className="col-sm-12 m-auto autokMezo pt-4">
-                {autoim ? (
+                {!autoim ? (
                   <>
                     <h1 className="text-center">Autóim</h1>
                     <div className="text-center">Nincs még autód rögzítve.</div>
