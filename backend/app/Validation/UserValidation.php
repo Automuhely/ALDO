@@ -3,6 +3,7 @@
 namespace App\Validation;
 
 use App\Models\User;
+use Illuminate\Validation\Rule;
 
 class UserValidation
 {
@@ -11,12 +12,8 @@ class UserValidation
         return [
 
             'name' => ['required', 'string', 'max:255', 'regex:/^([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*)(\s([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*))*$/'],
-            'cim' => ['required', 'string', 'regex:/^[A-Za-z0-9\s\.,\/\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{1,255}$/', 'unique:users'],
-            'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', function ($attribute, $value, $fail) use ($id) {
-                if ($value !== null && User::where('telefon', $value)->where('id', '!=', $id)->exists()) {
-                    $fail(__('validation.unique', ['attribute' => $attribute]));
-                }
-            }]
+            'cim' => ['required', 'string'],
+            'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', Rule::unique('users')->ignore($id)],
         ];
     }
 
@@ -40,7 +37,7 @@ class UserValidation
             'name' => ['required', 'string', 'max:255', 'regex:/^([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*)(\s([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\-]*))*$/'],
             'password' => ['required', 'confirmed', 'string', 'min:8', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
-            'cim' => ['required', 'string', 'regex:/^[A-Za-z0-9\s\.,\/\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]{1,255}$/', 'unique:users'],
+            'cim' => ['required', 'string'],
             'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', 'unique:users'],
             'szulido' => ['required', 'date'],
             'adoazonosito' => ['nullable', 'required_without_all:adoszam', 'regex:/^\d{10}$/'],
