@@ -15,13 +15,18 @@ autó becenév módosítása                         X
 számláim táblázat                               X
 munkalapszám mellé számlaszám?                  X
 rendszám és/vagy becenévvel átláthatóbb lenne   X
-validáció                                      2.0
+validáció                                       X
 email form betöltése autó kiválasztással        X
 reszponzivitás                                      ?
-ha nincs számláim, autóim, akkor külön div megjelenítése
+
 kódok kiszervezése
 tesztelés
 számla blade + számláim megtekintése
 +1 context
 működő email
 
+
+ha nincs számláim, autóim, akkor külön div megjelenítése                         1.0
+új autó felvételénél a becenév nem jelenik meg azonnal                            X
+hibaüzenet eltüntetése profil/autó + visszacsatolás a sikeres küldésről          1.0
+auth failed hibaüzenet
