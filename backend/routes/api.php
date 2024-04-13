@@ -10,35 +10,53 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+/* Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+
     return $request->user();
+
+});
+ */
+
+Route::middleware(['auth:sanctum'])->group(function () {
+
+    /*                              user                             */
+    //bejelentkezett felh. számlái
+    Route::get('/szamlaim', [MunkalapController::class, 'szamlaim']);
+    //autóinak száma
+    Route::get('/autoim', [MunkalapController::class, 'autoim']);
+    //összes autóinak legfrissebb munkalapja, avagy státusza
+    Route::get('/legfrissebb', [MunkalapController::class, 'legfrissebb']);
+
+
+    Route::middleware(['szerelo'])->group(function () {
+
+        /*                              szerelő                           */
+        Route::apiResource('/users', UserController::class);
+        Route::apiResource('/arak', MunkaArController::class);
+        Route::apiResource('/autos', AutoController::class);
+        Route::apiResource('/feladats', FeladatController::class);
+        Route::apiResource('/munkalaps', MunkalapController::class);
+        Route::apiResource('/munkalaptetels', MunkalapTetelController::class);
+
+        // autói listázása
+        Route::get('/autoja/{ugyfel}', [AutoController::class, 'autoja']);
+        // ügyfélnek kiállított munkalapok
+        Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);
+
+        Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);
+        Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
+        Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);
+
+        Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);   // ----------------------------------- jogosultság?
+
+        Route::middleware(['vezetoszerelo'])->group(function () {
+        });
+    });
 });
 
-Route::apiResource('/users', UserController::class);
-Route::apiResource('/arak', MunkaArController::class);
-Route::apiResource('/autos', AutoController::class);
-Route::apiResource('/feladats', FeladatController::class);
-Route::apiResource('/munkalaps', MunkalapController::class);
-Route::apiResource('/munkalaptetels', MunkalapTetelController::class);
 Route::post('/send_mail', [MailController::class]);
 
-/*                              user                             */
-//bejelentkezett felh. számlái
-Route::get('/szamlaim', [MunkalapController::class, 'szamlaim']);
-//autóinak száma
-Route::get('/autoim', [MunkalapController::class, 'autoim']);
-//összes autóinak legfrissebb munkalapja, avagy státusza
-Route::get('/legfrissebb', [MunkalapController::class, 'legfrissebb']);
 
 
-/*                              szerelő                           */
-// autói listázása
-Route::get('/autoja/{ugyfel}', [AutoController::class, 'autoja']);
-// ügyfélnek kiállított munkalapok
-Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);
 
 // 
-Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);
-Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);
-Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
-Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);
