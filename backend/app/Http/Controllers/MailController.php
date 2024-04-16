@@ -1,45 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail; 
+use App\Mail\Email;
+use Illuminate\Http\Request; 
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\DemoMail;
-
-class MailController extends Controller
-{
-    // Az index metódus kívül van a sendEmail metóduson
-    public function index()
+class MailController extends Controller 
+{ 
+   
+    public function store(Request $request)
     {
+        // Ellenőrizd a bejövő adatokat és készítsd elő a $mailData tömböt
         $mailData = [
-            'title' => 'Mail from your_email.com',
-            'body' => 'This is for testing email using smtp.',
+            'title' => $request->input('title'),
+            'body' => $request->input('body')
         ];
 
+        // Küldd el az emailt
         Mail::to('aldo.szerviz@gmail.com')
-            ->send(new DemoMail($mailData));
+            ->send(new Email($mailData));
 
-        // Válasz küldése a frontend-nek, hogy az tudja, hogy sikeres volt az e-mail küldés
+        // Visszajelzés a sikeres kérésekről
         return response()->json(['message' => 'Email sent successfully'], 200);
     }
-
-    // A sendEmail metódus a MailController osztályon belül van
-    public function sendEmail(Request $request)
-    {
-        $mailData = [
-            'vezeteknev' => $request->input('vezeteknev'),
-            'keresztnev' => $request->input('keresztnev'),
-            'email' => $request->input('email'),
-            'subject' => $request->input('subject'),
-            'message' => $request->input('message'),
-            'attachment' => $request->file('attachment'),
-        ];
-
-        Mail::to('aldo.szerviz@gmail.com')
-            ->send(new DemoMail($mailData));
-
-        // Válasz küldése a frontend-nek, hogy az tudja, hogy sikeres volt az e-mail küldés
-        return response()->json(['message' => 'Email sent successfully'], 200);
-    }
-}
+} 
 
