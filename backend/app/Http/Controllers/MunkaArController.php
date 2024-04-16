@@ -31,4 +31,6 @@ class MunkaArController extends Controller
     {
         MunkaAr::findOrFail($id)->delete();
     }
+
+    
 }

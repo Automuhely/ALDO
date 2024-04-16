@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Munkalap;
+use App\Models\MunkalapTetel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -108,21 +109,52 @@ class MunkalapController extends Controller
     public function elnemkezdetmunka()
     {
         return DB::table('munkalaps as m')
-            ->where("statusz", "=", "0")
+            ->join('users as u', 'u.id', '=', 'm.ugyfel')
+            ->join('autos as a', 'a.id', '=', 'm.auto')
+            ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->where('m.statusz', '=', '0')
             ->get();
     }
 
     public function folyamatmunka()
     {
         return DB::table('munkalaps as m')
-            ->where("statusz", "=", "1")
+            ->join('users as u', 'u.id', '=', 'm.ugyfel')
+            ->join('autos as a', 'a.id', '=', 'm.auto')
+            ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->where('m.statusz', '=', '1')
             ->get();
     }
 
     public function befejezettmunka()
     {
+
         return DB::table('munkalaps as m')
-            ->where("statusz", "=", "2")
+            ->join('users as u', 'u.id', '=', 'm.ugyfel')
+            ->join('autos as a', 'a.id', '=', 'm.auto')
+            ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->where('m.statusz', '=', '2')
             ->get();
+    }
+
+    public function moveToStarted(Request $request)
+    {
+        $munkalap = Munkalap::findOrFail($request->munkalap_id);
+        $munkalap->statusz = 1; // Áthelyezés az elkezdett munkák közé
+        $munkalap->save();
+
+        return response()->json(['message' => 'Sikeres áthelyezés az elkezdett munkák közé.']);
+    }
+
+    public function moveToFinished(Request $request)
+    {
+        $munkalap = Munkalap::findOrFail($request->munkalap_id);
+        $munkalap->statusz = 2; // Áthelyezés a befejezett munkák közé
+        $munkalap->save();
+
+        return response()->json(['message' => 'Sikeres áthelyezés a befejezett munkák közé.']);
     }
 }
