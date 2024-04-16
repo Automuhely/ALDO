@@ -42,10 +42,19 @@ class UserController extends Controller
             ->get();
     }
 
+    public function vezszerelok()
+    {
+        return DB::table('users as u')
+            ->where('u.szerepkor', '=', 'vezetoszerelo')
+            ->select('u.name')
+            ->get();
+    }
+
 
     public function szerlmunk($id)
 
     {
+        
         return DB::table('munkalaps as m')
             ->join("munkalap_tetels as mt", "m.munkalapszam", "=", "mt.munkalapszam")
             ->where('mt.szerelo', $id)
