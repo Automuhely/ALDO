@@ -16,7 +16,6 @@ class Auto extends Model
         'marka',
         'motorkod',
         'evjarat',
-        'ugyfel',
     ];
     protected $hidden = ["created_at", "updated_at"];
     
@@ -25,6 +24,16 @@ class Auto extends Model
     public function getUgyfelnevAttribute()
     {
         // az ügyfél mező alapján, a másik táblából a nevét kérdezem le
-        return User::find($this->ugyfel)->name;
+        return $this->ugyfel()->first()->name;
+    }
+
+    // Az autóhoz tartozó kapcsolat definiálása
+    public function ugyfel()
+    {
+        return $this->belongsTo(User::class, 'ugyfel_id');
+    }
+
+    public function megnevezes(){
+        return $this->belongsTo(MunkaAr::class,'megnevezes');
     }
 }

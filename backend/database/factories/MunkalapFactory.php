@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Auto;
+use App\Models\MunkaAr;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ class MunkalapFactory extends Factory
             'auto' => Auto::all()->random(),
             'ugyfel' => User::all()->random(),
             'munkavezeto' => User::all()->random(),
-            'altalanosLeiras' => fake()->realText(50),
+            'altalanosLeiras' => MunkaAr::all()->random(),
             'elvitel_ido' => null,
             'statusz' => rand(0,2),
             'uzembentarto' => User::all()->random(),

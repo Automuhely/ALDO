@@ -46,6 +46,7 @@ return new class extends Migration
         });
 
         User::create([
+            'id' => '1',
             'name' => "Szerelo Pista",
             'telefon' => '06702001234',
             'cim' => '1234 Budapest, Szerelők útja 1.',
@@ -58,6 +59,7 @@ return new class extends Migration
         ]);
 
         User::create([
+            'id' => '2',
             'name' => "Szerelo Janos",
             'telefon' => '06702001235',
             'cim' => '1234 Budapest, Szerelők útja 1.',

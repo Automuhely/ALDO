@@ -11,6 +11,8 @@ class MunkaAr extends Model
         'megnevezes',
         'ara'
     ];
-
+    public function megnevezes(){
+        return $this->belongsTo(MunkaAr::class,'megnevezes');
+    }
     
 }

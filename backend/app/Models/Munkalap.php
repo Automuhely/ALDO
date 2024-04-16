@@ -16,7 +16,7 @@ class Munkalap extends Model
 
     protected $fillable = [
         'szamlaszam',
-        'auto',
+        'auto_id',
         'ugyfel',
         'munkavezeto',
         'altalanosLeiras',
@@ -25,5 +25,19 @@ class Munkalap extends Model
         'statusz',
     ];
 
-    
+     // Az autóhoz tartozó kapcsolat definiálása
+     public function auto()
+     {
+         return $this->belongsTo(Auto::class, 'auto_id');
+     }
+ 
+     // Az ügyfélhez tartozó kapcsolat definiálása
+     public function ugyfel()
+     {
+         return $this->belongsTo(User::class, 'ugyfel_id');
+     }
+
+     public function szerelo(){
+        return $this->belongsTo(User::class, "szerelo");
+     }
 }
