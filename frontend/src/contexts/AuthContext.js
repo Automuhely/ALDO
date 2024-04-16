@@ -113,8 +113,49 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const Kuldes = async (adat) => {
+    try {
+        await csrf();
+        console.log(token);
+        const resp = await axios.post("/api/send_mail", adat); 
+        navigate("/");
+        console.log(resp);
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            console.error("422-es hiba történt:", error);
+            setErrors(error.response.data.errors);
+        }
+        if (error.response && error.response.status === 401) {
+            console.log("401, nem történt bejelentkezés", error);
+        } else {
+            console.error("Egyéb hiba történt:", error);
+        }
+        return null;
+    }
+};
+
+const moveToStarted = async (munkalapId) => {
+  try {
+    await csrf();
+    const response = await axios.post('/api/moveToStarted', { munkalap_id: munkalapId });
+    console.log(response.data); 
+  } catch (error) {
+    console.error('Hiba történt az áthelyezés során:', error);
+  }
+};
+
+const moveToFinished = async (munkalapId) => {
+  try {
+    await csrf();
+    const response = await axios.post('/api/moveToFinished', { munkalap_id: munkalapId });
+    console.log(response.data); 
+  } catch (error) {
+    console.error('Hiba történt az áthelyezés során:', error);
+  }
+};
+
   return (
-    <AuthContext.Provider value={{ loginReg, logout, errors, getUser, user, csrf}}>
+    <AuthContext.Provider value={{ loginReg, logout, errors, getUser, user,Kuldes,moveToFinished,moveToStarted, csrf}}>
       {children}
     </AuthContext.Provider>
   );
