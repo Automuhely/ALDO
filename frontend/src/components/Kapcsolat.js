@@ -1,139 +1,85 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function Kapcsolat() {
-  const { csrf } = useAuthContext();
-  const [form, setForm] = useState({
-    vezeteknev: "asd",
-    keresztnev: "asd",
-    email: "szlucska.dora@gmail.com",
-    message: "asd",
-    subject: "sad",
-    attachment: null,
-  });
+  const { Kuldes, csrf } = useAuthContext(); // csrf függvény hozzáadása
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
-  };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [uzenet, setUzenet] = useState("");
 
-  const handleFileChange = (event) => {
-    setForm((prevForm) => ({
-      ...prevForm,
-      attachment: event.target.files[0],
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const token = await csrf();
-
-    const formData = new FormData();
-    formData.append("vezeteknev", form.vezeteknev);
-    formData.append("keresztnev", form.keresztnev);
-    formData.append("email", form.email);
-    formData.append("message", form.message);
-    formData.append("subject", form.subject);
-    if (form.attachment) {
-      formData.append("attachment", form.attachment);
-    }
-    formData.append("_token", token);
-    try {
-      const response = await fetch("/send_mail", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      console.log(data.message);
-    } catch (error) {
-      console.error("Error:", error);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (name.length === 0) {
+      alert("Nincs kitöltve a név!");
+    } else if (email.length === 0) {
+      alert("Nincs kitöltve az e-mail cím!");
+    } else if (uzenet.length === 0) {
+      alert("Nincs kitöltve az üzenet!");
+    } else {
+      try {
+        const token = await csrf(); // Token lekérése
+        const adat = {
+          name: name,
+          email: email,
+          uzenet: uzenet,
+          _token: token, // A token hozzáadása az adatokhoz
+        };
+        await Kuldes(adat);
+        alert("Email sikeresen elküldve!");
+      } catch (error) {
+        alert("Hiba történt az email küldése során: " + error.message);
+      }
     }
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: "url('/img/FormBackGroundImg.jpg')",
-        backgroundSize: "100%",
-      }}
-    >
-      <div
-        style={{
-          marginTop: "50px",
-          width: "50%",
-          margin: "0 auto",
-        }}
-      >
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>Vezetéknév</Form.Label>
+    <div>
+      <Form onSubmit={handleSubmit}>
+        <div>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>Név</Form.Label>
             <Form.Control
               type="text"
-              name="vezeteknev"
-              value={form.vezeteknev}
-              onChange={handleChange}
-              placeholder="Vezetéknév"
+              placeholder="Tóth Alexandra"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Keresztnév</Form.Label>
-            <Form.Control
-              type="text"
-              name="keresztnev"
-              value={form.keresztnev}
-              onChange={handleChange}
-              placeholder="Keresztnév"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>E-mail cím</Form.Label>
+        </div>
+        <div>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email cím</Form.Label>
             <Form.Control
               type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="name@gmail.com"
+              placeholder="name@example.com"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Tárgy</Form.Label>
-            <Form.Control
-              type="text"
-              name="subject"
-              value={form.subject}
-              onChange={handleChange}
-              placeholder="Tárgy"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Melléklet</Form.Label>
-            <Form.Control
-              type="file"
-              name="attachment"
-              onChange={handleFileChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Üzenet</Form.Label>
+        </div>
+        <div>
+          <Form.Group className="mb-3" controlId="uzenet">
+            <Form.Label>Üzenet szövege</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
-              type="text"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
+              onChange={(e) => {
+                setUzenet(e.target.value);
+              }}
             />
           </Form.Group>
+        </div>
+        <div>
           <Button variant="primary" type="submit">
             Küldés
           </Button>
-        </Form>
-      </div>
+        </div>
+      </Form>
     </div>
   );
 }
