@@ -3,6 +3,9 @@
 namespace App\Observers;
 
 use App\Models\Auto;
+use Exception;
+
+use function Laravel\Prompts\error;
 
 class AutoObserver
 {
@@ -11,15 +14,22 @@ class AutoObserver
      */
     public function created(Auto $auto): void
     {
-       
     }
 
     /**
      * Handle the Auto "updated" event.
      */
-    public function updated(Auto $auto): void
+    public function updated(Auto $auto)
     {
-        //
+        $ugyfelAutok = Auto::where('ugyfel', $auto->ugyfel)
+            ->where('becenev', $auto->becenev)
+            ->where('id', '!=', $auto->id)
+            ->exists();
+
+        if ($ugyfelAutok) {
+            abort(422, 'Már van ilyen nevű autód.');
+        return response()->json(['error' => 'Már van ilyen nevű autód.'], 422);
+        }
     }
 
     /**

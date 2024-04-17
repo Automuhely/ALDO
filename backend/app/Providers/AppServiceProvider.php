@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Auto;
 use App\Models\Munkalap;
 use App\Models\MunkalapTetel;
+use App\Observers\AutoObserver;
 use App\Observers\MunkalapObserver;
 use App\Observers\MunkalapTetelObserver;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -31,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         // observerekre való feliratkozás
         Munkalap::observe(MunkalapObserver::class);
         MunkalapTetel::observe(MunkalapTetelObserver::class);
+        Auto::observe(AutoObserver::class);
 
 
     }
