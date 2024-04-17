@@ -11,6 +11,8 @@ import Galeria from "./pages/Galeria.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import UserProfile from "./pages/UserProfile.js";
+import UserProfileForm from "./components/UserProfileForm.js";
+import UserAutosForm from "./components/UserAutosForm.js";
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
         <Route path="/munkaar" element={<MunkaAr />} />
         <Route path="/kapcsolat" element={<Email />} />
         <Route path="/galeria" element={<Galeria />} />
+
+        <Route path="/user-profile-form" element={<UserProfileForm />} />
+        <Route path="/user-auto-form" element={<UserAutosForm />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
