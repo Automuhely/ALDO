@@ -30,6 +30,8 @@ export default function MyNav() {
                   <Nav.Link href="/vezetoszerelo">Vezető szerelő oldala</Nav.Link>
                 )}
                 <Nav.Link href="/profil">Profilom</Nav.Link>
+                <Nav.Link href="/user-profile-form">PROFIL 2.0</Nav.Link>
+                <Nav.Link href="/user-autos-form">AUTÓK 2.0</Nav.Link>
                 
               </>
             ) : (
@@ -37,7 +39,7 @@ export default function MyNav() {
               <>
                 <Nav.Link href="/login">Bejelentkezés</Nav.Link>
 
-                <Nav.Link href="/register">Regisztráció</Nav.Link>
+                <Nav.Link href="/register">Regisztráció</Nav.Link>                
               </>
             )}
           </Nav>
