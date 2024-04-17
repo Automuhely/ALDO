@@ -77,7 +77,7 @@ export default function UserProfile() {
       setAdoszam(user.adoszam);
       szamlakBetolt();
     }
-    console.log("useEffect profil");
+    //console.log("useEffect profil");
   }, [user, getUser]);
 
   async function szamlakBetolt() {
@@ -530,9 +530,9 @@ export default function UserProfile() {
                 </Row>
               </Col>
               <Col className="col-sm-12 m-auto szamlakMezo">
+                <h1 className="text-center">Számlák</h1>
                 {szamlaim ? (
                   <>
-                    <h1 className="text-center">Számlák</h1>
                     <div className="text-center">
                       Nincs még számlád rögzítve.
                     </div>
@@ -582,9 +582,9 @@ export default function UserProfile() {
                 )}
               </Col>
               <Col className="col-sm-12 m-auto autokMezo pt-4">
+                <h1 className="text-center">Autóim</h1>
                 {!autoim ? (
                   <>
-                    <h1 className="text-center">Autóim</h1>
                     <div className="text-center">Nincs még autód rögzítve.</div>
                   </>
                 ) : (
