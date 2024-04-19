@@ -16,6 +16,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::middleware('cors')->group(function () {
     Route::post('/send_mail', [GlobalMailController::class, 'store']);
+
 });
 
 
@@ -48,7 +49,8 @@ Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);
 Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);
 Route::get('/vezszerelok',[UserController::class,'vezszerelok']);
 Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);
+Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);
 Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
 Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);
-Route::post('/moveToStarted', [MunkalapController::class, 'moveToStarted']);
-Route::post('/moveToFinished', [MunkalapController::class, 'moveToFinished']);
+Route::post('/folyamatmunkapost', [MunkalapController::class, 'folyamatmunkapost']);
+Route::post('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);

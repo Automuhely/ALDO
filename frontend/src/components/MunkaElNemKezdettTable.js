@@ -1,7 +1,26 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable } from "react-table";
+import axios from "../api/axios";
+import useAuthContext from "../contexts/AuthContext";
 
-export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak, onMoveToStarted }) {
+export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak }) {
+  const { csrf } = useAuthContext();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    // CSRF token lekérése és beállítása
+    const fetchCsrfToken = async () => {
+      try {
+        const token = await csrf();
+        setToken(token);
+      } catch (error) {
+        console.error("Hiba történt a CSRF token lekérése során:", error);
+      }
+    };
+    fetchCsrfToken();
+  }, [csrf]);
+
+
   const columns = useMemo(
     () => [
       {
@@ -40,12 +59,34 @@ export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak, onMoveToSta
         Header: " ",
         accessor: "kezdes",
         Cell: ({ row }) => (
-          <button onClick={() => onMoveToStarted(row.original)}>Kezdés</button>
+          <button onClick={()=> kezdesgomb(row.munkalapszam)}>Kezdés</button>
         ),
       },
     ],
     []
   );
+
+  const kezdesgomb = async (munkalapszam) => {
+    try {
+      // CSRF token lekérése
+      await csrf();
+      // A kéréshez tartozó adatok összeállítása
+      const data = {
+        munkalapszam: munkalapszam,
+        statusz: 1,
+        _token: token, // A token hozzáadása az adatokhoz
+      };
+      // Elküldjük a kérést a backend-nek a státusz módosításához
+      const response = await axios.post("/api/folyamatmunkapost", data);
+      console.log("Státusz megváltoztatva");
+      // Ha a kérés sikeres, frissítjük az oldalt
+      // Frissítheted az oldalt a megfelelő módon, pl. újratöltéssel vagy a friss adatok letöltésével
+      window.location.reload(); // Példa: oldal újratöltése
+    } catch (error) {
+      console.error("Hiba történt a státusz megváltoztatása közben:", error);
+    }
+  };
+  
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: ElNemKezdettMunkak });
