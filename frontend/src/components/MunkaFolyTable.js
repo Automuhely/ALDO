@@ -40,8 +40,9 @@ export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
         Header: " ",
         accessor: "befejezes",
         Cell: ({ row }) => (
-          <button onClick={() => onMoveToFinished(row.original)}>Befejezés</button>
-        ),
+          <button onClick={() => {
+            console.log("Befejezés");
+        }}>Befejezés</button>)
       },
     ],
     []

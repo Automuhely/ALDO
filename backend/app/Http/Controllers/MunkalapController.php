@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Munkalap;
-use App\Models\MunkalapTetel;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +13,7 @@ class MunkalapController extends Controller
     {
         return response()->json(Munkalap::all());
     }
+
 
     public function show($id)
     {
@@ -140,21 +139,15 @@ class MunkalapController extends Controller
             ->get();
     }
 
-    public function moveToStarted(Request $request)
-    {
-        $munkalap = Munkalap::findOrFail($request->munkalap_id);
-        $munkalap->statusz = 1; // Áthelyezés az elkezdett munkák közé
-        $munkalap->save();
+    public function folyamatmunkapost(Request $request)
+{
+    
+    $munkalapszam = $request->input('munkalapszam');
+    // státusz módosítása a $munkalapszam-hoz tartozó munkalapon
 
-        return response()->json(['message' => 'Sikeres áthelyezés az elkezdett munkák közé.']);
-    }
+    // Válasz visszaküldése
+    return response()->json(['message' => 'Státusz sikeresen megváltoztatva'], 200);
+}
 
-    public function moveToFinished(Request $request)
-    {
-        $munkalap = Munkalap::findOrFail($request->munkalap_id);
-        $munkalap->statusz = 2; // Áthelyezés a befejezett munkák közé
-        $munkalap->save();
-
-        return response()->json(['message' => 'Sikeres áthelyezés a befejezett munkák közé.']);
-    }
+   
 }

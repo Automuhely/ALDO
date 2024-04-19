@@ -6,17 +6,11 @@ import MunkaElNemKezdettTable from "../components/MunkaElNemKezdettTable";
 import MunkaBefejezettTable from "../components/MunkaBefejezettTable";
 
 export default function MunkaFolyamatok() {
-  const { user, getUser,moveToFinished,moveToStarted,csrf } = useAuthContext();
+ 
   const [ElKezdettMunkak, setElKezdettMunkak] = useState([]);
   const [ElNemKezdettMunkak, setElNemKezdettMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
-
-  useEffect(() => {
-    if (!user) {
-      getUser();
-    }
-  }, [user]);
-
+  
  
 
   useEffect(() => {
@@ -57,9 +51,9 @@ export default function MunkaFolyamatok() {
       <h1>Munkafolyamatok</h1>
       <MunkaElNemKezdettTable
         ElNemKezdettMunkak={ElNemKezdettMunkak}
-        onMoveToStarted={moveToStarted}
+       
       />
-      <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak}  onMoveToFinished={moveToFinished}/>
+      <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak}/>
       <MunkaBefejezettTable BefejezettMunkak={BefejezettMunkak} />
     </div>
   );
