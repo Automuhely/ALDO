@@ -5,9 +5,41 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+    background-color: rgba(173, 216, 230, 0.544);
+  
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+img{
+  height: 400px;
+}
+
+.kartyak{
+  padding: 40px;
+}
+
+@media only screen and (max-width: 1300px ) {
+  body {
+    background-color: lightblue;
+  }
+
+  img{
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 900px ) {
+  body {
+    background-color: lightblue;
+  }
+
+  img{
+    height: 250px;
+  }
+}
+
