@@ -6,7 +6,6 @@ use App\Models\Auto;
 use App\Validation\AutoValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class AutoController extends Controller
 {
@@ -44,6 +43,11 @@ class AutoController extends Controller
     public function destroy($id)
     {
         Auto::findOrFail($id)->delete();
+    }
+
+    public function autoMarkak()
+    {
+        return response()->json(Auto::getAutoMarkak());
     }
 
     // adott ügyfél autóinak kilistázása
