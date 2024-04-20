@@ -28,7 +28,7 @@ function App() {
         <Route path="/galeria" element={<Galeria />} />
 
         <Route path="/user-profile-form" element={<UserProfileForm />} />
-        <Route path="/user-auto-form" element={<UserAutosForm />} />
+        <Route path="/user-autos-form" element={<UserAutosForm />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
