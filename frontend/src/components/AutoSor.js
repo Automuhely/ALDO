@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "../api/axios";
 import { useState } from "react";
+import InputGroup from "react-bootstrap/InputGroup";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function AutoSor(props) {
@@ -16,7 +17,7 @@ export default function AutoSor(props) {
     const token = await csrf();
     if (kuldheto === true) {
       try {
-        console.log("becenév változtatás")
+        console.log("becenév változtatás");
         await axios.put(vegpont, { becenev: beceneve, _token: token });
       } catch (error) {
         console.error("Hiba történt:", error);
@@ -27,43 +28,50 @@ export default function AutoSor(props) {
   return (
     <tr id={"sor" + props.auto.id}>
       <td>
-        <Form.Control
-          className="becenev"
-          type="text"
-          disabled={!kuldheto}
-          defaultValue={props.auto.becenev ?? ""}
-          onChange={(e) => {
-            setBeceneve(e.target.value);
-          }}
-        />
-        <span>
-          <Button
-            variant={kuldheto ? "success" : "primary"}
-            style={{
-              width: "2em",
-              fontSize: "1.5em",
-              margin: "0",
-              padding: "0",
+        <InputGroup>
+          <Form.Control
+            type="text"
+            disabled={!kuldheto}
+            defaultValue={props.auto.becenev ?? ""}
+            onChange={(e) => {
+              setBeceneve(e.target.value);
             }}
-            autoid={`elso${autoid ?? ""}`}
-            id={`elsoGomb-${autoid ?? ""}`}
-            className="autoimElsoGomb"
-            onClick={(e) => {
-              szerkeszt(e);
-            }}
-          >
-            {kuldheto ? (
-              <i className="fa-solid fa-floppy-disk"></i>
-            ) : (
-              <i className="fa-regular fa-pen-to-square"></i>
-            )}
-          </Button>
-        </span>
+          />
+          <InputGroup.Text>
+              <Button
+                variant={kuldheto ? "success" : "primary"}
+                className="elsoGomb"
+                autoid={`elso${autoid ?? ""}`}
+                id={`elsoGomb-${autoid ?? ""}`}
+                onClick={(e) => {
+                  szerkeszt(e);
+                }}
+              >
+                {kuldheto ? "Mentés" : "Szerkeszt"}
+              </Button>
+          </InputGroup.Text>
+        </InputGroup>
       </td>
       <td>{props.auto.rendszam ?? ""}</td>
-      <td>{props.auto.alvazszam ?? ""}</td>
-      <td>{props.auto.motorkod ?? ""}</td>
-      <td>{props.auto.evjarat ?? ""}</td>
+      <td>
+        <span className="showOnSmall">Alvázszám:</span>
+        {props.auto.alvazszam ?? ""}
+        <span className="showOnSmall">
+          <br />
+          Motorkód:
+          <span className="showOnSmallInside">
+          {props.auto.motorkod ?? ""}
+          </span>
+          <br />
+          <br />
+          Évjárat:
+          <span className="showOnSmallInside">
+            {props.auto.evjarat}
+          </span>
+        </span>
+      </td>
+      <td className="hiddenOnSmall">{props.auto.motorkod ?? ""}</td>
+      <td className="hiddenOnSmall">{props.auto.evjarat ?? ""}</td>
     </tr>
   );
 }

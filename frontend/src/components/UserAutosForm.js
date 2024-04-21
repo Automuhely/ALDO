@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "../api/axios";
 
-export default function UserAutosForm() {
+export default function UserAutosForm(props) {
   /* Új autó hozzáadásához */
   const [becenev, setBecenev] = useState("");
   const [rendszam, setRendszam] = useState("");
@@ -16,8 +16,8 @@ export default function UserAutosForm() {
   const [evjarat, setEvjarat] = useState("");
 
   /* Szerkesztéshez logikai operátorok */
-  const [isAutoUrlapNyitva, setIsAutoUrlapNyitva] = useState(false);
-
+  /*   const [isAutoUrlapNyitva, setIsAutoUrlapNyitva] = useState(false);
+   */
   /* Error üzenetek formokhoz */
   const [autoErrors, setAutoErrors] = useState({
     becenev: "",
@@ -60,32 +60,31 @@ export default function UserAutosForm() {
   };
 
   return (
-    <Col className="col-sm-12 col-md-6" id="ujAutoMezo">
-      <Row id="ujAutoMezoFejlec">
-        <Col className="text-end">
-          <Button
-            variant="primary"
-            id="ujAutoGomb"
-            onClick={() => {
-              setIsAutoUrlapNyitva((prevState) => !prevState);
-            }}
-          >
-            Új autó felvitele
-          </Button>
-        </Col>
-      </Row>
-
-      <Row>
+    <>
+      <Row className="justify-content-center align-items-center mb-3">
+        <Row>
+          {/*  <Col>
+            <Button
+              className="text-end d-inline"
+              variant="primary"
+              id="ujAutoGomb"
+              onClick={() => {
+                setIsAutoUrlapNyitva((prevState) => !prevState);
+              }}
+            >
+              Új autó felvitele
+            </Button>
+          </Col> */}
+        </Row>
         <Col
           id="ujAutoUrlap"
-          style={{
-            visibility: isAutoUrlapNyitva ? "visible" : "hidden",
-          }}
+          /* style={{
+            display: isAutoUrlapNyitva ? "block" : "none",
+          }} */
         >
-          <h1 id="ujAutoUrlapCim" className="text-center">
-            Új autó
-          </h1>
-          <Form onSubmit={(e) => ujAuto(e)}>
+          <Col className="text-end"></Col>
+          <Form onSubmit={(e) => ujAuto(e)} className="border p-3">
+            <legend className="text-center">Új autó</legend>
             <Form.Group className="mb-3">
               <Form.Label>Becenév</Form.Label>
               <Form.Control
@@ -100,37 +99,66 @@ export default function UserAutosForm() {
                 )}
               </Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Rendszám</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                value={rendszam}
-                onChange={(e) => setRendszam(e.target.value)}
-              />
-              <Form.Text>
-                {autoErrors.rendszam && (
-                  <span className="text-danger">{autoErrors.rendszam[0]}</span>
-                )}
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Márka</Form.Label>
-              <Form.Select
-                required
-                id="marka"
-                value={marka}
-                onChange={(e) => setMarka(e.target.value)}
-              >
-                <option value={""}>Kérlek válassz....</option>
-                <option value={"BMW"}>BMW</option>
-              </Form.Select>
-              <Form.Text>
-                {autoErrors.marka && (
-                  <span className="text-danger">{autoErrors.marka[0]}</span>
-                )}
-              </Form.Text>
-            </Form.Group>
+            {/* --------------- --------------- --------------- --------------- --------------- */}
+
+            <Row className="mb-3">
+              <Form.Group as={Col} className="mb-3">
+                <Form.Label>Rendszám</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  value={rendszam}
+                  onChange={(e) => setRendszam(e.target.value)}
+                />
+                <Form.Text>
+                  {autoErrors.rendszam && (
+                    <span className="text-danger">
+                      {autoErrors.rendszam[0]}
+                    </span>
+                  )}
+                </Form.Text>
+              </Form.Group>
+              <Form.Group as={Col} className="mb-3">
+                <Form.Label>Márka</Form.Label>
+                <Form.Select
+                  required
+                  id="marka"
+                  value={marka}
+                  onChange={(e) => setMarka(e.target.value)}
+                >
+                  <option value={""}>Kérlek válassz....</option>
+                  {props.markak.map((e, i) => {
+                    return (
+                      <option key={i} value={e}>
+                        {e}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+                <Form.Text>
+                  {autoErrors.marka && (
+                    <span className="text-danger">{autoErrors.marka[0]}</span>
+                  )}
+                </Form.Text>
+              </Form.Group>
+              <Form.Group as={Col} className="mb-3">
+                <Form.Label>Évjárat</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  value={evjarat}
+                  onChange={(e) => setEvjarat(e.target.value)}
+                />
+                <Form.Text>
+                  {autoErrors.evjarat && (
+                    <span className="text-danger">{autoErrors.evjarat[0]}</span>
+                  )}
+                </Form.Text>
+              </Form.Group>
+            </Row>
+
+            {/* --------------- --------------- --------------- --------------- --------------- */}
+
             <Form.Group className="mb-3">
               <Form.Label>Alvázszám</Form.Label>
               <Form.Control
@@ -159,26 +187,12 @@ export default function UserAutosForm() {
                 )}
               </Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Évjárat</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                value={evjarat}
-                onChange={(e) => setEvjarat(e.target.value)}
-              />
-              <Form.Text>
-                {autoErrors.evjarat && (
-                  <span className="text-danger">{autoErrors.evjarat[0]}</span>
-                )}
-              </Form.Text>
-            </Form.Group>
             <Button type="submit" className="mx-auto d-block">
               Küldés
             </Button>
           </Form>
         </Col>
       </Row>
-    </Col>
+    </>
   );
 }

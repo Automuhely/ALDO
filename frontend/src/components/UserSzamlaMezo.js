@@ -1,9 +1,9 @@
-import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
 
 export default function UserSzamlaMezo(props) {
   return (
-    <Col className="col-sm-12 m-auto szamlakMezo">
+    <>
       <h1 className="text-center">Számlák</h1>
       {!props.szamlaim ? (
         <>
@@ -15,36 +15,41 @@ export default function UserSzamlaMezo(props) {
           striped
           hover
           responsive="sm"
-          className="munkalapokTable"
+          className="munkalapokTable text-center align-middle"
         >
           <thead>
             <tr>
-              <th>Számlaszám</th>
+              <th>Sz.szám</th>
               <th>Becenév</th>
               <th>Rendszám</th>
-              <th>Munkavezető</th>
+              <th className="hiddenOnSmall">Munkavezető</th>
               <th>Leírás</th>
-              <th>Módosult</th>
-              <th></th>
+              <th colSpan={2}><span className="hiddenOnSmall">Módosult</span></th>
             </tr>
           </thead>
           <tbody>
             {Object.values(props.szamlaim).map((e, i) => {
               return (
                 <tr key={i}>
-                  <td>{e.munkalapszam}</td>
+                  <td>{e.szamlaszam}</td>
                   <td>{e.becenev}</td>
                   <td>{e.rendszam}</td>
-                  <td>{e.munkavezeto_nev}</td>
-                  <td>{e.altalanosLeiras}</td>
-                  <td>{e.updated_at}</td>
+                  <td className="hiddenOnSmall">{e.munkavezeto_nev}</td>
                   <td>
-                    <i
-                      className="fa-solid fa-eye d-block m-auto"
-                      style={{
-                        fontSize: "1.5em",
-                      }}
-                    ></i>
+                    {e.altalanosLeiras}
+                    <span className="showOnSmall">
+                      <br />
+                      Munkavezető: <br />
+                      <span className="showOnSmallInside">
+                        {e.munkavezeto_nev}
+                        <br /><br />
+                        {e.updated_at}
+                      </span>
+                    </span>
+                  </td>
+                  <td className="hiddenOnSmall">{e.updated_at}</td>
+                  <td>
+                    <Button>Megnéz</Button>
                   </td>
                 </tr>
               );
@@ -52,6 +57,6 @@ export default function UserSzamlaMezo(props) {
           </tbody>
         </Table>
       )}
-    </Col>
+    </>
   );
 }

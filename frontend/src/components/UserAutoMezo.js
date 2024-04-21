@@ -1,48 +1,35 @@
-
 import AutoSor from "../components/AutoSor";
-import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 
 export default function UserAutoMezo(props) {
-return ""
   return (
-    <Col className="col-sm-12 m-auto autokMezo pt-4">
+    <>
       <h1 className="text-center">Autóim</h1>
       {!props.autoim ? (
         <>
           <div className="text-center">Nincs még autód rögzítve.</div>
         </>
       ) : (
-        <Table bordered striped hover>
+        <Table bordered striped hover className="text-center">
           <thead>
             <tr>
-              <th>Becenév</th>
+              <th style={{ minWidth: "15em", width: "20em" }}>Becenév</th>
               <th>Rendszám</th>
-              <th>Alvázszám</th>
-              <th>Motorkód</th>
-              <th>Évjárat</th>
-              <th colSpan={2}></th>
+              <th>
+                Alvázszám
+                <span className="showOnSmall">Motorkód</span>
+              </th>
+              <th className="hiddenOnSmall">Motorkód</th>
+              <th className="hiddenOnSmall">Évjárat</th>
             </tr>
           </thead>
           <tbody>
             {Object.values(props.autoim).map((e, i) => {
-              return (
-                <AutoSor
-                  key={i}
-                  auto={e}
-                  // autoim={props.autoim}
-                  /*  becenev={becenev}
-                  setBecenev={setBecenev}
-                  setRendszam={setRendszam}
-                  setAlvazszam={setAlvazszam}
-                  setMotorkod={setMotorkod}
-                  setEvjarat={setEvjarat} */
-                />
-              );
+              return <AutoSor key={i} auto={e} />;
             })}
           </tbody>
         </Table>
       )}
-    </Col>
+    </>
   );
 }
