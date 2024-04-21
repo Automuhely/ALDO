@@ -20,7 +20,6 @@ export default function MyNav() {
             {user ? (
               <>
               {/* Bejelentkezett felhasználó láthatja */}
-                <Nav.Link href="#" onClick={logout}>Kijelentkezés</Nav.Link>
                 {/* csak a szerelő szerepkörben lévő user láthatja */}
                 {user.szerepkor === 'szerelo' && (
                   <Nav.Link href="/szerelo">Szerelők oldala</Nav.Link>
@@ -29,10 +28,8 @@ export default function MyNav() {
                 {user.szerepkor === 'vezetoszerelo' && (
                   <Nav.Link href="/vezetoszerelo">Vezető szerelő oldala</Nav.Link>
                 )}
-                <Nav.Link href="/profil">Profilom</Nav.Link>
-                <Nav.Link href="/user-profile-form">PROFIL 2.0</Nav.Link>
-                <Nav.Link href="/user-autos-form">AUTÓK 2.0</Nav.Link>
-                
+                <Nav.Link href="/profil">Profilom</Nav.Link>                
+                <Nav.Link href="#" onClick={logout}>Kijelentkezés</Nav.Link>
               </>
             ) : (
               /* Guest, vendég láthatja */

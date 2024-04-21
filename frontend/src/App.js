@@ -26,9 +26,6 @@ function App() {
         <Route path="/munkaar" element={<MunkaAr />} />
         <Route path="/kapcsolat" element={<Email />} />
         <Route path="/galeria" element={<Galeria />} />
-
-        <Route path="/user-profile-form" element={<UserProfileForm />} />
-        <Route path="/user-autos-form" element={<UserAutosForm />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
