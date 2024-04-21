@@ -25,21 +25,21 @@ return new class extends Migration
             $table->timestamps();
         });
         Auto::create([
-            'alvazszam' => "asd",
+            'alvazszam' => "12345678901234567",
             'marka' => "Mercedes",
-            'motorkod' => "asd",
+            'motorkod' => "abc",
             'evjarat' => "2000",
-            'rendszam' => "asd123",
-            'becenev' => "Macika",
+            'rendszam' => "abc123",
+            'becenev' => "Bogár",
             'ugyfel' => "1",
         ]);
         Auto::create([
-            'alvazszam' => "asdef",
+            'alvazszam' => "12345678907894562",
             'marka' => "Bmw",
-            'motorkod' => "asdef",
+            'motorkod' => "guf",
             'evjarat' => "2001",
-            'rendszam' => "efef12",
-            'becenev' => "Kicsi",
+            'rendszam' => "dan123",
+            'becenev' => "Dante",
             'ugyfel' => "1",
         ]);
     }
