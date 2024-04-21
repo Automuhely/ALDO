@@ -2,14 +2,12 @@
 
 use App\Http\Controllers\AutoController;
 use App\Http\Controllers\FeladatController;
-use App\Http\Controllers\LoginedUserController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MunkaArController;
 use App\Http\Controllers\MunkalapController;
 use App\Http\Controllers\MunkalapTetelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
@@ -21,13 +19,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/autos', [AutoController::class, 'store']);
     Route::put('/users/{user}', [UserController::class, 'update']);
-    Route::get('/szamlaim', [MunkalapController::class, 'szamlaim']);           //bejelentkezett felh. számlái
-    Route::get('/autoim', [MunkalapController::class, 'autoim']);               //autói
-    Route::get('/legfrissebb', [MunkalapController::class, 'legfrissebb']);     //összes autóinak legfrissebb munkalapja, avagy státusza
+    Route::get('/szamlaim', [MunkalapController::class, 'szamlaim']);        // bejelentkezett felh. számlái
+    Route::get('/autoim', [AutoController::class, 'autoim']);               // autói
+    Route::get('/legfrissebb', [AutoController::class, 'legfrissebb']);    // összes autóinak legfrissebb munkalapja, avagy státusza
+    Route::get('/autoim-db', [AutoController::class, 'autoimCount']);     // autó db száma
     
     /*  ______________________________________________________________________________________________________________________________________________________SZERELŐ__________ */
     Route::middleware(['szerelo'])->group(function () {
-        Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);       // adott ügyfélnek kiállított összes munkalap
+        Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);        // adott ügyfélnek kiállított összes munkalap
         Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);         // munkalapok státuszok szerinti lekérése
         Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
         Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);

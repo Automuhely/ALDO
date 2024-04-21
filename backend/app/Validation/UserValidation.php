@@ -2,7 +2,6 @@
 
 namespace App\Validation;
 
-use App\Models\User;
 use Illuminate\Validation\Rule;
 
 class UserValidation
@@ -28,9 +27,6 @@ class UserValidation
         ];
     }
 
-
-
-
     public static function rules()
     {
         return [
@@ -41,8 +37,7 @@ class UserValidation
             'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', 'unique:users'],
             'szulido' => ['required', 'date'],
             'adoazonosito' => ['nullable', 'required_without_all:adoszam', 'regex:/^\d{10}$/'],
-            'adoszam' => ['nullable', 'required_without_all:adoazonosito', 'regex:/^\d{8}\-\d{1}\-\d{1}|\d{8}\-\d{1}$/'],
-
+            'adoszam' => ['nullable',  'required_without_all:adoazonosito', 'regex:/^\d{8,10}$/'],
         ];
     }
 
