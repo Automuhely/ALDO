@@ -63,7 +63,7 @@ return [
             ],
             'servers' => [
                 [
-                    'host' => env('MEMCACHED_HOST', '127.0.0.1'),
+                    'host' => env('smtp.mailtrap.hu'),
                     'port' => env('MEMCACHED_PORT', 11211),
                     'weight' => 100,
                 ],

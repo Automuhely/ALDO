@@ -1,7 +1,11 @@
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
+import {  Button, Table } from "react-bootstrap";
+import useAuthContext from "../contexts/AuthContext";
+
 
 export default function MunkaBefejezettTable({ BefejezettMunkak }) {
+  const { csrf } = useAuthContext();
   const columns = useMemo(
     () => [
       {
@@ -26,6 +30,7 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
         Header: "Leírás",
         accessor: "megnevezes",
       },
+      
       {
         Header: "Elvitték",
         accessor: "elvitel_ido",
@@ -38,59 +43,58 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
         Header: "Számlaszám",
         accessor: "szamlaszam",
       },
+      {
+        Header: " ",
+        accessor: "szamla",
+        Cell: ({ row }) => (
+          <Button variant="primary" onClick={() => szamlagomb()}>
+            Számla
+          </Button>)
+      },
       
     ],
     []
   );
+
+  const szamlagomb = async () => {
+    try {
+      const token = await csrf();
+      
+    } catch (error) {
+      console.error("Hiba történt a státusz megváltoztatása közben:", error);
+    }
+  };
+
+
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: BefejezettMunkak });
 
   return (
     <div><h3>Befejezett munkák</h3>
-        <table
-    {...getTableProps()}
-    style={{ border: "1px solid black", borderCollapse: "collapse" }}
-  >
-    <thead>
-      {headerGroups.map((headerGroup) => (
-        <tr {...headerGroup.getHeaderGroupProps()}>
-          {headerGroup.headers.map((column) => (
-            <th
-              {...column.getHeaderProps()}
-              style={{ border: "1px solid black", padding: "8px" }}
-            >
-              {column.render("Header")}
-            </th>
+        <Table striped bordered hover {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              ))}
+            </tr>
           ))}
-          
-        </tr>
-        
-      ))}
-    </thead>
-    <tbody {...getTableBodyProps()}>
-      {rows.map((row) => {
-        prepareRow(row);
-        return (
-          <tr {...row.getRowProps()} key={row.id}>
-            {row.cells.map((cell) => {
-              return (
-                <td
-                  {...cell.getCellProps()}
-                  style={{ border: "1px solid black", padding: "8px" }}
-                >
-                  {cell.render("Cell")}
-                  
-                </td>
-              );
-            })}
-            
-          </tr>
-          
-        );
-      })}
-    </tbody>
-  </table></div>
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()} key={row.id}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table></div>
     
   );
 }

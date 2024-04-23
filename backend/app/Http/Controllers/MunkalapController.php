@@ -141,12 +141,45 @@ class MunkalapController extends Controller
 
     public function folyamatmunkapost(Request $request)
 {
-    
-    $munkalapszam = $request->input('munkalapszam');
-    // státusz módosítása a $munkalapszam-hoz tartozó munkalapon
+    try {
+        $munkalapszam = $request->input('munkalapszam');
 
-    // Válasz visszaküldése
-    return response()->json(['message' => 'Státusz sikeresen megváltoztatva'], 200);
+        $munkalap = Munkalap::where('munkalapszam', $munkalapszam)->first();
+        // Ellenőrizzük, hogy létezik-e a munkalap
+        if ($munkalap) {
+            $munkalap->statusz = 1; 
+            $munkalap->save();
+            return response()->json(['message' => 'Státusz sikeresen megváltoztatva'], 200);
+        } else {
+            // Ha a munkalap nem létezik, akkor hibát küldünk vissza
+            return response()->json(['error' => 'A megadott munkalapszám nem található'], 404);
+        }
+    } catch (\Exception $e) {
+        // Ha hiba történik, akkor azt elküldjük JSON formában a frontend felé
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
+
+public function befejezettmunkapost(Request $request)
+{
+    try {
+    $munkalapszam = $request->input('munkalapszam');
+
+    $munkalap = Munkalap::where('munkalapszam', $munkalapszam)->first();
+    // Ellenőrizzük, hogy létezik-e a munkalap
+    if ($munkalap) {
+        $munkalap->statusz = 2; 
+        $munkalap->save();
+        return response()->json(['message' => 'Státusz sikeresen megváltoztatva'], 200);
+    } else {
+        // Ha a munkalap nem létezik, akkor hibát küldünk vissza
+        return response()->json(['error' => 'A megadott munkalapszám nem található'], 404);
+    }
+} catch (\Exception $e) {
+    // Ha hiba történik, akkor azt elküldjük JSON formában a frontend felé
+    return response()->json(['error' => $e->getMessage()], 500);
+}
 }
 
    

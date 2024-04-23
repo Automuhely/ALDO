@@ -23,6 +23,23 @@ img{
   padding: 40px;
 }
 
+.kapcsolatiurlap{
+  text-align: center;
+  margin-top: 10px;
+ 
+}
+
+.kapcsolatdiv{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  text-align: center;
+  margin: 6rem;
+  margin-top: 5rem;
+  
+}
+
+
 @media only screen and (max-width: 1300px ) {
   body {
     background-color: lightblue;
@@ -30,6 +47,13 @@ img{
 
   img{
     height: 300px;
+  }
+
+  .kapcsolatdiv{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+       
   }
 }
 
