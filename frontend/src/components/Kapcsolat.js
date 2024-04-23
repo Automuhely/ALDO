@@ -10,7 +10,10 @@ export default function Kapcsolat() {
   const [email, setEmail] = useState("");
   const [uzenet, setUzenet] = useState("");
 
+ 
+
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     if (name.length === 0) {
       alert("Nincs kitöltve a név!");
@@ -27,6 +30,7 @@ export default function Kapcsolat() {
           uzenet: uzenet,
           _token: token, // A token hozzáadása az adatokhoz
         };
+        console.log("Adatok:",adat);
         await Kuldes(adat);
         alert("Email sikeresen elküldve!");
       } catch (error) {
@@ -36,13 +40,14 @@ export default function Kapcsolat() {
   };
 
   return (
-    <div>
+    <div >
       <Form onSubmit={handleSubmit}>
         <div>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Név</Form.Label>
             <Form.Control
               type="text"
+             
               placeholder="Tóth Alexandra"
               onChange={(e) => {
                 setName(e.target.value);
@@ -80,6 +85,7 @@ export default function Kapcsolat() {
           </Button>
         </div>
       </Form>
+      
     </div>
   );
 }

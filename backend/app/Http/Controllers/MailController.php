@@ -1,27 +1,28 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail; 
-use App\Mail\Email;
-use Illuminate\Http\Request; 
+namespace App\Http\Controllers;
 
-class MailController extends Controller 
-{ 
-   
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Email;
+
+class MailController extends Controller
+{
     public function store(Request $request)
     {
         // Ellenőrizd a bejövő adatokat és készítsd elő a $mailData tömböt
         $mailData = [
-            'title' => $request->input('title'),
-            'body' => $request->input('body')
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'uzenet' => $request->input('uzenet'),
         ];
 
         // Küldd el az emailt
-        Mail::to('aldo.szerviz@gmail.com')
-            ->send(new Email($mailData));
+        Mail::to('aldo.szerviz@gmail.com')->send(new Email($mailData));
 
         // Visszajelzés a sikeres kérésekről
-        return response()->json(['message' => 'Email sent successfully'], 200);
+        return response()->json(['message' => 'Email sikeresen elküldve!'], 200);
     }
-} 
+}
+
 

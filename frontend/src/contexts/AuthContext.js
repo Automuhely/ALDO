@@ -113,10 +113,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  
+  const Kuldes = async (adat) => {
+    try {
+      const response = await axios.post("/api/emailkuld", adat);
+      console.log(adat)
+      return response.data; 
+      
+      
+    } catch (error) {
+      console.error("Hiba történt az e-mail küldése során: " + error.message);
+    }
+    
+  };
 
   return (
-    <AuthContext.Provider value={{ loginReg, logout, errors, getUser, user, csrf}}>
+    <AuthContext.Provider value={{ loginReg, logout, errors, getUser, user, csrf,Kuldes}}>
       {children}
     </AuthContext.Provider>
   );

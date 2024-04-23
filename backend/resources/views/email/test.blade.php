@@ -6,8 +6,9 @@
     <title>Email küldése</title>
 </head>
 <body>
-<h1>{{ $mailData['title'] }}</h1> 
+<h1>{{ $mailData['name'] }}</h1> 
 
-<p>{{ $mailData['body'] }}</p> 
+<p>{{ $mailData['email'] }}</p> 
+<p>{{ $mailData['uzenet'] }}</p> 
 </body>
 </html>

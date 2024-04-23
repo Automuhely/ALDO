@@ -1,6 +1,7 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import useAuthContext from "../contexts/AuthContext";
 import Kapcsolat from "../components/Kapcsolat";
+import TerkepElerhetoseg from "../components/TerkepElerhetoseg";
 
 export default function Emial() {
   const { user, getUser } = useAuthContext();
@@ -13,8 +14,11 @@ export default function Emial() {
 
   return (
     <div>
-        <h1>Kapcsolati űrlap</h1>
+      <h1 className="kapcsolatiurlap">Kapcsolati űrlap</h1>
+      <div className="kapcsolatdiv">
         <Kapcsolat></Kapcsolat>
+        <TerkepElerhetoseg></TerkepElerhetoseg>
+      </div>
     </div>
   );
-  }
+}
