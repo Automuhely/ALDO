@@ -4,11 +4,13 @@ import Kapcsolat from "../components/Kapcsolat";
 import TerkepElerhetoseg from "../components/TerkepElerhetoseg";
 
 export default function Emial() {
-  const { user, getUser } = useAuthContext();
+  const { user, getUser, csrf  } = useAuthContext();
+
 
   useEffect(() => {
     if (!user) {
       getUser();
+      
     }
   }, [user]);
 

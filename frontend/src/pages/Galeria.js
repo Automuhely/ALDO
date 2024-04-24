@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import useAuthContext from "../contexts/AuthContext";
+import { Card } from "react-bootstrap";
 
 export default function Galeria() {
   const { user, getUser } = useAuthContext();
@@ -10,5 +11,13 @@ export default function Galeria() {
     }
   }, [user]);
 
-  return <div>Feltöltés alatt!</div>;
+  
+
+  return (
+    <div>
+      <div className="galery">
+      <Card.Img src="img/muszaki vizsga.jpg" alt="Card image" />
+      </div>
+    </div>
+  );
 }

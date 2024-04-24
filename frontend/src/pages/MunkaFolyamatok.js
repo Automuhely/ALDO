@@ -6,7 +6,7 @@ import MunkaElNemKezdettTable from "../components/MunkaElNemKezdettTable";
 import MunkaBefejezettTable from "../components/MunkaBefejezettTable";
 
 export default function MunkaFolyamatok() {
- 
+  const { csrf } = useAuthContext();
   const [ElKezdettMunkak, setElKezdettMunkak] = useState([]);
   const [ElNemKezdettMunkak, setElNemKezdettMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
@@ -17,6 +17,7 @@ export default function MunkaFolyamatok() {
     axios.get("/api/folyamatmunka")
       .then(response => {
         setElKezdettMunkak(response.data);
+        
       })
       .catch(error => {
         console.error("Hiba történt az elkezdett munkák lekérésekor:", error);

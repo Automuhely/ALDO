@@ -40,6 +40,8 @@ img{
 }
 
 
+
+
 @media only screen and (max-width: 1300px ) {
   body {
     background-color: lightblue;
@@ -63,7 +65,7 @@ img{
   }
 
   img{
-    height: 250px;
+    height: 300px;
   }
 }
 
