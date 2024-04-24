@@ -39,6 +39,8 @@ export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
       // console.log("Státusz:",statusz)
       const response = await axios.post("/api/befejezettmunkapost", data);
       console.log("Státusz megváltoztatva");
+      alert("Státusz megváltoztatva");
+
     } catch (error) {
       console.error("Hiba történt a státusz megváltoztatása közben:", error);
     }

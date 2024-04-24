@@ -38,6 +38,7 @@ export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak }) {
       console.log("Munkalapszám a kezdés táblánál:",munkalapszam)
       const response = await axios.post("/api/folyamatmunkapost", data);
       console.log("Státusz megváltoztatva");
+      alert("Státusz megváltoztatva");
     } catch (error) {
       console.error("Hiba történt a státusz megváltoztatása közben:", error);
     }
