@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 import useAuthContext from "../contexts/AuthContext";
 import Kapcsolat from "../components/Kapcsolat";
 import TerkepElerhetoseg from "../components/TerkepElerhetoseg";
@@ -23,4 +24,5 @@ export default function Emial() {
       </div>
     </div>
   );
+}
 }

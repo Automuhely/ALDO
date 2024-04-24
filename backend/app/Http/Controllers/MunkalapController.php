@@ -49,54 +49,6 @@ class MunkalapController extends Controller
             ->get();
     }
 
-    public function autoim()
-    {
-        // Bejelentkezett felhasználó autóinak db száma
-        $user = Auth::user();
-        return
-            DB::table('autos')
-            ->select()
-            ->where('ugyfel', $user->id)
-            ->get();
-    }
-
-    public function autoimCount()
-    {
-        // Bejelentkezett felhasználó autóinak db száma
-        $user = Auth::user();
-        return
-            DB::table('autos')
-            ->select()
-            ->where('ugyfel', $user->id)
-            ->count();
-    }
-
-    public function legfrissebb()
-    {
-        /* 
-        aktuális autónak a legutoljára létrehozott munkalapjának
-    
-            státusza
-            dátuma
-            alvázszáma
-            munkalapszáma       
-                  
-        */
-
-        $user = Auth::user();
-
-        $autos = DB::table('autos')
-            ->where('ugyfel', 6)
-            ->pluck('alvazszam');
-
-        $result = DB::table('munkalaps as m')
-            ->whereIn('auto', $autos)
-            ->select('ugyfel', 'munkalapszam', 'auto as alvazszam', 'statusz', 'created_at as letrehozva')
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return $result;
-    }
-
     public function ugyfel($user)
     {
         // adott ügyfélnek kiállított összes munkalap

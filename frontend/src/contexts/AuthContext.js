@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   const csrf = async () => {
     try {
       const response = await axios.get("/token");
-      console.log(response);
+      //console.log(response);
       token = response.data;
       return response.data;
     } catch (error) {
@@ -65,9 +65,9 @@ export const AuthProvider = ({ children }) => {
   const loginReg = async ({ ...adat }, vegpont) => {
     try {
       await csrf();
-      console.log(token);
+      //console.log(token);
       adat._token = token;
-      console.log(adat);
+      //console.log(adat);
       await axios.post(vegpont, adat);
       console.log("Sikeres bejelentkezés/regisztráció");
       await getUser();
@@ -91,10 +91,11 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await csrf();
-      console.log(token);
-      const resp = await axios.post("/logout", { _token: token });
+      //console.log(token);
+      //const resp = 
+      await axios.post("/logout", { _token: token });
       navigate("/");
-      console.log(resp);
+      //console.log(resp);
     } catch (error) {
       if (error.response && error.response.status === 422) {
         console.error("422-es hiba történt:", error);

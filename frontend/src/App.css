@@ -12,3 +12,22 @@
 .App-link {
   color: #61dafb;
 }
+
+.showOnSmall{
+  display: none;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .showOnSmall{
+    color: rgb(115, 115, 115);
+    display: block;
+  }
+  .showOnSmallInside{
+    color: black;
+  }
+
+  .hiddenOnSmall{
+    display: none;
+  }
+}

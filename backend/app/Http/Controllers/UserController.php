@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Validation\UserValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 
 class UserController extends Controller
 {
@@ -28,13 +28,20 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        User::findorFail($id)->fill($request->all())->save();
+        $rules = UserValidation::rulesForModify($id);
+        $attributes = UserValidation::attributes();
+        $messages = UserValidation::messagesForModify();
+
+        $validatedData = $request->validate($rules, $messages, $attributes);
+
+        User::findorFail($id)->fill($validatedData)->save();
     }
 
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
     }
+
     public function vezmunk($id)
     {
         return DB::table('munkalaps')
@@ -70,7 +77,4 @@ class UserController extends Controller
             )
             ->get();
     }
-
-    
-    
 }

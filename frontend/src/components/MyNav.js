@@ -19,18 +19,21 @@ export default function MyNav() {
             <Nav.Link href="/kapcsolat">Kapcsolat</Nav.Link>
             {user ? (
               <>
-              {/* Bejelentkezett felhasználó láthatja */}
-                <Nav.Link href="#" onClick={logout}>Kijelentkezés</Nav.Link>
+                {/* Bejelentkezett felhasználó láthatja */}
                 {/* csak a szerelő szerepkörben lévő user láthatja */}
                 {user.szerepkor === 'szerelo' && (
                   <Nav.Link href="/munkafolyamatok">Munkafolyamatok</Nav.Link>
                 )}
                 {/* csak a vezetőszerelő szerepkörben lévő user láthatja */}
-                {user.szerepkor === 'vezetoszerelo' && (
-                  <Nav.Link href="/vezetoszerelo">Vezető szerelő oldala</Nav.Link>
+                {user.szerepkor === "vezetoszerelo" && (
+                  <Nav.Link href="/vezetoszerelo">
+                    Vezető szerelő oldala
+                  </Nav.Link>
                 )}
                 <Nav.Link href="/profil">Profilom</Nav.Link>
-                
+                <Nav.Link href="#" onClick={logout}>
+                  Kijelentkezés
+                </Nav.Link>
               </>
             ) : (
               /* Guest, vendég láthatja */

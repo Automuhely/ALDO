@@ -1,112 +1,77 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "../api/axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import InputGroup from "react-bootstrap/InputGroup";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function AutoSor(props) {
-  const autoid = props.auto.id;
   const [beceneve, setBeceneve] = useState(props.auto.becenev ?? "");
-  const [szerkesztheto, setSzerkesztheto] = useState(false);
+  const [kuldheto, setKuldheto] = useState(false);
+
+  const autoid = props.auto.id;
   const vegpont = "api/autos/" + autoid;
   const { csrf } = useAuthContext();
 
-  useEffect(() => {
-    props.setBecenev(beceneve);
-    console.log("render AUTOSOR");
-  }, [beceneve, props.auto]);
-
   async function szerkeszt(e) {
-    setSzerkesztheto(!szerkesztheto);
-
-    if (e.target.innerHTML === "Mentés") {
-      const token = await csrf();
+    const token = await csrf();
+    if (kuldheto === true) {
       try {
-        await axios
-          .put(vegpont, { becenev: beceneve, _token: token })
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.error("Hiba történt:", error);
-          });
+        console.log("becenév változtatás");
+        await axios.put(vegpont, { becenev: beceneve, _token: token });
       } catch (error) {
         console.error("Hiba történt:", error);
       }
     }
+    setKuldheto((prevState) => !prevState);
   }
-
   return (
     <tr id={"sor" + props.auto.id}>
       <td>
-        <Form.Control
-          className="becenev"
-          type="text"
-          disabled={!szerkesztheto}
-          defaultValue={props.auto.becenev ?? ""}
-          onChange={(e) => {
-            setBeceneve(e.target.value);
-          }}
-        />
+        <InputGroup>
+          <Form.Control
+            type="text"
+            disabled={!kuldheto}
+            defaultValue={props.auto.becenev ?? ""}
+            onChange={(e) => {
+              setBeceneve(e.target.value);
+            }}
+          />
+          <InputGroup.Text>
+              <Button
+                variant={kuldheto ? "success" : "primary"}
+                className="elsoGomb"
+                autoid={`elso${autoid ?? ""}`}
+                id={`elsoGomb-${autoid ?? ""}`}
+                onClick={(e) => {
+                  szerkeszt(e);
+                }}
+              >
+                {kuldheto ? "Mentés" : "Szerkeszt"}
+              </Button>
+          </InputGroup.Text>
+        </InputGroup>
       </td>
+      <td>{props.auto.rendszam ?? ""}</td>
       <td>
-        <Form.Control
-          type="text"
-          disabled
-          readOnly
-          value={props.auto.rendszam ?? ""}
-        />
+        <span className="showOnSmall">Alvázszám:</span>
+        {props.auto.alvazszam ?? ""}
+        <span className="showOnSmall">
+          <br />
+          Motorkód:
+          <span className="showOnSmallInside">
+          {props.auto.motorkod ?? ""}
+          </span>
+          <br />
+          <br />
+          Évjárat:
+          <span className="showOnSmallInside">
+            {props.auto.evjarat}
+          </span>
+        </span>
       </td>
-      <td>
-        <Form.Control
-          type="text"
-          disabled
-          readOnly
-          value={props.auto.alvazszam ?? ""}
-        />
-      </td>
-      <td>
-        <Form.Control
-          type="text"
-          disabled
-          readOnly
-          value={props.auto.motorkod ?? ""}
-        />
-      </td>
-      <td>
-        <Form.Control
-          type="text"
-          disabled
-          readOnly
-          value={props.auto.evjarat ?? ""}
-        />
-      </td>
-      <td>
-        <Button
-          variant={szerkesztheto ? "success" : "primary"}
-          autoid={`elso${autoid ?? ""}`}
-          id={`elsoGomb-${autoid ?? ""}`}
-          className="autoimElsoGomb"
-          onClick={(e) => {
-            szerkeszt(e);
-          }}
-        >
-          {szerkesztheto ? "Mentés" : "Szerkeszt"}
-        </Button>
-      </td>
-      <td>
-        <Button
-          variant="danger"
-          autoid={`masodik${autoid ?? ""}`}
-          id={`masodikGomb-${autoid ?? ""}`}
-          className="autoimMasodikGomb"
-          onClick={(e) => {
-            szerkeszt(e);
-          }}
-        >
-          Töröl
-        </Button>
-      </td>
+      <td className="hiddenOnSmall">{props.auto.motorkod ?? ""}</td>
+      <td className="hiddenOnSmall">{props.auto.evjarat ?? ""}</td>
     </tr>
   );
 }

@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('telefon')->nullable()->default(null);
-            $table->string('cim')->nullable()->default(null);
-            $table->date('szulido')->nullable()->default('2000-01-01');
+            $table->string('telefon');
+            $table->string('cim');
+            $table->date('szulido')->default('2000-01-01');
             $table->string('szerepkor')->default(0);
             $table->string('adoazonosito')->nullable()->default(null);
             $table->string('adoszam')->nullable()->default(null);

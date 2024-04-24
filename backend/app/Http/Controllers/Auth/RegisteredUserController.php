@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Validation\UserValidation;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
@@ -20,29 +20,23 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): Response
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            /* Hibaüzenetek megjelenítéséhez */
-            'cim' => ['required', 'string', 'max:255'],
-            'telefon' => ['required', 'string', 'max:255', 'unique:' . User::class],
-            'szulido' => ['required', 'date'],
-            'adoazonosito' => 'required_without:adoszam',
-            'adoszam' => 'required_without:adoazonosito',
-        ]);
+
+        $rules = UserValidation::rules();
+        $attributes = UserValidation::attributes();
+        $messages = UserValidation::messages();
+
+        $validatedData = $request->validate($rules, $messages, $attributes);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
             'password' => Hash::make($request->password),
-            'cim' => $request->cim,
-            'telefon' => $request->telefon,
-            'szulido' => $request->szulido,
+            'cim' => $validatedData['cim'],
+            'telefon' => $validatedData['telefon'],
+            'szulido' => $validatedData['szulido'],
             'szerepkor' => 'ugyfel',
-            'adoazonosito' => $request->adoazonosito,
-            'adoszam' => $request->adoszam,
-            
+            'adoazonosito' => $validatedData['adoazonosito'],
+            'adoszam' => $validatedData['adoszam'],
         ]);
 
         event(new Registered($user));
