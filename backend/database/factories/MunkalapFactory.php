@@ -23,6 +23,7 @@ class MunkalapFactory extends Factory
             'auto' => Auto::all()->random(),
             'ugyfel' => User::where("szerepkor", "!=", "szerelo")->where("szerepkor", "!=", "vezetoszerelo")->get()->random(),
             'munkavezeto' => User::where("szerepkor", "szerelo")->get()->random(),
+            // 'altalanosLeiras' => MunkaAr::all()->random(),
             'altalanosLeiras' => fake()->realText(20),
             'elvitel_ido' => null,
             'statusz' => rand(0,2),

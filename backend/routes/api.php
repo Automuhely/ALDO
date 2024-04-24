@@ -17,7 +17,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::middleware('cors')->group(function () {
     Route::post('/emailkuld', [MailController::class, 'store']);
-
 });
 
 
@@ -30,19 +29,22 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/autoim', [AutoController::class, 'autoim']);               // autói
     Route::get('/legfrissebb', [AutoController::class, 'legfrissebb']);    // összes autóinak legfrissebb munkalapja, avagy státusza
     Route::get('/autoim-db', [AutoController::class, 'autoimCount']);     // autó db száma
-    
+
     /*  ______________________________________________________________________________________________________________________________________________________SZERELŐ__________ */
     Route::middleware(['szerelo'])->group(function () {
         Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);        // adott ügyfélnek kiállított összes munkalap
         Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);         // munkalapok státuszok szerinti lekérése
         Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
         Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);
-        
+
         Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);       // adott szerelő munkái
-        
+        Route::post('/folyamatmunkapost', [MunkalapController::class, 'folyamatmunkapost']);
+        Route::post('/befejezettmunkapost', [MunkalapController::class, 'befejezettmunkapost']);
+        Route::get('/vezszerelok', [UserController::class, 'vezszerelok']);
+
         /* .................................................................................... */
         Route::put('/autos/{auto}', [AutoController::class, 'update']);
-        Route::get('/autos/{auto}', [AutoController::class, 'show']);              
+        Route::get('/autos/{auto}', [AutoController::class, 'show']);
         Route::get('/munkalaps/{munkalap}', [MunkalapController::class, 'show']);
         Route::get('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'show']);
         Route::get('/feladats/{feladat}', [FeladatController::class, 'show']);
@@ -82,7 +84,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
-Route::post('/send_mail', [MailController::class]);
+Route::post('/emailkuld', [MailController::class, 'store']);
+// Route::post('/send_mail', [MailController::class]);
 
 Route::get('/arak/{arak}', [MunkaArController::class, 'show']);
 Route::get('/arak', [MunkaArController::class, 'index']);
