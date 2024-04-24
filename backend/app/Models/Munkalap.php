@@ -16,7 +16,7 @@ class Munkalap extends Model
 
     protected $fillable = [
         'szamlaszam',
-        'auto_id',
+        'auto',
         'ugyfel',
         'munkavezeto',
         'altalanosLeiras',
