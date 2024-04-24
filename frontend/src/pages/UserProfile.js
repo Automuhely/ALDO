@@ -28,7 +28,7 @@ export default function UserProfile() {
       markakBetolt();
     }
     console.log("render");
-  }, [user]);
+  }, [user, getUser]);
 
   async function markakBetolt() {
     try {
@@ -59,33 +59,34 @@ export default function UserProfile() {
     <>
       <Container fluid>
         <Container>
-
-        {user ? (
-          <>
-            <Row>
-              <Col className="col-sm-12 col-md-6 m-auto mt-5" id="profilMezo">
-                <UserProfileForm />
-              </Col>
-              <Col className="col-sm-12 col-md-6 mt-5" id="ujAutoMezo">
-                <UserAutosForm markak={markak}/>
-              </Col>
-              <Col className="col-sm-12 m-auto pt-4 mt-5" id="autokMezo">
-                <UserAutoMezo autoim={autoim} />
-              </Col>
-              <Col className="col-sm-12 m-auto mt-5" id="szamlakMezo">
-                <UserSzamlaMezo szamlaim={szamlaim} />
-              </Col>
-              <Col className="col-sm-12 col-md-6 m-auto mt-5 mb-5" id="emailForm">
-                <EmailForm user={user} autoim={autoim} />
-              </Col>
-            </Row>
-          </>
-        ) : (
-          <div>Valami hiba történt, jelentkezz be újra!</div>
-        )}
+          {user ? (
+            <>
+              <Row>
+                <Col className="col-sm-12 col-md-6 m-auto mt-3" id="profilMezo">
+                  <UserProfileForm />
+                </Col>
+                <Col className="col-sm-12 col-md-6 mt-2" id="ujAutoMezo">
+                  <UserAutosForm markak={markak} />
+                </Col>
+                <Col className="col-sm-12 m-auto pt-4 mt-5" id="autokMezo">
+                  <UserAutoMezo autoim={autoim} />
+                </Col>
+                <Col className="col-sm-12 m-auto mt-5" id="szamlakMezo">
+                  <UserSzamlaMezo szamlaim={szamlaim} />
+                </Col>
+                <Col
+                  className="col-sm-12 col-md-6 m-auto mt-5 mb-5"
+                  id="emailForm"
+                >
+                  <EmailForm user={user} autoim={autoim} />
+                </Col>
+              </Row>
+            </>
+          ) : (
+            <div>Valami hiba történt, jelentkezz be újra!</div>
+          )}
+        </Container>
       </Container>
-      </Container>
-
     </>
   );
 }
