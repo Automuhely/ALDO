@@ -92,7 +92,8 @@ export const AuthProvider = ({ children }) => {
     try {
       await csrf();
       //console.log(token);
-      const resp = await axios.post("/logout", { _token: token });
+      //const resp = 
+      await axios.post("/logout", { _token: token });
       navigate("/");
       //console.log(resp);
     } catch (error) {

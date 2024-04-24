@@ -9,10 +9,7 @@ import MunkaAr from "./pages/MunkaAr.js";
 import Email from "./pages/Email.js";
 import Galeria from "./pages/Galeria.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import UserProfile from "./pages/UserProfile.js";
-import UserProfileForm from "./components/UserProfileForm.js";
-import UserAutosForm from "./components/UserAutosForm.js";
 
 function App() {
   return (

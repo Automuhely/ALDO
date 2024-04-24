@@ -25,10 +25,10 @@ export default function Login() {
   };
 
   return (
-    <Container fluid className="mt-5 m-auto">
-      <Col lg={5} className="m-auto">
+    <Container fluid>
+      <Container className="mt-5 p-5 m-auto bg-light border rounded col-sm-12 col-md-5">
         <h1 className="text-center mb-4">Bejelentkezés</h1>
-        <Col xs={12} md={5} lg={12} className="mx-auto">
+        <Col className="mx-auto col-md-12">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
@@ -74,7 +74,7 @@ export default function Login() {
             </div>
           </Form>
         </Col>
-      </Col>
+      </Container>
     </Container>
   );
 }
