@@ -62,20 +62,20 @@ export default function UserProfile() {
           {user ? (
             <>
               <Row>
-                <Col className="col-sm-12 col-md-6 m-auto mt-3" id="profilMezo">
+                <Col className="col-sm-12 col-md-6 mt-3 p-3" id="profilMezo">
                   <UserProfileForm />
                 </Col>
-                <Col className="col-sm-12 col-md-6 mt-2" id="ujAutoMezo">
+                <Col className="col-sm-12 col-md-6 mt-3 p-3" id="ujAutoMezo">
                   <UserAutosForm markak={markak} />
                 </Col>
-                <Col className="col-sm-12 m-auto pt-4 mt-5" id="autokMezo">
+                <Col className="col-sm-12 m-auto mt-5 p-1" id="autokMezo">
                   <UserAutoMezo autoim={autoim} />
                 </Col>
-                <Col className="col-sm-12 m-auto mt-5" id="szamlakMezo">
+                <Col className="col-sm-12 m-auto mt-5 p-1" id="szamlakMezo">
                   <UserSzamlaMezo szamlaim={szamlaim} />
                 </Col>
                 <Col
-                  className="col-sm-12 col-md-6 m-auto mt-5 mb-5"
+                  className="col-sm-12 col-md-6 m-auto mt-5 mb-5 p-1"
                   id="emailForm"
                 >
                   <EmailForm user={user} autoim={autoim} />

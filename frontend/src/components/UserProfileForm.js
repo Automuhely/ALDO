@@ -1,5 +1,4 @@
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
@@ -90,13 +89,9 @@ export default function UserProfileForm() {
   };
 
   return (
-    <>
-      <Row>
-        <Col>
-          <h1 className="text-center">Profil</h1>
-        </Col>
-      </Row>
-      <Table bordered responsive>
+    <Row className="justify-content-center align-items-center border p-2 bg-light UserProfileForm">
+      <h4 className="text-center text-bg-primary p-3">Profil</h4>
+      <Table>
         <thead>
           <tr>
             <th
@@ -235,7 +230,7 @@ export default function UserProfileForm() {
               visibility: isProfilSzerkesztheto ? "visible" : "hidden",
             }}
           >
-            <td colSpan={2}>
+            <td colSpan={2} style={{border: "unset"}}>
               <Button
                 className="mx-auto d-block"
                 onClick={(e) => {
@@ -252,6 +247,6 @@ export default function UserProfileForm() {
           </tr>
         </tbody>
       </Table>
-    </>
+    </Row>
   );
 }

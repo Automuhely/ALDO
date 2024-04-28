@@ -13,7 +13,7 @@ export default function AutoSor(props) {
   const vegpont = "api/autos/" + autoid;
   const { csrf } = useAuthContext();
 
-  async function szerkeszt(e) {
+  async function szerkeszt() {
     const token = await csrf();
     if (kuldheto === true) {
       try {
@@ -38,40 +38,50 @@ export default function AutoSor(props) {
             }}
           />
           <InputGroup.Text>
-              <Button
-                variant={kuldheto ? "success" : "primary"}
-                className="elsoGomb"
-                autoid={`elso${autoid ?? ""}`}
-                id={`elsoGomb-${autoid ?? ""}`}
-                onClick={(e) => {
-                  szerkeszt(e);
-                }}
-              >
-                {kuldheto ? "Mentés" : "Szerkeszt"}
-              </Button>
+            <Button
+              variant={kuldheto ? "success" : "primary"}
+              className="elsoGomb"
+              autoid={`elso${autoid ?? ""}`}
+              id={`elsoGomb-${autoid ?? ""}`}
+              onClick={(e) => {
+                szerkeszt(e);
+              }}
+            >
+              {kuldheto ? "Mentés" : "Szerkeszt"}
+            </Button>
           </InputGroup.Text>
         </InputGroup>
       </td>
-      <td>{props.auto.rendszam ?? ""}</td>
-      <td>
-        <span className="showOnSmall">Alvázszám:</span>
-        {props.auto.alvazszam ?? ""}
-        <span className="showOnSmall">
+      <td className="hiddenOnSmall">{props.auto.rendszam ?? ""}</td>
+      <td className="hiddenOnSmall">{props.auto.alvazszam}</td>
+      <td className="hiddenOnSmall">{props.auto.motorkod ?? ""}</td>
+      <td className="hiddenOnSmall">{props.auto.evjarat ?? ""}</td>
+
+      <td className="showOnSmall">
+        <span>
+          Becenév:
+          <br />
+          <span className="showOnSmallInside text-danger">{props.auto.becenev}</span>
+          <br />
+          <br />
+          Rendszám:
+          <br />
+          <span className="showOnSmallInside">{props.auto.rendszam}</span>
+          <br />
+          <br />
+          Alvázszám:
+          <br />
+          <span className="showOnSmallInside">{props.auto.alvazszam ?? ""}</span>
+          <br />
           <br />
           Motorkód:
-          <span className="showOnSmallInside">
-          {props.auto.motorkod ?? ""}
-          </span>
+          <span className="showOnSmallInside">{props.auto.motorkod ?? ""}</span>
           <br />
           <br />
           Évjárat:
-          <span className="showOnSmallInside">
-            {props.auto.evjarat}
-          </span>
+          <span className="showOnSmallInside">{props.auto.evjarat}</span>
         </span>
       </td>
-      <td className="hiddenOnSmall">{props.auto.motorkod ?? ""}</td>
-      <td className="hiddenOnSmall">{props.auto.evjarat ?? ""}</td>
     </tr>
   );
 }

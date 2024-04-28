@@ -61,137 +61,126 @@ export default function UserAutosForm(props) {
 
   return (
     <>
-      <Row className="justify-content-center align-items-center mb-3">
-        <Row>
-          {/*  <Col>
-            <Button
-              className="text-end d-inline"
-              variant="primary"
-              id="ujAutoGomb"
-              onClick={() => {
-                setIsAutoUrlapNyitva((prevState) => !prevState);
-              }}
-            >
-              Új autó felvitele
-            </Button>
-          </Col> */}
-        </Row>
-        <Col
-          id="ujAutoUrlap"
-          /* style={{
-            display: isAutoUrlapNyitva ? "block" : "none",
-          }} */
-        >
-          <Col className="text-end"></Col>
-          <Form onSubmit={(e) => ujAuto(e)} className="border p-3">
-            <legend className="text-center">Új autó</legend>
-            <Form.Group className="mb-3">
-              <Form.Label>Becenév</Form.Label>
+      <Row className="justify-content-center align-items-center p-2 border bg-light ujAutoUrlap">
+        <h4 className="text-center text-bg-primary p-3">Új autó</h4>
+        <Form onSubmit={(e) => ujAuto(e)} className="mb-3 p-4">
+          <Form.Group className="">
+            <Form.Label>Becenév</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              value={becenev}
+              onChange={(e) => setBecenev(e.target.value)}
+            />
+            <Form.Text>
+              {autoErrors.becenev && (
+                <span className="text-danger">{autoErrors.becenev[0]}</span>
+              )}
+            </Form.Text>
+          </Form.Group>
+          <Form.Group as={Col} className="mt-3 showOnSmall text-dark">
+              <Form.Label>Rendszám</Form.Label>
               <Form.Control
                 required
                 type="text"
-                value={becenev}
-                onChange={(e) => setBecenev(e.target.value)}
+                value={rendszam}
+                onChange={(e) => setRendszam(e.target.value)}
               />
               <Form.Text>
-                {autoErrors.becenev && (
-                  <span className="text-danger">{autoErrors.becenev[0]}</span>
+                {autoErrors.rendszam && (
+                  <span className="text-danger">{autoErrors.rendszam[0]}</span>
                 )}
               </Form.Text>
             </Form.Group>
-            {/* --------------- --------------- --------------- --------------- --------------- */}
-
-            <Row className="mb-3">
-              <Form.Group as={Col} className="mb-3">
-                <Form.Label>Rendszám</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  value={rendszam}
-                  onChange={(e) => setRendszam(e.target.value)}
-                />
-                <Form.Text>
-                  {autoErrors.rendszam && (
-                    <span className="text-danger">
-                      {autoErrors.rendszam[0]}
-                    </span>
-                  )}
-                </Form.Text>
-              </Form.Group>
-              <Form.Group as={Col} className="mb-3">
-                <Form.Label>Márka</Form.Label>
-                <Form.Select
-                  required
-                  id="marka"
-                  value={marka}
-                  onChange={(e) => setMarka(e.target.value)}
-                >
-                  <option value={""}>Kérlek válassz....</option>
-                  {props.markak.map((e, i) => {
-                    return (
-                      <option key={i} value={e}>
-                        {e}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-                <Form.Text>
-                  {autoErrors.marka && (
-                    <span className="text-danger">{autoErrors.marka[0]}</span>
-                  )}
-                </Form.Text>
-              </Form.Group>
-              <Form.Group as={Col} className="mb-3">
-                <Form.Label>Évjárat</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  value={evjarat}
-                  onChange={(e) => setEvjarat(e.target.value)}
-                />
-                <Form.Text>
-                  {autoErrors.evjarat && (
-                    <span className="text-danger">{autoErrors.evjarat[0]}</span>
-                  )}
-                </Form.Text>
-              </Form.Group>
-            </Row>
-
-            {/* --------------- --------------- --------------- --------------- --------------- */}
-
-            <Form.Group className="mb-3">
-              <Form.Label>Alvázszám</Form.Label>
+          {/* --------------- Rendszám --------------- Márka --------------- Évjárat ---------------  --------------- */}
+          <Row className="mb-3 mt-4">
+            <Form.Group as={Col} className="mb-3 hiddenOnSmall text-dark">
+              <Form.Label>Rendszám</Form.Label>
               <Form.Control
                 required
                 type="text"
-                value={alvazszam}
-                onChange={(e) => setAlvazszam(e.target.value)}
+                value={rendszam}
+                onChange={(e) => setRendszam(e.target.value)}
               />
               <Form.Text>
-                {autoErrors.alvazszam && (
-                  <span className="text-danger">{autoErrors.alvazszam[0]}</span>
+                {autoErrors.rendszam && (
+                  <span className="text-danger">{autoErrors.rendszam[0]}</span>
                 )}
               </Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Motorkód</Form.Label>
+            <Form.Group as={Col} className="mb-3">
+              <Form.Label>Márka</Form.Label>
+              <Form.Select
+                required
+                id="marka"
+                value={marka}
+                onChange={(e) => setMarka(e.target.value)}
+              >
+                <option value={""}>Kérlek válassz....</option>
+                {props.markak.map((e, i) => {
+                  return (
+                    <option key={i} value={e}>
+                      {e}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+              <Form.Text>
+                {autoErrors.marka && (
+                  <span className="text-danger">{autoErrors.marka[0]}</span>
+                )}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group as={Col} className="mb-3">
+              <Form.Label>Évjárat</Form.Label>
               <Form.Control
                 required
                 type="text"
-                value={motorkod}
-                onChange={(e) => setMotorkod(e.target.value)}
+                value={evjarat}
+                onChange={(e) => setEvjarat(e.target.value)}
               />
               <Form.Text>
-                {autoErrors.motorkod && (
-                  <span className="text-danger">{autoErrors.motorkod[0]}</span>
+                {autoErrors.evjarat && (
+                  <span className="text-danger">{autoErrors.evjarat[0]}</span>
                 )}
               </Form.Text>
             </Form.Group>
-            <Button type="submit" className="mx-auto d-block">
-              Küldés
-            </Button>
-          </Form>
-        </Col>
+          </Row>
+
+          {/* --------------- --------------- --------------- --------------- --------------- */}
+
+          <Form.Group className="mb-3">
+            <Form.Label>Alvázszám</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              value={alvazszam}
+              onChange={(e) => setAlvazszam(e.target.value)}
+            />
+            <Form.Text>
+              {autoErrors.alvazszam && (
+                <span className="text-danger">{autoErrors.alvazszam[0]}</span>
+              )}
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Motorkód</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              value={motorkod}
+              onChange={(e) => setMotorkod(e.target.value)}
+            />
+            <Form.Text>
+              {autoErrors.motorkod && (
+                <span className="text-danger">{autoErrors.motorkod[0]}</span>
+              )}
+            </Form.Text>
+          </Form.Group>
+          <Button type="submit" className="mx-auto d-block">
+            Küldés
+          </Button>
+        </Form>
       </Row>
     </>
   );
