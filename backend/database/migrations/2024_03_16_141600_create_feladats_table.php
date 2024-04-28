@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('feladats', function (Blueprint $table) {
             $table->id();
-            $table-> string('megnevezes');
+            $table-> string('megnevezes', 50);
             $table-> integer('munkadij');
             $table->timestamps();
         });

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('feladat_id')->references('id')->on('feladats');
             $table->foreignId('munkalapszam')->references('munkalapszam')->on('munkalaps');
             $table->foreignId('szerelo')->references('id')->on('users');
-            $table->string('leiras');
-            $table->string('alkatresz')->nullable()->default(null);
-            $table->string('alk_marka')->nullable()->default(null);
+            $table->string('leiras', 100);
+            $table->string('alkatresz', 50)->nullable()->default(null);
+            $table->string('alk_marka', 20)->nullable()->default(null);
             $table->tinyInteger('mennyiseg')->nullable()->default(null);
             $table->integer('alkatresz_ar')->nullable()->default(null);
             $table->date('alk_rend_ido')->nullable()->default(null);

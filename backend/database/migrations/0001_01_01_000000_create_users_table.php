@@ -16,14 +16,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('telefon');
-            $table->string('cim');
+            $table->string('name', 50);
+            $table->string('telefon', 15);
+            $table->string('cim', 150);
             $table->date('szulido')->default('2000-01-01');
-            $table->string('szerepkor')->default(0);
-            $table->string('adoazonosito')->nullable()->default(null);
-            $table->string('adoszam')->nullable()->default(null);
-            $table->string('email')->unique();
+            $table->string('szerepkor', 15)->default("ugyfel");
+            $table->string('adoazonosito', 15)->nullable()->default(null);
+            $table->string('adoszam', 15)->nullable()->default(null);
+            $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -47,14 +47,14 @@ return new class extends Migration
 
         User::create([
             'id' => '1',
-            'name' => "Szerelo Pista",
+            'name' => "Szerelo Admin",
             'telefon' => '06702001234',
             'cim' => '1234 Budapest, Szerelők útja 1.',
             'szulido' => '1980-01-01',
-            'szerepkor' => 'szerelo',
+            'szerepkor' => 'vezetoszerelo',
             'adoazonosito' => '12345678911',
-            'email' => 'admin@gmail.com',
-            'password' => 'szerelopista',
+            'email' => 'vezetoszerelo@aldo.hu',
+            'password' => 'aldomuhely',
             'remember_token' => Str::random(10),
         ]);
 
@@ -64,10 +64,23 @@ return new class extends Migration
             'telefon' => '06702001235',
             'cim' => '1234 Budapest, Szerelők útja 1.',
             'szulido' => '1980-01-02',
-            'szerepkor' => 'vezetoszerelo',
+            'szerepkor' => 'szerelo',
             'adoazonosito' => '12345674911',
-            'email' => 'szerelo.janos@gmail.com',
-            'password' => 'szerelojanos',
+            'email' => 'szerelo@aldo.hu',
+            'password' => 'aldomuhely',
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'id' => '3',
+            'name' => "Felhasználó Béla",
+            'telefon' => '06702001235',
+            'cim' => '1234 Budapest, Szerelők útja 1.',
+            'szulido' => '1980-01-02',
+            'szerepkor' => 'ugyfel',
+            'adoazonosito' => '12345674911',
+            'email' => 'user@gmail.com',
+            'password' => 'aldomuhely',
             'remember_token' => Str::random(10),
         ]);
     }

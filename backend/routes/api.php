@@ -71,8 +71,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
             // árakat csak a vezetőszerelő tud módosítani
             Route::post('/arak', [MunkaArController::class, 'store']);
-            Route::put('/arak/{arak}', [MunkaArController::class, 'update']);
-            Route::delete('/arak/{arak}', [MunkaArController::class, 'destroy']);
+            Route::put('/arak/{elem}', [MunkaArController::class, 'update']);
+            Route::delete('/arak/{elem}', [MunkaArController::class, 'destroy']);
 
             // törléshez vezetőszerelő engedélyre van szükség
             Route::delete('/users/{user}', [UserController::class, 'destroy']);

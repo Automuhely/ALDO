@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('munka_ars', function (Blueprint $table) {
             $table->id();
-            $table->string('megnevezes');
+            $table->string('megnevezes', 50);
             $table->integer('ara');
             $table->timestamps();
         });

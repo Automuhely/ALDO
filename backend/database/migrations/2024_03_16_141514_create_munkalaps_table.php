@@ -15,12 +15,12 @@ return new class extends Migration
             $table->foreignId('auto')->references('id')->on('autos');
             $table->foreignId('ugyfel')->references('id')->on('users');
             $table->foreignId('munkavezeto')->references('id')->on('users')->where('szerepkor', 'szerelo');
-            $table->string('altalanosLeiras')->references('megnevezes')->on('munka_ars');
+            $table->string('altalanosLeiras', 100)->references('megnevezes')->on('munka_ars');
             //$table->string('altalanosLeiras');
             $table->date('elvitel_ido')->nullable();
             $table->tinyInteger('statusz');
             $table->foreignId('uzembentarto')->references('id')->on('users');
-            $table->string('szamlaszam');
+            $table->string('szamlaszam', 30);
             $table->timestamps();
         });
 

@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('autos', function (Blueprint $table) {
             $table->id();
-            $table->string('alvazszam')->unique();
-            $table->string('marka');
-            $table->string('motorkod')->unique();
+            $table->string('alvazszam', 17)->unique();
+            $table->string('marka', 20);
+            $table->string('motorkod', 3)->unique();
             $table->integer('evjarat');
-            $table->string('rendszam')->unique();
-            $table->string('becenev')->nullable()->default(null);
+            $table->string('rendszam', 10)->unique();
+            $table->string('becenev', 20)->nullable()->default(null);
             $table->foreignId('ugyfel')->constrained('users');
             $table->boolean('hitelesitett')->default(false);
             $table->timestamps();

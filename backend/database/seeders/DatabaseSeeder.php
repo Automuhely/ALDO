@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         break;
       } catch (Exception $e) {
         if ($e->getMessage()) {
-          dd($e->getMessage());
+          dd("Hiba a seedelés során:", $e->getMessage());
         } else {
           dd($e);
         }
