@@ -49,7 +49,7 @@ return new class extends Migration
             'id' => '1',
             'name' => "Szerelo Admin",
             'telefon' => '06702001234',
-            'cim' => '1234 Budapest, Szerelők útja 1.',
+            'cim' => '1234 Budapest, Vezér út 1.',
             'szulido' => '1980-01-01',
             'szerepkor' => 'vezetoszerelo',
             'adoazonosito' => '12345678911',
@@ -61,7 +61,7 @@ return new class extends Migration
         User::create([
             'id' => '2',
             'name' => "Szerelo Janos",
-            'telefon' => '06702001235',
+            'telefon' => '06702001135',
             'cim' => '1234 Budapest, Szerelők útja 1.',
             'szulido' => '1980-01-02',
             'szerepkor' => 'szerelo',
@@ -75,11 +75,24 @@ return new class extends Migration
             'id' => '3',
             'name' => "Felhasználó Béla",
             'telefon' => '06702001235',
-            'cim' => '1234 Budapest, Szerelők útja 1.',
+            'cim' => '1234 Budapest, Béla utca 1.',
             'szulido' => '1980-01-02',
             'szerepkor' => 'ugyfel',
             'adoazonosito' => '12345674911',
             'email' => 'user@gmail.com',
+            'password' => 'aldomuhely',
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'id' => '4',
+            'name' => "Céges Elek",
+            'telefon' => '06702001125',
+            'cim' => '1234 Budapest, Cég útja 1.',
+            'szulido' => '1980-01-02',
+            'szerepkor' => 'ugyfel',
+            'adoszam' => '1234567491',
+            'email' => 'ceges@ceg.hu',
             'password' => 'aldomuhely',
             'remember_token' => Str::random(10),
         ]);
