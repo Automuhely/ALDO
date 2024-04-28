@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
 import axios from "../api/axios";
+import Container from "react-bootstrap/esm/Container";
+import Col from "react-bootstrap/esm/Col";
 
 export default function UserProfileForm() {
   /* Profiladatok módosításához */
@@ -89,7 +91,10 @@ export default function UserProfileForm() {
   };
 
   return (
-    <Row className="justify-content-center align-items-center border p-2 bg-light UserProfileForm">
+    <Col
+      className="justify-content-center align-items-center p-2 border bg-light"
+      style={{ minHeight: "35em" }}
+    >
       <h4 className="text-center text-bg-primary p-3">Profil</h4>
       <Table>
         <thead>
@@ -230,7 +235,7 @@ export default function UserProfileForm() {
               visibility: isProfilSzerkesztheto ? "visible" : "hidden",
             }}
           >
-            <td colSpan={2} style={{border: "unset"}}>
+            <td colSpan={2} style={{ border: "unset" }}>
               <Button
                 className="mx-auto d-block"
                 onClick={(e) => {
@@ -247,6 +252,6 @@ export default function UserProfileForm() {
           </tr>
         </tbody>
       </Table>
-    </Row>
+    </Col>
   );
 }

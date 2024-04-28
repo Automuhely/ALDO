@@ -31,55 +31,59 @@ export default function AutoSor(props) {
         <InputGroup>
           <Form.Control
             type="text"
+            className="hiddenOnSmall"
             disabled={!kuldheto}
             defaultValue={props.auto.becenev ?? ""}
             onChange={(e) => {
               setBeceneve(e.target.value);
             }}
           />
-          <InputGroup.Text>
-            <Button
-              variant={kuldheto ? "success" : "primary"}
-              className="elsoGomb"
-              autoid={`elso${autoid ?? ""}`}
-              id={`elsoGomb-${autoid ?? ""}`}
-              onClick={(e) => {
-                szerkeszt(e);
-              }}
-            >
-              {kuldheto ? "Mentés" : "Szerkeszt"}
-            </Button>
-          </InputGroup.Text>
+          {/* ------------------------------------------------------------------------------------------------------------- autó BECENÉV */}
+          <span className="showOnSmall text-bg-warning m-auto mt-4 mb-4 p-2 ps-2 pe-3 h3 rounded-3 text-center">
+            {props.auto.becenev}
+          </span>
+          {/* ------------------------------------------------------------------------------------------------------------- autó RENDSZÁM*/}
+
+          <span className="showOnSmall mb-4 text-uppercase text-danger m-auto">
+            {props.auto.rendszam}
+          </span>
+           {/* ------------------------------------------------------------------------------------------------------------ szerkeszt GOMB */}
+
+          <Button
+            variant={kuldheto ? "success" : "secondary"}
+            className="elsoGom m-auto rounded-3"
+            autoid={`elso${autoid ?? ""}`}
+            id={`elsoGomb-${autoid ?? ""}`}
+            onClick={(e) => {
+              szerkeszt(e);
+            }}
+          >
+            {kuldheto ? "Mentés" : "Szerkeszt"}
+          </Button>
         </InputGroup>
       </td>
-      <td className="hiddenOnSmall">{props.auto.rendszam ?? ""}</td>
+      <td className="hiddenOnSmall text-uppercase">{props.auto.rendszam ?? ""}</td>
       <td className="hiddenOnSmall">{props.auto.alvazszam}</td>
       <td className="hiddenOnSmall">{props.auto.motorkod ?? ""}</td>
       <td className="hiddenOnSmall">{props.auto.evjarat ?? ""}</td>
 
-      <td className="showOnSmall">
+      <td className="showOnSmall p-3">
         <span>
-          Becenév:
-          <br />
-          <span className="showOnSmallInside text-danger">{props.auto.becenev}</span>
-          <br />
-          <br />
-          Rendszám:
-          <br />
-          <span className="showOnSmallInside">{props.auto.rendszam}</span>
-          <br />
-          <br />
           Alvázszám:
           <br />
-          <span className="showOnSmallInside">{props.auto.alvazszam ?? ""}</span>
+          <span className="text-secondary">
+            {props.auto.alvazszam ?? ""}
+          </span>
           <br />
           <br />
           Motorkód:
-          <span className="showOnSmallInside">{props.auto.motorkod ?? ""}</span>
+          <br />
+          <span className="text-secondary">{props.auto.motorkod ?? ""}</span>
           <br />
           <br />
           Évjárat:
-          <span className="showOnSmallInside">{props.auto.evjarat}</span>
+          <br />
+          <span className="text-secondary">{props.auto.evjarat}</span>
         </span>
       </td>
     </tr>

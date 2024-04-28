@@ -57,36 +57,46 @@ export default function UserProfile() {
 
   return (
     <>
-      <Container fluid>
-        <Container>
-          {user ? (
-            <>
+      {user ? (
+        <>
+          <Container>
               <Row>
-                <Col className="col-sm-12 col-md-6 mt-3 p-3" id="profilMezo">
+                <Col
+                  className="col-sm-12 col-lg-6 d-flex m-auto mt-3 p-2"
+                  id="profilMezo"
+                >
                   <UserProfileForm />
                 </Col>
-                <Col className="col-sm-12 col-md-6 mt-3 p-3" id="ujAutoMezo">
+                <Col
+                  className="col-sm-12 col-lg-6 d-flex m-auto mt-3 p-2"
+                  id="ujAutoMezo"
+                >
                   <UserAutosForm markak={markak} />
                 </Col>
-                <Col className="col-sm-12 m-auto mt-5 p-1" id="autokMezo">
+              </Row>
+              <Row>
+                <Col className="col-sm-12 m-auto mt-3 p-2" id="autokMezo">
                   <UserAutoMezo autoim={autoim} />
                 </Col>
-                <Col className="col-sm-12 m-auto mt-5 p-1" id="szamlakMezo">
+              </Row>
+              <Row>
+                <Col className="col-sm-12 m-auto mt-3 p-2" id="szamlakMezo">
                   <UserSzamlaMezo szamlaim={szamlaim} />
                 </Col>
+              </Row>
+              <Row>
                 <Col
-                  className="col-sm-12 col-md-6 m-auto mt-5 mb-5 p-1"
+                  className="col-sm-12 col-md-10 col-lg-6 m-auto mt-3 p-2 mb-5 "
                   id="emailForm"
                 >
                   <EmailForm user={user} autoim={autoim} />
                 </Col>
               </Row>
-            </>
-          ) : (
-            <div>Valami hiba történt, jelentkezz be újra!</div>
-          )}
-        </Container>
-      </Container>
+          </Container>
+        </>
+      ) : (
+        <div>Valami hiba történt, jelentkezz be újra!</div>
+      )}
     </>
   );
 }

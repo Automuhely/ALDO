@@ -13,21 +13,20 @@
   color: #61dafb;
 }
 
-.showOnSmall{
+.showOnSmall {
   display: none;
 }
 
-
 @media only screen and (max-width: 767px) {
-  .showOnSmall{
+  .showOnSmall {
     color: rgb(115, 115, 115);
     display: block;
   }
-  .showOnSmallInside{
+  .showOnSmallInside {
     color: black;
   }
 
-  .hiddenOnSmall{
+  .hiddenOnSmall {
     display: none;
   }
 }

@@ -1,20 +1,23 @@
 import AutoSor from "../components/AutoSor";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/esm/Col";
 
 export default function UserAutoMezo(props) {
   return (
-    <Container fluid className="text-center p-2 border bg-light">
+    <Col
+      className="justify-content-center align-items-center p-2 border bg-light"
+    >
       <h4 className="text-bg-primary p-3">Autóim</h4>
       {!props.autoim ? (
         <>
           <div className="text-center">Nincs még autód rögzítve.</div>
         </>
       ) : (
-        <Table bordered striped hover className="text-center">
+        <Table bordered striped hover responsive className="text-center">
           <thead>
             <tr>
-              <th style={{ minWidth: "5em", width: "15em" }}>Becenév</th>
+              <th style={{ minWidth: "6em", width: "6em" }}>Becenév</th>
               <th className="hiddenOnSmall">Rendszám</th>
               <th className="hiddenOnSmall">Alvázszám</th>
               <th className="hiddenOnSmall">Motorkód</th>
@@ -29,6 +32,6 @@ export default function UserAutoMezo(props) {
           </tbody>
         </Table>
       )}
-    </Container>
+    </Col>
   );
 }
