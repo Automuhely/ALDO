@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function Kapcsolat() {
-  const { Kuldes, csrf } = useAuthContext(); // csrf függvény hozzáadása
+  const { Kuldes, csrf,user,getUser } = useAuthContext(); // csrf függvény hozzáadása
+
+  
+  useEffect(() => {
+    console.log(user);
+    if (!user) {
+      getUser();
+    }
+  }, [user, getUser]);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

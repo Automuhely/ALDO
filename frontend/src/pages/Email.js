@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
 import Kapcsolat from "../components/Kapcsolat";
 import TerkepElerhetoseg from "../components/TerkepElerhetoseg";
 
 export default function Emial() {
-  const { user, getUser, csrf  } = useAuthContext();
-
+  const { csrf ,user,getUser} = useAuthContext();
+  const [token, setToken] = useState();
 
   useEffect(() => {
-    if (!user) {
-      getUser();
-      
-    }
-  }, [user]);
+    const fetchCsrfToken = async () => {
+      if (!user) {
+        getUser();
+        const token = await csrf();
+        setToken(token);
+      }
+    };
+
+    fetchCsrfToken();
+  }, [user, getUser, csrf]);
 
   return (
     <div>
