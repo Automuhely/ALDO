@@ -10,13 +10,12 @@ munkalapszám mellé számlaszám?                  X
 rendszám és/vagy becenévvel átláthatóbb lenne   X
 validáció                                       X
 email form betöltése autó kiválasztással        X
-reszponzivitás                                  2.0
+reszponzivitás                                  3.0
 kódok kiszervezése                              2.0
+működő email                                    1.0 (user oldalon is meg lehetne valósítani)
++1 context
 tesztelés
 számla blade + számláim megtekintése
-+1 context
-működő email
-email autó objektum küldése...? vagy csak id?   
 ha nincs számláim, autóim, akkor külön div megjelenítése                         1.0
 hibaüzenet eltüntetése profil/autó + visszacsatolás a sikeres küldésről          1.0
 auth failed hibaüzenet                                                           1.0
@@ -27,3 +26,9 @@ Hibák, észrevételek
 új autó felvételénél a becenév nem jelenik meg azonnal                            X
 ha nincs jogosultsága valakinek, egy alert-tel jelezni
 hitelesített autó lekezelése szerelő oldalon
+email autó objektum küldése...? vagy csak id?
+profilform és autóform összeakad valamiért 489-575px-en
+háttérképek
+számla megtekintése
+képfeltöltési lehetőség
+számla szerkesztése ?
