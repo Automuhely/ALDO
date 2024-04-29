@@ -40,6 +40,20 @@ img{
 }
 
 
+h1,h2,h3,h4,h5{
+  padding-top: 20px;
+  color: blue;
+}
+
+
+#containerhatter{
+  background: linear-gradient(to bottom, rgba(30, 0, 255, 0.2), rgba(114, 1, 252, 0.2) , rgba(1, 22, 252, 0.296));
+  
+}
+
+ul,li{
+  list-style-type: none;
+}
 
 
 @media only screen and (max-width: 1300px ) {

@@ -41,7 +41,7 @@ export default function Register() {
   };
 
   return (
-    <Container fluid className="mt-5 m-auto">
+    <Container fluid className=" p-5 m-auto" id="containerhatter">
       <Col lg={5} className="m-auto">
         <h1 className="text-center">Regisztráció</h1>
         <Col xs={12} md={5} lg={12} className="mx-auto">
@@ -184,16 +184,17 @@ export default function Register() {
                 )}
               </Form.Text>
             </Form.Group>
-            <p>
-              <Link className="nav-link text-info" to="/login">
-                Bejelentkezés
-              </Link>
-            </p>
+           
             <div className="text-center">
               <Button variant="primary" type="submit">
                 Regisztráció
               </Button>
             </div>
+            <p>
+              <Link className="nav-link text-black text-center" to="/login">
+                Bejelentkezés
+              </Link>
+            </p>
           </Form>
         </Col>
       </Col>

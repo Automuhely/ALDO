@@ -26,9 +26,12 @@ export default function Login() {
 
   return (
     <Container fluid>
-      <Container className="mt-5 p-5 m-auto bg-light border rounded col-sm-12 col-md-5">
+      <Container
+        className="mt-5 p-5 m-auto bg-light border rounded col-sm-12 col-md-5"
+        id="containerhatter"
+      >
         <h1 className="text-center mb-4">Bejelentkezés</h1>
-        <Col className="mx-auto col-md-12">
+        <Col className="mx-auto col-md-10">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
@@ -62,16 +65,23 @@ export default function Login() {
                 )}
               </Form.Text>
             </Form.Group>
+
+            <div className="text-center">
+              <Button variant="primary" type="submit">
+                Bejelentkezés
+              </Button>
+            </div>
             <p>
-              <Link className="nav-link text-info" to="/register">
+              <Link className="nav-link text-black text-center" to="/register">
+                Elfelejtett jelszó
+              </Link>
+            </p>
+            <p>
+              <Link className="nav-link text-black text-center" to="/register">
                 Regisztráció
               </Link>
             </p>
-            <div className="text-center">
-              <Button variant="primary" type="submit">
-                Login
-              </Button>
-            </div>
+            
           </Form>
         </Col>
       </Container>
