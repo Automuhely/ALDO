@@ -21,15 +21,17 @@ export default function MyNav() {
               <>
                 {/* Bejelentkezett felhasználó láthatja */}
                 {/* csak a szerelő szerepkörben lévő user láthatja */}
-                {user.szerepkor === "szerelo" ||
-                  (user.szerepkor === "vezetoszerelo" && (
-                    <Nav.Link href="/munkafolyamatok">Munkafolyamatok</Nav.Link>
-                  ))}
+                {user.szerepkor === "szerelo" && (
+                  <Nav.Link href="/munkafolyamatok">Munkafolyamatok</Nav.Link>
+                )}
                 {/* csak a vezetőszerelő szerepkörben lévő user láthatja */}
                 {user.szerepkor === "vezetoszerelo" && (
-                  <Nav.Link href="/vezetoszerelo">
-                    Vezető szerelő oldala
-                  </Nav.Link>
+                  <>
+                    <Nav.Link href="/vezetoszerelo">
+                      Vezető szerelő oldala
+                    </Nav.Link>
+                    <Nav.Link href="/munkafolyamatok">Munkafolyamatok</Nav.Link>
+                  </>
                 )}
                 <Nav.Link href="/profil">Profilom</Nav.Link>
                 <Nav.Link href="#" onClick={logout}>
