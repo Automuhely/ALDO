@@ -35,7 +35,7 @@ class UserValidation
             'email' => ['required', 'email', 'max:255'],
             'cim' => ['required', 'string'],
             'telefon' => ['required', 'string', 'regex:/^06\d{1}(\d{7}|\d{8})$/', 'unique:users'],
-            'szulido' => ['required', 'date'],
+            'szulido' => ['nullable', 'date'],
             'adoazonosito' => ['nullable', 'required_without_all:adoszam', 'regex:/^\d{10}$/'],
             'adoszam' => ['nullable',  'required_without_all:adoazonosito', 'regex:/^\d{8,10}$/'],
         ];
