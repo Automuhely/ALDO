@@ -11,51 +11,47 @@ export default function MunkaFolyamatok() {
   const [ElNemKezdettMunkak, setElNemKezdettMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
   
-  
- 
-
   useEffect(() => {
-    axios.get("/api/folyamatmunka")
-      .then(response => {
+    axios
+      .get("/api/folyamatmunka")
+      .then((response) => {
         setElKezdettMunkak(response.data);
-        
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Hiba történt az elkezdett munkák lekérésekor:", error);
       });
   }, []);
 
-
   useEffect(() => {
-    axios.get("/api/befejezettmunka")
-      .then(response => {
+    axios
+      .get("/api/befejezettmunka")
+      .then((response) => {
         setBefejezettMunkak(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Hiba történt a befejezett munkák lekérésekor::", error);
       });
   }, []);
 
-
   useEffect(() => {
-    axios.get("/api/elnemkezdetmunka")
-      .then(response => {
+    axios
+      .get("/api/elnemkezdettmunka")
+      .then((response) => {
         setElNemKezdettMunkak(response.data);
       })
-      .catch(error => {
-        console.error("Hiba történt az el nem kezdett munkák lekérésekor:", error);
+      .catch((error) => {
+        console.error(
+          "Hiba történt az el nem kezdett munkák lekérésekor:",
+          error
+        );
       });
   }, []);
-
 
   return (
     <div>
       <h1>Munkafolyamatok</h1>
-      <MunkaElNemKezdettTable
-        ElNemKezdettMunkak={ElNemKezdettMunkak}
-       
-      />
-      <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak}/>
+      <MunkaElNemKezdettTable ElNemKezdettMunkak={ElNemKezdettMunkak} />
+      <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak} />
       <MunkaBefejezettTable BefejezettMunkak={BefejezettMunkak} />
     </div>
   );

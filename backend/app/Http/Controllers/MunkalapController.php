@@ -57,7 +57,7 @@ class MunkalapController extends Controller
             ->get();
     }
 
-    public function elnemkezdetmunka()
+    public function elnemkezdettmunka()
     {
         return DB::table('munkalaps as m')
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
