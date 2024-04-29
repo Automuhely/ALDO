@@ -17,6 +17,10 @@
   display: none;
 }
 
+#userForm tr{
+  line-height: 3.7em;
+}
+
 @media only screen and (max-width: 767px) {
   .showOnSmall {
     color: rgb(115, 115, 115);
@@ -30,3 +34,4 @@
     display: none;
   }
 }
+
