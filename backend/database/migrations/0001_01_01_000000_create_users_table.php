@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('telefon', 15);
             $table->string('cim', 150);
-            $table->date('szulido')->default('2000-01-01');
+            $table->date('szulido')->nullable()->default('2000-01-01');
             $table->string('szerepkor', 15)->default("ugyfel");
             $table->string('adoazonosito', 15)->nullable()->default(null);
             $table->string('adoszam', 15)->nullable()->default(null);

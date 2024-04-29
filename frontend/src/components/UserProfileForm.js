@@ -1,11 +1,9 @@
-import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import useAuthContext from "../contexts/AuthContext";
 import axios from "../api/axios";
-import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/esm/Col";
 
 export default function UserProfileForm() {
@@ -43,9 +41,11 @@ export default function UserProfileForm() {
       setEmail(user.email);
       setTelefon(user.telefon);
       setCim(user.cim);
-      setSzulido(user.szulido);
       setAdoazonosito(user.adoazonosito);
       setAdoszam(user.adoszam);
+      if (user.szulido) {
+        setSzulido(user.szulido);
+      }
     }
     console.log("profileform");
   }, [user, getUser]);
@@ -96,7 +96,7 @@ export default function UserProfileForm() {
       style={{ minHeight: "35em" }}
     >
       <h4 className="text-center text-bg-primary p-3">Profil</h4>
-      <Table>
+      <Table id="userForm">
         <thead>
           <tr>
             <th
@@ -105,6 +105,22 @@ export default function UserProfileForm() {
               style={{ position: "relative" }}
             >
               Személyes adatok
+              <Button
+                className="mx-auto d-block bg-success"
+                onClick={(e) => {
+                  bekuld(e);
+                }}
+                id="profilMentesGomb"
+                style={{
+                  visibility: isProfilSzerkesztheto ? "visible" : "hidden",
+                  position: "absolute",
+                  right: 100,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                }}
+              >
+                Mentés
+              </Button>
               <Button
                 variant="primary"
                 style={{
@@ -185,17 +201,23 @@ export default function UserProfileForm() {
               </Form.Text>
             </td>
           </tr>
-          <tr>
-            <td>Születési idő</td>
-            <td>
-              <Form.Control disabled type="date" value={szulido} />
-              <Form.Text>
-                {profilErrors.szulido && (
-                  <span className="text-danger">{profilErrors.szulido[0]}</span>
-                )}
-              </Form.Text>
-            </td>
-          </tr>
+
+          {user?.szulido !== null ?? (
+            <tr>
+              <td>Születési idő</td>
+              <td>
+                <Form.Control disabled type="date" value={szulido} />
+                <Form.Text>
+                  {profilErrors.szulido && (
+                    <span className="text-danger">
+                      {profilErrors.szulido[0]}
+                    </span>
+                  )}
+                </Form.Text>
+              </td>
+            </tr>
+          )}
+
           {user?.adoazonosito ? (
             <tr>
               <td>Adóazonosító</td>
@@ -228,26 +250,6 @@ export default function UserProfileForm() {
             <td>Email</td>
             <td>
               <Form.Control disabled type="text" value={email} />
-            </td>
-          </tr>
-          <tr
-            style={{
-              visibility: isProfilSzerkesztheto ? "visible" : "hidden",
-            }}
-          >
-            <td colSpan={2} style={{ border: "unset" }}>
-              <Button
-                className="mx-auto d-block"
-                onClick={(e) => {
-                  bekuld(e);
-                }}
-                id="profilMentesGomb"
-                style={{
-                  visibility: isProfilSzerkesztheto ? "visible" : "hidden",
-                }}
-              >
-                Mentés
-              </Button>
             </td>
           </tr>
         </tbody>
