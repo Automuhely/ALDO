@@ -11,6 +11,7 @@ export default function MunkaFolyamatok() {
   const [ElNemKezdettMunkak, setElNemKezdettMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
   
+  
  
 
   useEffect(() => {

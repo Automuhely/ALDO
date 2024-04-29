@@ -1,11 +1,19 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useTable } from "react-table";
 import {  Button, Table } from "react-bootstrap";
 import useAuthContext from "../contexts/AuthContext";
 
 
 export default function MunkaBefejezettTable({ BefejezettMunkak }) {
-  const { csrf } = useAuthContext();
+  const { csrf,user,getUser } = useAuthContext();
+
+  useEffect(() => {
+    console.log(user);
+    if (!user) {
+      getUser();
+    }
+  }, [user, getUser]);
+
   const columns = useMemo(
     () => [
       {
@@ -61,7 +69,7 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
       const token = await csrf();
       
     } catch (error) {
-      console.error("Hiba történt a státusz megváltoztatása közben:", error);
+      console.error("Hiba történt a számla megjelenítése közben:", error);
     }
   };
 

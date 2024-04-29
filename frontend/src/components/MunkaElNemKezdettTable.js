@@ -5,7 +5,14 @@ import axios from "../api/axios";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak }) {
-  const { csrf } = useAuthContext();
+  const { csrf,user,getUser } = useAuthContext();
+
+  useEffect(() => {
+    console.log(user);
+    if (!user) {
+      getUser();
+    }
+  }, [user, getUser]);
 
   const columns = useMemo(
     () => [

@@ -1,11 +1,24 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable } from "react-table";
 import { Button, Table } from "react-bootstrap";
 import useAuthContext from "../contexts/AuthContext";
 import axios from "../api/axios";
 
 export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
-  const { csrf } = useAuthContext();
+  const { csrf ,user,getUser} = useAuthContext();
+  const [token, setToken] = useState();
+
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      if (!user) {
+        getUser();
+        const token = await csrf();
+        setToken(token);
+      }
+    };
+
+    fetchCsrfToken();
+  }, [user, getUser, csrf]);
  
   const columns = useMemo(
     () => [
@@ -14,7 +27,6 @@ export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
       { Header: "Rendszám", accessor: "rendszam" },
       { Header: "Ügyfél", accessor: "name" },
       { Header: "Leírás", accessor: "megnevezes" },
-      
       { Header: "Elvitték", accessor: "elvitel_ido" },
       { Header: "Munkavezető", accessor: "munkavezeto" },
       { Header: "Számlaszám", accessor: "szamlaszam" },
@@ -39,8 +51,8 @@ export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
       // console.log("Státusz:",statusz)
       const response = await axios.post("/api/befejezettmunkapost", data);
       console.log("Státusz megváltoztatva");
-      alert("Státusz megváltoztatva");
-
+      alert("Státusz megváltoztatva")
+      
     } catch (error) {
       console.error("Hiba történt a státusz megváltoztatása közben:", error);
     }
