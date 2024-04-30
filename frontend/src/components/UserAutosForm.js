@@ -71,7 +71,6 @@ export default function UserAutosForm(props) {
             <Form.Group className="">
               <Form.Label>Becenév</Form.Label>
               <Form.Control
-                required
                 type="text"
                 value={becenev}
                 onChange={(e) => setBecenev(e.target.value)}
