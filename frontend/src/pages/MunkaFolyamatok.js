@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
 import useAuthContext from "../contexts/AuthContext";
 import MunkaFolyTable from "../components/MunkaFolyTable";
-import MunkaElNemKezdettTable from "../components/MunkaElNemKezdettTable";
+import MunkaElNemKezdetTable from "../components/MunkaElNemKezdetTable";
 import MunkaBefejezettTable from "../components/MunkaBefejezettTable";
+import { Container } from "react-bootstrap";
 
 export default function MunkaFolyamatok() {
   const [ElKezdettMunkak, setElKezdettMunkak] = useState([]);
-  const [ElNemKezdettMunkak, setElNemKezdettMunkak] = useState([]);
+  const [ElNemKezdetMunkak, setElNemKezdetMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
   const { csrf ,user,getUser} = useAuthContext();
   const [token, setToken] = useState();
@@ -23,6 +24,26 @@ export default function MunkaFolyamatok() {
 
     fetchCsrfToken();
   }, [user, getUser, csrf]);
+
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/folyamatmunka"),
+  //     axios.get("/api/befejezettmunka"),
+  //     axios.get("/api/elnemkezdettmunka")
+  //   ])
+  //   .then((responses) => {
+  //     const elKezdettMunkak = responses[0].data;
+  //     const befejezettMunkak = responses[1].data;
+  //     const elNemKezdettMunkak = responses[2].data;
+  //     setElKezdettMunkak(elKezdettMunkak);
+  //     setBefejezettMunkak(befejezettMunkak);
+  //     setElNemKezdettMunkak(elNemKezdettMunkak);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Hiba történt az adatok lekérésekor:", error);
+  //   });
+  // }, []);
+  
   
   useEffect(() => {
     axios
@@ -48,9 +69,9 @@ export default function MunkaFolyamatok() {
 
   useEffect(() => {
     axios
-      .get("/api/elnemkezdettmunka")
+      .get("/api/elnemkezdetmunka")
       .then((response) => {
-        setElNemKezdettMunkak(response.data);
+        setElNemKezdetMunkak(response.data);
       })
       .catch((error) => {
         console.error(
@@ -62,10 +83,13 @@ export default function MunkaFolyamatok() {
 
   return (
     <div>
-      <h1>Munkafolyamatok</h1>
-      <MunkaElNemKezdettTable ElNemKezdettMunkak={ElNemKezdettMunkak} />
+      <Container>
+      <h1 style={{ textAlign:"center" }}>Munkafolyamatok</h1>
+      <MunkaElNemKezdetTable ElNemKezdetMunkak={ElNemKezdetMunkak} />
       <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak} />
       <MunkaBefejezettTable BefejezettMunkak={BefejezettMunkak} />
+      </Container>
+      
     </div>
   );
 }

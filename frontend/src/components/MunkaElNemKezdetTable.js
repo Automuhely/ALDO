@@ -4,7 +4,7 @@ import { Button, Table } from "react-bootstrap";
 import axios from "../api/axios";
 import useAuthContext from "../contexts/AuthContext";
 
-export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak }) {
+export default function MunkaElNemKezdetTable({ ElNemKezdetMunkak }) {
   const { csrf} = useAuthContext();
 
   const columns = useMemo(
@@ -44,11 +44,11 @@ export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak }) {
   };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: ElNemKezdettMunkak });
+    useTable({ columns, data: ElNemKezdetMunkak });
 
   return (
     <div>
-      <h3>Következő munkák</h3>
+      <h3>Felvett munkák</h3>
       <Table striped bordered hover {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
