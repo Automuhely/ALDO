@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('alvazszam', 17)->unique();
             $table->string('marka', 20);
-            $table->string('motorkod', 3)->unique();
+            $table->string('motorkod', 6)->unique();
             $table->integer('evjarat');
             $table->string('rendszam', 10)->unique();
             $table->string('becenev', 20)->nullable()->default(null);

@@ -21,7 +21,7 @@ class Auto extends Model
     ];
     protected $hidden = ["created_at", "updated_at"];
 
-    protected $appends = ['ugyfelnev'];
+   // protected $appends = ['ugyfelnev'];
 
     public static function getAutoMarkak()
     {
@@ -35,12 +35,11 @@ class Auto extends Model
         return $autoMarkak;
     }
 
-    public function getUgyfelnevAttribute()
+   /*  public function getUgyfelnevAttribute()
     {
-        // az ügyfél mező alapján, a másik táblából a nevét kérdezem le
         return $this->ugyfel()->first()->name;
     }
-
+ */
     // Az autóhoz tartozó kapcsolat definiálása
     public function ugyfel()
     {
