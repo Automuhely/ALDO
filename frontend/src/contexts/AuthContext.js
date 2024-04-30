@@ -27,18 +27,14 @@ export const AuthProvider = ({ children }) => {
   const csrf = async () => {
     try {
       const response = await axios.get("/token");
-      //console.log(response);
       token = response.data;
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        console.log("401, nem tudtam token-t lekérdezni", error);
+        console.log("401, nem tudtam a token-t lekérdezni", error);
       } else {
-        console.error("Hiba történt a token lekérése során", error);
+        console.error("Valamilyen hiba történt a token lekérése során", error);
       }
-      // REMOVE IT WHEN YOU TESTING
-      return null;
-      //throw error;
     }
   };
 
