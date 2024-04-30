@@ -13,6 +13,7 @@ import MunkaFolyamatok from "./pages/MunkaFolyamatok.js";
 import UserProfile from "./pages/UserProfile.js";
 import AkummulatorCsere from "./pages/szolgaltatasok/AkkumulatorCsere.js";
 import Futomu from "./pages/szolgaltatasok/Futomu.js";
+import VezetoSzerelo from "./pages/VezetoSzerelo.js";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/munkaar" element={<MunkaAr />} />
         <Route path="/kapcsolat" element={<Email />} />
         <Route path="/galeria" element={<Galeria />} />
+        <Route path="/vezetoszerelo" element={<VezetoSzerelo />} />
         <Route path="/akkumulatorcsere" element={<AkummulatorCsere />} />
         <Route path="/futomu" element={<Futomu />} />
         <Route path="*" element={<NoPage />} />
