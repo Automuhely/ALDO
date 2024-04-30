@@ -16,7 +16,6 @@ import Futomu from "./pages/szolgaltatasok/Futomu.js";
 
 function App() {
   return (
-    // <BrowserRouter>
     <Routes>
       <Route path="/" element={<BasicLayout />}>
         <Route index element={<Home />} />
@@ -32,7 +31,6 @@ function App() {
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
-    //  </BrowserRouter>
   );
 }
 
