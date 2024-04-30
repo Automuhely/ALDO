@@ -6,56 +6,65 @@ import MunkaElNemKezdettTable from "../components/MunkaElNemKezdettTable";
 import MunkaBefejezettTable from "../components/MunkaBefejezettTable";
 
 export default function MunkaFolyamatok() {
-  const { csrf } = useAuthContext();
   const [ElKezdettMunkak, setElKezdettMunkak] = useState([]);
   const [ElNemKezdettMunkak, setElNemKezdettMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
-  
-  
- 
+  const { csrf ,user,getUser} = useAuthContext();
+  const [token, setToken] = useState();
 
   useEffect(() => {
-    axios.get("/api/folyamatmunka")
-      .then(response => {
+    const fetchCsrfToken = async () => {
+      if (!user) {
+        getUser();
+        const token = await csrf();
+        setToken(token);
+      }
+    };
+
+    fetchCsrfToken();
+  }, [user, getUser, csrf]);
+  
+  useEffect(() => {
+    axios
+      .get("/api/folyamatmunka")
+      .then((response) => {
         setElKezdettMunkak(response.data);
-        
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Hiba történt az elkezdett munkák lekérésekor:", error);
       });
   }, []);
 
-
   useEffect(() => {
-    axios.get("/api/befejezettmunka")
-      .then(response => {
+    axios
+      .get("/api/befejezettmunka")
+      .then((response) => {
         setBefejezettMunkak(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Hiba történt a befejezett munkák lekérésekor::", error);
       });
   }, []);
 
-
   useEffect(() => {
-    axios.get("/api/elnemkezdetmunka")
-      .then(response => {
+    axios
+      .get("/api/elnemkezdettmunka")
+      .then((response) => {
         setElNemKezdettMunkak(response.data);
       })
-      .catch(error => {
-        console.error("Hiba történt az el nem kezdett munkák lekérésekor:", error);
+      .catch((error) => {
+        console.error(
+          "Hiba történt az el nem kezdett munkák lekérésekor:",
+          error
+        );
       });
   }, []);
-
 
   return (
     <div>
       <h1>Munkafolyamatok</h1>
-      <MunkaElNemKezdettTable
-        ElNemKezdettMunkak={ElNemKezdettMunkak}
-       
-      />
-      <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak}/>
+      <MunkaElNemKezdettTable ElNemKezdettMunkak={ElNemKezdettMunkak} />
+      <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak} />
       <MunkaBefejezettTable BefejezettMunkak={BefejezettMunkak} />
     </div>
   );

@@ -5,14 +5,7 @@ import useAuthContext from "../contexts/AuthContext";
 
 
 export default function MunkaBefejezettTable({ BefejezettMunkak }) {
-  const { csrf,user,getUser } = useAuthContext();
-
-  useEffect(() => {
-    console.log(user);
-    if (!user) {
-      getUser();
-    }
-  }, [user, getUser]);
+  const { csrf} = useAuthContext();
 
   const columns = useMemo(
     () => [
@@ -72,8 +65,6 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
       console.error("Hiba történt a számla megjelenítése közben:", error);
     }
   };
-
-
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: BefejezettMunkak });

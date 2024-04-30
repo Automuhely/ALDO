@@ -5,14 +5,7 @@ import axios from "../api/axios";
 import useAuthContext from "../contexts/AuthContext";
 
 export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak }) {
-  const { csrf,user,getUser } = useAuthContext();
-
-  useEffect(() => {
-    console.log(user);
-    if (!user) {
-      getUser();
-    }
-  }, [user, getUser]);
+  const { csrf} = useAuthContext();
 
   const columns = useMemo(
     () => [
@@ -21,7 +14,6 @@ export default function MunkaElNemKezdettTable({ ElNemKezdettMunkak }) {
       { Header: "Rendszám", accessor: "rendszam" },
       { Header: "Ügyfél", accessor: "name" },
       { Header: "Leírás", accessor: "megnevezes" },
-    
       { Header: "Elvitték", accessor: "elvitel_ido" },
       { Header: "Munkavezető", accessor: "munkavezeto" },
       { Header: "Számlaszám", accessor: "szamlaszam" },

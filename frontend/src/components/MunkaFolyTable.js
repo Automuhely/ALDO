@@ -5,20 +5,8 @@ import useAuthContext from "../contexts/AuthContext";
 import axios from "../api/axios";
 
 export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
-  const { csrf ,user,getUser} = useAuthContext();
-  const [token, setToken] = useState();
-
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      if (!user) {
-        getUser();
-        const token = await csrf();
-        setToken(token);
-      }
-    };
-
-    fetchCsrfToken();
-  }, [user, getUser, csrf]);
+  const { csrf} = useAuthContext();
+ 
  
   const columns = useMemo(
     () => [
