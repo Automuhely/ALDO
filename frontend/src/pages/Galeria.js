@@ -46,8 +46,8 @@ const photos = [
 
   return (
     
-      <Container style={{ margin:"3rem" }}>
-        <PhotoAlbum layout="rows" photos={photos} />
+      <Container >
+        <PhotoAlbum layout="rows" photos={photos}  />
       </Container>
     
   );
