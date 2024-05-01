@@ -15,7 +15,7 @@ export default function MyNav() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto w-100">
+          <Nav className="me-auto w-100 ms-5">
             {user ? (
               <>
                 {user.szerepkor === "ugyfel" && (
@@ -73,7 +73,7 @@ export default function MyNav() {
                 <Nav.Link href="/galeria">Galéria</Nav.Link>
                 <Nav.Link href="/munkaar">Munkadíjak</Nav.Link>
                 <Nav.Link href="/kapcsolat">Kapcsolat</Nav.Link>
-                <Nav.Link href="/login" className="ms-auto mx-3"> Bejelentkezés </Nav.Link>
+                <Nav.Link href="/login" className="ms-lg-auto mx-lg-3"> Bejelentkezés </Nav.Link>
                 <Nav.Link href="/register">Regisztráció </Nav.Link>
               </>
             )}

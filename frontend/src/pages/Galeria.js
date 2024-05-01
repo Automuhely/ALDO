@@ -46,7 +46,7 @@ const photos = [
 
   return (
     
-      <Container >
+      <Container className="p-5" >
         <PhotoAlbum layout="rows" photos={photos}  />
       </Container>
     
