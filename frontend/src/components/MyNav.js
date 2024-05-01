@@ -10,28 +10,28 @@ export default function MyNav() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="/" className="mx-5">
+        <Navbar.Brand href="/" className="mx-2">
           ALDO
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto w-100 ms-5">
+          <Nav className="w-100 ">
             {user ? (
               <>
                 {user.szerepkor === "ugyfel" && (
                   <>
-                    <Nav.Link href="/" className="ms-auto">Főoldal</Nav.Link>
+                    <Nav.Link href="/" className="ms-md-0 ms-lg-auto ms-sm-0">Főoldal</Nav.Link>
                     <Nav.Link href="/galeria">Galéria</Nav.Link>
                     <Nav.Link href="/munkaar">Munkadíjak</Nav.Link>
                     <Nav.Link href="/kapcsolat">Kapcsolat</Nav.Link>
-                    <Nav.Link href="/profil" className="ms-auto">Profilom</Nav.Link>
+                    <Nav.Link href="/profil" className="ms-md-0 ms-lg-auto ms-sm-0">Profilom</Nav.Link>
                   </>
                 )}
                 
                 {user.szerepkor === "szerelo" && (
                   <>
                    <Dropdown>
-                   <Dropdown.Toggle variant="" id="dropdown-basic">
+                   <Dropdown.Toggle variant="" className="ms-0 ps-0" id="dropdown-basic">
                      Publikus
                    </Dropdown.Toggle>
                    <Dropdown.Menu>
@@ -43,14 +43,14 @@ export default function MyNav() {
                      </Dropdown.Item>
                    </Dropdown.Menu>
                  </Dropdown>
-                  <Nav.Link href="/munkafolyamatok" className="m-auto">Munkafolyamatok</Nav.Link>
+                  <Nav.Link href="/munkafolyamatok" className="ms-sm-0 ms-md-0 ms-lg-auto m-auto">Munkafolyamatok</Nav.Link>
                   </>
                 )}
 
                 {user.szerepkor === "vezetoszerelo" && (
                   <>
                     <Dropdown>
-                      <Dropdown.Toggle className="me-auto" variant="" id="dropdown-basic">
+                    <Dropdown.Toggle className="ms-0 ps-0" variant="" id="dropdown-basic">
                         Publikus
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
@@ -60,12 +60,11 @@ export default function MyNav() {
                         <Dropdown.Item href="/kapcsolat">Kapcsolat</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
-                    <Nav.Link href="/vezetoszerelo" className="ms-auto">Vezetői</Nav.Link>
+                    <Nav.Link href="/vezetoszerelo" className="ms-sm-0 ms-md-0 ms-lg-auto">Vezetői</Nav.Link>
                     <Nav.Link href="/munkafolyamatok" className="ms-0 me-auto">Munkafolyamatok</Nav.Link>
                   </>
                 )}
                 <Nav.Link href="#" onClick={logout} className=""> Kijelentkezés</Nav.Link>
-                <Nav.Link href="/profil" className="">{user.name}</Nav.Link>
               </>
             ) : (
               <>
@@ -78,8 +77,8 @@ export default function MyNav() {
               </>
             )}
           </Nav>
-          {user && (
-            <Nav.Link href="/profil" className="ml-auto px-5">
+           {user && (
+            <Nav.Link href="/profil" className="text-nowrap link-info">
               {user.name}
             </Nav.Link>
           )}

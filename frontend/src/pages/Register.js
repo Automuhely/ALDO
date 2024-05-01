@@ -198,11 +198,11 @@ export default function Register() {
                 </Form.Text>
               </Form.Group>
             </Row>
-            <p>
+            {/* <p>
               <Link className="nav-link text-info" to="/login">
                 Bejelentkezés
               </Link>
-            </p>
+            </p> */}
             <div className="text-center">
               <Button variant="primary" type="submit">
                 Regisztráció
