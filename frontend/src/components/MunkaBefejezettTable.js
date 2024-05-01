@@ -31,11 +31,6 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
         Header: "Leírás",
         accessor: "megnevezes",
       },
-      
-      {
-        Header: "Elvitték",
-        accessor: "elvitel_ido",
-      },
       {
         Header: "Munkavezető",
         accessor: "munkavezeto",
@@ -71,7 +66,7 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
 
   return (
     <div><h3>Befejezett munkák</h3>
-        <Table striped bordered hover {...getTableProps()}>
+        <Table striped bordered hover {...getTableProps()} style={{ textAlign:"center" }}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>

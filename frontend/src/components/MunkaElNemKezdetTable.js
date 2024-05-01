@@ -14,9 +14,6 @@ export default function MunkaElNemKezdetTable({ ElNemKezdetMunkak }) {
       { Header: "Rendszám", accessor: "rendszam" },
       { Header: "Ügyfél", accessor: "name" },
       { Header: "Leírás", accessor: "megnevezes" },
-      { Header: "Elvitték", accessor: "elvitel_ido" },
-      { Header: "Munkavezető", accessor: "munkavezeto" },
-      { Header: "Számlaszám", accessor: "szamlaszam" },
       {
         Header: " ",
         accessor: "kezdes",
@@ -37,7 +34,8 @@ export default function MunkaElNemKezdetTable({ ElNemKezdetMunkak }) {
       console.log("Munkalapszám a kezdés táblánál:",munkalapszam)
       const response = await axios.post("/api/folyamatmunkapost", data);
       console.log("Státusz megváltoztatva");
-      alert("Státusz megváltoztatva");
+      window.location.reload()
+      alert("Státusz megváltoztatva!A munkafolyamat átkerült az elkezdett munkák táblázatba.");
     } catch (error) {
       console.error("Hiba történt a státusz megváltoztatása közben:", error);
     }
@@ -49,7 +47,7 @@ export default function MunkaElNemKezdetTable({ ElNemKezdetMunkak }) {
   return (
     <div>
       <h3>Felvett munkák</h3>
-      <Table striped bordered hover {...getTableProps()}>
+      <Table striped bordered hover {...getTableProps()} style={{ textAlign:"center" }}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>

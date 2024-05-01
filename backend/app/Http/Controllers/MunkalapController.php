@@ -63,7 +63,7 @@ class MunkalapController extends Controller
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
             ->join('autos as a', 'a.id', '=', 'm.auto')
             ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes')
             ->where('m.statusz', '=', '0')
             ->get();
     }
@@ -74,7 +74,7 @@ class MunkalapController extends Controller
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
             ->join('autos as a', 'a.id', '=', 'm.auto')
             ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes', 'm.munkavezeto')
             ->where('m.statusz', '=', '1')
             ->get();
     }
@@ -86,7 +86,7 @@ class MunkalapController extends Controller
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
             ->join('autos as a', 'a.id', '=', 'm.auto')
             ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.szamlaszam')
             ->where('m.statusz', '=', '2')
             ->get();
     }
