@@ -35,7 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);        // adott ügyfélnek kiállított összes munkalap
         Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);         // munkalapok státuszok szerinti lekérése
         Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
-        Route::get('/elnemkezdettmunka', [MunkalapController::class, 'elnemkezdettmunka']);
+        Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);
 
         Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);       // adott szerelő munkái
         Route::post('/folyamatmunkapost', [MunkalapController::class, 'folyamatmunkapost']);
@@ -78,6 +78,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::delete('/feladats/{feladat}', [FeladatController::class, 'destroy']);
             Route::delete('/munkalaps/{munkalap}', [MunkalapController::class, 'destroy']);
             Route::delete('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'destroy']);
+         
         });
     });
 });

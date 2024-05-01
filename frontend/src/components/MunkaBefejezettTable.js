@@ -5,14 +5,7 @@ import useAuthContext from "../contexts/AuthContext";
 
 
 export default function MunkaBefejezettTable({ BefejezettMunkak }) {
-  const { csrf,user,getUser } = useAuthContext();
-
-  useEffect(() => {
-    console.log(user);
-    if (!user) {
-      getUser();
-    }
-  }, [user, getUser]);
+  const { csrf} = useAuthContext();
 
   const columns = useMemo(
     () => [
@@ -37,11 +30,6 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
       {
         Header: "Leírás",
         accessor: "megnevezes",
-      },
-      
-      {
-        Header: "Elvitték",
-        accessor: "elvitel_ido",
       },
       {
         Header: "Munkavezető",
@@ -73,14 +61,12 @@ export default function MunkaBefejezettTable({ BefejezettMunkak }) {
     }
   };
 
-
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: BefejezettMunkak });
 
   return (
     <div><h3>Befejezett munkák</h3>
-        <Table striped bordered hover {...getTableProps()}>
+        <Table striped bordered hover {...getTableProps()} style={{ textAlign:"center" }}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>

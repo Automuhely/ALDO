@@ -57,13 +57,13 @@ class MunkalapController extends Controller
             ->get();
     }
 
-    public function elnemkezdettmunka()
+    public function elnemkezdetmunka()
     {
         return DB::table('munkalaps as m')
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
             ->join('autos as a', 'a.id', '=', 'm.auto')
             ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes')
             ->where('m.statusz', '=', '0')
             ->get();
     }
@@ -74,7 +74,7 @@ class MunkalapController extends Controller
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
             ->join('autos as a', 'a.id', '=', 'm.auto')
             ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes', 'm.munkavezeto')
             ->where('m.statusz', '=', '1')
             ->get();
     }
@@ -86,7 +86,7 @@ class MunkalapController extends Controller
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
             ->join('autos as a', 'a.id', '=', 'm.auto')
             ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.elvitel_ido', 'm.szamlaszam')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'm.munkavezeto', 'ma.megnevezes', 'm.szamlaszam')
             ->where('m.statusz', '=', '2')
             ->get();
     }
@@ -95,19 +95,15 @@ class MunkalapController extends Controller
 {
     try {
         $munkalapszam = $request->input('munkalapszam');
-
         $munkalap = Munkalap::where('munkalapszam', $munkalapszam)->first();
-        // Ellenőrizzük, hogy létezik-e a munkalap
         if ($munkalap) {
             $munkalap->statusz = 1; 
             $munkalap->save();
             return response()->json(['message' => 'Státusz sikeresen megváltoztatva'], 200);
         } else {
-            // Ha a munkalap nem létezik, akkor hibát küldünk vissza
             return response()->json(['error' => 'A megadott munkalapszám nem található'], 404);
         }
     } catch (\Exception $e) {
-        // Ha hiba történik, akkor azt elküldjük JSON formában a frontend felé
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
@@ -117,19 +113,15 @@ public function befejezettmunkapost(Request $request)
 {
     try {
     $munkalapszam = $request->input('munkalapszam');
-
     $munkalap = Munkalap::where('munkalapszam', $munkalapszam)->first();
-    // Ellenőrizzük, hogy létezik-e a munkalap
     if ($munkalap) {
         $munkalap->statusz = 2; 
         $munkalap->save();
         return response()->json(['message' => 'Státusz sikeresen megváltoztatva'], 200);
     } else {
-        // Ha a munkalap nem létezik, akkor hibát küldünk vissza
         return response()->json(['error' => 'A megadott munkalapszám nem található'], 404);
     }
 } catch (\Exception $e) {
-    // Ha hiba történik, akkor azt elküldjük JSON formában a frontend felé
     return response()->json(['error' => $e->getMessage()], 500);
 }
 }

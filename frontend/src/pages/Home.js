@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import useAuthContext from "../contexts/AuthContext";
 import Footer from "../components/Footer";
+import Container from "react-bootstrap/esm/Container";
+import { Link } from "react-router-dom";
 import Kepek from "../components/Kepek";
 
 export default function Home() {
@@ -28,7 +30,7 @@ export default function Home() {
     {
       link: "#Ingyenes műszaki felmérés",
       src: "img/atvizsgalas.jpg",
-      title: "Ingyenes műszaki felmérés",
+      title: "Műszaki felmérés",
     },
     { link: "#Fékrendszer", src: "img/fekcsere.jpg", title: "Fékrendszer" },
     { link: "#Gumicsere", src: "img/gumicsere.jpg", title: "Gumicsere" },

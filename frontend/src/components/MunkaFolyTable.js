@@ -4,21 +4,9 @@ import { Button, Table } from "react-bootstrap";
 import useAuthContext from "../contexts/AuthContext";
 import axios from "../api/axios";
 
-export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
-  const { csrf ,user,getUser} = useAuthContext();
-  const [token, setToken] = useState();
-
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      if (!user) {
-        getUser();
-        const token = await csrf();
-        setToken(token);
-      }
-    };
-
-    fetchCsrfToken();
-  }, [user, getUser, csrf]);
+export default function MunkaFolyTable({ ElKezdettMunkak}) {
+  const { csrf} = useAuthContext();
+ 
  
   const columns = useMemo(
     () => [
@@ -27,9 +15,7 @@ export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
       { Header: "Rendszám", accessor: "rendszam" },
       { Header: "Ügyfél", accessor: "name" },
       { Header: "Leírás", accessor: "megnevezes" },
-      { Header: "Elvitték", accessor: "elvitel_ido" },
       { Header: "Munkavezető", accessor: "munkavezeto" },
-      { Header: "Számlaszám", accessor: "szamlaszam" },
       {
         Header: " ",
         accessor: "befejezes",
@@ -51,6 +37,7 @@ export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
       // console.log("Státusz:",statusz)
       const response = await axios.post("/api/befejezettmunkapost", data);
       console.log("Státusz megváltoztatva");
+      window.location.reload()
       alert("Státusz megváltoztatva")
       
     } catch (error) {
@@ -64,7 +51,7 @@ export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
   return (
     <div>
       <h3>Elkezdett munkák</h3>
-      <Table striped bordered hover {...getTableProps()}>
+      <Table striped bordered hover {...getTableProps()} style={{ textAlign:"center" }}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>

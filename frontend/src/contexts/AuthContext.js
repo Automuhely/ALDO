@@ -123,8 +123,21 @@ export const AuthProvider = ({ children }) => {
     
   };
 
+  const Torles = async (id) => {
+    try {
+      const response = await axios.delete("/api/arak/${id}", id);
+      console.log(id)
+      return response.data; 
+    } catch (error) {
+      console.error("Hiba történt a munka ár törlésekor: " + error.message);
+    }
+    
+  };
+
+
+
   return (
-    <AuthContext.Provider value={{ loginReg, logout, errors, getUser, user, csrf,Kuldes}}>
+    <AuthContext.Provider value={{ loginReg, logout, errors, getUser, user, csrf,Kuldes,Torles}}>
       {children}
     </AuthContext.Provider>
   );
