@@ -4,7 +4,7 @@ import { Button, Table } from "react-bootstrap";
 import useAuthContext from "../contexts/AuthContext";
 import axios from "../api/axios";
 
-export default function MunkaFolyTable({ ElKezdettMunkak ,  onMoveToFinished}) {
+export default function MunkaFolyTable({ ElKezdettMunkak}) {
   const { csrf} = useAuthContext();
  
  
