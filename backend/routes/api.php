@@ -80,6 +80,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::delete('/feladats/{feladat}', [FeladatController::class, 'destroy']);
             Route::delete('/munkalaps/{munkalap}', [MunkalapController::class, 'destroy']);
             Route::delete('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'destroy']);
+         
         });
     });
 });
