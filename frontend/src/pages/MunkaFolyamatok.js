@@ -25,61 +25,61 @@ export default function MunkaFolyamatok() {
     fetchCsrfToken();
   }, [user, getUser, csrf]);
 
+  useEffect(() => {
+    Promise.all([
+      axios.get("/api/folyamatmunka"),
+      axios.get("/api/befejezettmunka"),
+      axios.get("/api/elnemkezdetmunka")
+    ])
+    .then((responses) => {
+      const elKezdettMunkak = responses[0].data;
+      const befejezettMunkak = responses[1].data;
+      const elNemKezdetMunkak = responses[2].data;
+      setElKezdettMunkak(elKezdettMunkak);
+      setBefejezettMunkak(befejezettMunkak);
+      setElNemKezdetMunkak(elNemKezdetMunkak);
+    })
+    .catch((error) => {
+      console.error("Hiba történt az adatok lekérésekor:", error);
+    });
+  }, []);
+  
+  
   // useEffect(() => {
-  //   Promise.all([
-  //     axios.get("/api/folyamatmunka"),
-  //     axios.get("/api/befejezettmunka"),
-  //     axios.get("/api/elnemkezdettmunka")
-  //   ])
-  //   .then((responses) => {
-  //     const elKezdettMunkak = responses[0].data;
-  //     const befejezettMunkak = responses[1].data;
-  //     const elNemKezdettMunkak = responses[2].data;
-  //     setElKezdettMunkak(elKezdettMunkak);
-  //     setBefejezettMunkak(befejezettMunkak);
-  //     setElNemKezdettMunkak(elNemKezdettMunkak);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Hiba történt az adatok lekérésekor:", error);
-  //   });
+  //   axios
+  //     .get("/api/folyamatmunka")
+  //     .then((response) => {
+  //       setElKezdettMunkak(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Hiba történt az elkezdett munkák lekérésekor:", error);
+  //     });
   // }, []);
-  
-  
-  useEffect(() => {
-    axios
-      .get("/api/folyamatmunka")
-      .then((response) => {
-        setElKezdettMunkak(response.data);
-      })
-      .catch((error) => {
-        console.error("Hiba történt az elkezdett munkák lekérésekor:", error);
-      });
-  }, []);
 
-  useEffect(() => {
-    axios
-      .get("/api/befejezettmunka")
-      .then((response) => {
-        setBefejezettMunkak(response.data);
-      })
-      .catch((error) => {
-        console.error("Hiba történt a befejezett munkák lekérésekor::", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/befejezettmunka")
+  //     .then((response) => {
+  //       setBefejezettMunkak(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Hiba történt a befejezett munkák lekérésekor::", error);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    axios
-      .get("/api/elnemkezdetmunka")
-      .then((response) => {
-        setElNemKezdetMunkak(response.data);
-      })
-      .catch((error) => {
-        console.error(
-          "Hiba történt az el nem kezdett munkák lekérésekor:",
-          error
-        );
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/elnemkezdetmunka")
+  //     .then((response) => {
+  //       setElNemKezdetMunkak(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(
+  //         "Hiba történt az el nem kezdett munkák lekérésekor:",
+  //         error
+  //       );
+  //     });
+  // }, []);
 
   return (
     <div>
