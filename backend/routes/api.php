@@ -22,14 +22,14 @@ Route::middleware('cors')->group(function () {
 
 /*  _____________________________________________________________________________________________________________________________________________________________USER_________ */
 Route::middleware(['auth:sanctum'])->group(function () {
-
     Route::post('/autos', [AutoController::class, 'store']);
     Route::put('/users/{user}', [UserController::class, 'update']);
     Route::get('/szamlaim', [MunkalapController::class, 'szamlaim']);        // bejelentkezett felh. számlái
     Route::get('/autoim', [AutoController::class, 'autoim']);               // autói
     Route::get('/legfrissebb', [AutoController::class, 'legfrissebb']);    // összes autóinak legfrissebb munkalapja, avagy státusza
     Route::get('/autoim-db', [AutoController::class, 'autoimCount']);     // autó db száma
-
+    
+    Route::put('/autos/{auto}', [AutoController::class, 'update']);
     /*  ______________________________________________________________________________________________________________________________________________________SZERELŐ__________ */
     Route::middleware(['szerelo'])->group(function () {
         Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);        // adott ügyfélnek kiállított összes munkalap
@@ -43,7 +43,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/vezszerelok', [UserController::class, 'vezszerelok']);
 
         /* .................................................................................... */
-        Route::put('/autos/{auto}', [AutoController::class, 'update']);
         Route::get('/autos/{auto}', [AutoController::class, 'show']);
         Route::get('/munkalaps/{munkalap}', [MunkalapController::class, 'show']);
         Route::get('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'show']);
@@ -67,8 +66,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/feladats', [FeladatController::class, 'store']);
 
         /*  _____________________________________________________________________________________________________________________________________________VEZETŐSZERELŐ__________ */
-        Route::middleware(['vezetoszerelo'])->group(function () {
-
+        Route::middleware(['vezetoszerelo'])->group(function () {  
             // árakat csak a vezetőszerelő tud módosítani
             Route::post('/arak', [MunkaArController::class, 'store']);
             Route::put('/arak/{elem}', [MunkaArController::class, 'update']);

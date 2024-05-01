@@ -6,14 +6,11 @@ use Illuminate\Validation\Rule;
 
 class AutoValidation
 {
-
-
     public static function rules()
     {
-
         return
             [
-                'becenev' => ['sometimes', 'string', 'string', Rule::unique('autos')->where('ugyfel', auth()->id()), 'max:255'],
+                'becenev' => ['nullable', 'String', Rule::unique('autos')->where('ugyfel', auth()->id()), 'max:255'],
                 'rendszam' => ['required', 'unique:autos', 'regex:/^(?=.*[a-zA-Z]{3,})(?=.*[0-9]{3,}).{6,10}$/'],
                 'ugyfel' => 'required',
                 'marka' => 'required',
