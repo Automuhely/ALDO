@@ -60,20 +60,15 @@ export default function UserProfile() {
       {user ? (
         <>
           <Container>
-              <Row>
-                <Col
-                  className="col-sm-12 col-lg-6 d-flex m-auto mt-3 p-2"
-                  id="profilMezo"
-                >
+            <Row>
+
+             <Col sm={12} md={6} className=" mt-3">
                   <UserProfileForm />
-                </Col>
-                <Col
-                  className="col-sm-12 col-lg-6 d-flex m-auto mt-3 p-2"
-                  id="ujAutoMezo"
-                >
+             </Col>
+            <Col sm={12} md={6} className="mt-3">
                   <UserAutosForm markak={markak} />
-                </Col>
-              </Row>
+            </Col>
+            </Row>
               <Row>
                 <Col className="col-sm-12 m-auto mt-3 p-2" id="autokMezo">
                   <UserAutoMezo autoim={autoim} />
