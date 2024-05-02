@@ -5,49 +5,28 @@ import useAuthContext from "../contexts/AuthContext";
 import axios from "../api/axios";
 
 export default function MunkaTable({ munkak }) {
-  const { csrf,Torles} = useAuthContext();
-  const columns = useMemo(
-    () => [
-      {
-        Header: "id",
-        accessor: "id",
-      },
-      {
-        Header: "Munka megnevezése",
-        accessor: "megnevezes",
-      },
-      {
-        Header: "Munka ára",
-        accessor: "ara",
-        Cell: ({ value }) => `${value} Ft`,
-      },
-      {
-        Header: " ",
-        accessor: "Szerkesztés",
-        Cell: ({ row }) => (
-          <Button variant="primary" onClick={() => szerkesztesgomb(row.original.id)}>
-            Szerkesztés
-          </Button>
-        ),
-      },
-      {
-        Header: " ",
-        accessor: "Törlés",
-        Cell: ({ row }) => (
-          <Button variant="primary" onClick={() => torlesgomb(row.original.id)}>
-            Törlés
-          </Button>
-        ),
-      },
-    ],
-    []
-  );
+  const { csrf, Torles } = useAuthContext();
+
+  const columns = [
+    {
+      Header: "Munka megnevezése",
+      accessor: "megnevezes",
+    },
+    {
+      Header: "Munka ára",
+      accessor: "ara",
+      Cell: ({ value }) => `${value} Ft`,
+    },
+  ];
+
+
+
 
   const szerkesztesgomb = async (id) => {
     try {
       const token = await csrf();
       const data = { id, _token: token };
-      console.log("Munka megnevezése:",id)
+      console.log("Munka megnevezése:", id);
       const response = await axios.put("/api/arak/{id}", data);
       console.log("Sikeres munka ár szerkesztése!");
       alert("Sikeres munka ár szerkesztése!");
@@ -58,18 +37,17 @@ export default function MunkaTable({ munkak }) {
 
   const torlesgomb = async (id) => {
     try {
-        const token = await csrf();
-        const data = { id,_token: token };
-        console.log("Munka ár id:", id);
-        const response = await axios.delete(`/api/arak/${id}`, { data }); 
-        console.log("Sikeres munka ár törlése!");
-        window.location.reload()
-        alert("Sikeres munka ár törlése!");
+      const token = await csrf();
+      const data = { id, _token: token };
+      console.log("Munka ár id:", id);
+      const response = await axios.delete(`/api/arak/${id}`, { data });
+      console.log("Sikeres munka ár törlése!");
+      window.location.reload();
+      alert("Sikeres munka ár törlése!");
     } catch (error) {
-        console.error("Hiba történt a munka törlésekor:", error);
+      console.error("Hiba történt a munka törlésekor:", error);
     }
-};
-
+  };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: munkak });
@@ -77,7 +55,11 @@ export default function MunkaTable({ munkak }) {
   return (
     <Table
       {...getTableProps()}
-      style={{ border: "1px solid black", borderCollapse: "collapse" ,textAlign:"center"}}
+      style={{
+        border: "1px solid black",
+        borderCollapse: "collapse",
+        textAlign: "center",
+      }}
     >
       <thead>
         {headerGroups.map((headerGroup) => (
