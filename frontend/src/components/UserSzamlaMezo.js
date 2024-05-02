@@ -31,7 +31,7 @@ export default function UserSzamlaMezo(props) {
               <th className="hiddenOnSmall" style={{ width: "3em" }}>
                 Leírás
               </th>
-              <th colspan={2} className="hiddenOnSmall">
+              <th colSpan={2} className="hiddenOnSmall">
                 Módosult
               </th>
             </tr>
@@ -57,7 +57,7 @@ export default function UserSzamlaMezo(props) {
                       </span>
                     </span>
                   </td>
-                  <td className="hiddenOnSmall" style={{width: "20%"}}>{(e.updated_at).slice(0,11)}</td>
+                  <td className="hiddenOnSmall" style={{width: "20%"}}>{e.updated_at && (e.updated_at).slice(0,11)}</td>
                   <td className="showOnSmall">
                     <span className="d-block text-bg-secondary rounded-5">
                       {e.becenev} <br />
