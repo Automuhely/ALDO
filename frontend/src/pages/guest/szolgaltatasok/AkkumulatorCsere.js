@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import { Container } from "react-bootstrap";
 import useAuthContext from "../../../contexts/AuthContext";
-import Footer from "../../../components/guest/Footer";
 
 export default function AkummulatorCsere() {
   const { user, getUser } = useAuthContext();
@@ -221,7 +220,6 @@ export default function AkummulatorCsere() {
           Nézd végig szervizünkben az autó akkumulátor átvizsgálást, javítást!
         </h2>
       </Container>
-      <Footer></Footer>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import useAuthContext from "../../../contexts/AuthContext";
-import Footer from "../../../components/guest/Footer";
 
 export default function Futomu() {
   const { user, getUser } = useAuthContext();
@@ -56,7 +55,6 @@ export default function Futomu() {
           </p>
         </ul>
       </Container>
-      <Footer></Footer>
     </div>
   );
 }

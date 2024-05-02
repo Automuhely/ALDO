@@ -3,9 +3,12 @@ import { Button, Table } from "react-bootstrap";
 import { useTable } from "react-table";
 import useAuthContext from "../../contexts/AuthContext";
 import axios from "../../api/axios";
+import useThemeContext from "../../contexts/ThemeContext";
 
-export default function MunkaTable({ munkak }) {
-  const { csrf,Torles} = useAuthContext();
+export default function MunkaTable(props) {
+  const { csrf, Torles } = useAuthContext();
+  const {darkTheme} = useThemeContext()
+
   const columns = useMemo(
     () => [
       {
@@ -25,7 +28,10 @@ export default function MunkaTable({ munkak }) {
         Header: " ",
         accessor: "Szerkesztés",
         Cell: ({ row }) => (
-          <Button variant="primary" onClick={() => szerkesztesgomb(row.original.id)}>
+          <Button
+            variant="primary"
+            onClick={() => szerkesztesgomb(row.original.id)}
+          >
             Szerkesztés
           </Button>
         ),
@@ -47,7 +53,7 @@ export default function MunkaTable({ munkak }) {
     try {
       const token = await csrf();
       const data = { id, _token: token };
-      console.log("Munka megnevezése:",id)
+      console.log("Munka megnevezése:", id);
       const response = await axios.put("/api/arak/{id}", data);
       console.log("Sikeres munka ár szerkesztése!");
       alert("Sikeres munka ár szerkesztése!");
@@ -58,26 +64,30 @@ export default function MunkaTable({ munkak }) {
 
   const torlesgomb = async (id) => {
     try {
-        const token = await csrf();
-        const data = { id,_token: token };
-        console.log("Munka ár id:", id);
-        const response = await axios.delete(`/api/arak/${id}`, { data }); 
-        console.log("Sikeres munka ár törlése!");
-        window.location.reload()
-        alert("Sikeres munka ár törlése!");
+      const token = await csrf();
+      const data = { id, _token: token };
+      console.log("Munka ár id:", id);
+      const response = await axios.delete(`/api/arak/${id}`, { data });
+      console.log("Sikeres munka ár törlése!");
+      window.location.reload();
+      alert("Sikeres munka ár törlése!");
     } catch (error) {
-        console.error("Hiba történt a munka törlésekor:", error);
+      console.error("Hiba történt a munka törlésekor:", error);
     }
-};
-
+  };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: munkak });
+    useTable({ columns, data: props.munkak });
 
   return (
     <Table
       {...getTableProps()}
-      style={{ border: "1px solid black", borderCollapse: "collapse" ,textAlign:"center"}}
+      style={{
+        border: "1px solid black",
+        borderCollapse: "collapse",
+        textAlign: "center",
+      }}
+      className={`${darkTheme.tableTheme} table-hover`}
     >
       <thead>
         {headerGroups.map((headerGroup) => (

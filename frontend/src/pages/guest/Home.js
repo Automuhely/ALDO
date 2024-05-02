@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import useAuthContext from "../../contexts/AuthContext";
 import Kepek from "../../components/guest/Kepek";
-import Footer from "../../components/guest/Footer";
+import useThemeContext from "../../contexts/ThemeContext";
+import { Container } from "react-bootstrap";
 
 export default function Home() {
   const { user, getUser } = useAuthContext();
+  const { darkTheme } = useThemeContext();
+
   useEffect(() => {
     console.log(user);
     if (!user) {
@@ -41,9 +44,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="kartyak">
-      <Kepek obj={obj} />
-      <Footer></Footer>
-    </div>
+    <>
+      <Container fluid className={`kartyak  ${darkTheme.bg}`}>
+        <Container>
+          <Kepek obj={obj} />
+        </Container>
+      </Container>
+    </>
   );
 }

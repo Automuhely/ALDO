@@ -9,10 +9,21 @@ export const ThemeProvider = ({ children }) => {
     backgroundColor: isDarkTheme ? "black" : "white",
     color: isDarkTheme ? "white" : "black",
     height: "30vh",
+    bg: isDarkTheme ? "bg-secondary" : "bg-light",
+    tableTheme: isDarkTheme ? "table-dark" : "table-light",
+    bgVariant: isDarkTheme ? "dark" : "light",
+    dataBsTheme: isDarkTheme ? "dark" : "light",
+    footerBg: isDarkTheme ? "bg-dark" : "text-bg-light",
+    footerText: isDarkTheme ? "text-secondary" : "text-dark",
   };
 
+  function toggleTheme() {
+    console.log("Toggle theme");
+    setDarkTheme((prevIsDarkTheme) => !prevIsDarkTheme);
+  }
+
   return (
-    <ThemeContext.Provider value={{ setDarkTheme, darkTheme }}>
+    <ThemeContext.Provider value={{ toggleTheme, darkTheme, isDarkTheme }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../../styles/forms.css";
 import useAuthContext from "../../contexts/AuthContext";
+import useThemeContext from "../../contexts/ThemeContext";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -20,6 +21,7 @@ export default function Register() {
   const [adoazonosito, setAdoazonosito] = useState(null);
 
   const { loginReg, errors } = useAuthContext();
+  const { darkTheme } = useThemeContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,11 +44,13 @@ export default function Register() {
   };
 
   return (
-    <Container fluid className=" p-5 m-auto" id="containerhatter">
-      <Col lg={5} className="m-auto">
+    <Container fluid className={`m-auto p-5 ${darkTheme.bg}`}>
+      <Container className="col-lg-5 col-sm-12 col-md-8">
+
+      <Col className="m-auto p-5 bg-light rounded-4 border"  id="containerhatter">
         <h1 className="text-center">Regisztráció</h1>
-        <Col xs={12} md={5} lg={12} className="mx-auto">
-          <Form onSubmit={handleSubmit}>
+        <Col xs={10} md={7} lg={12} className="mx-auto">
+          <Form onSubmit={handleSubmit} >
             <Row>
               <Form.Group as={Col} className="mb-3" controlId="adoazonosito">
                 <Form.Label className="adoazonosito">Adóazonosító</Form.Label>
@@ -217,5 +221,7 @@ export default function Register() {
         </Col>
       </Col>
     </Container>
+    </Container>
+
   );
 }

@@ -1,0 +1,13 @@
+.moonIcon,
+.sunIcon {
+  width: 1.5em;
+  padding: 0;
+  margin: 0;
+}
+.moonIcon {
+  fill: rgb(168, 178, 181);
+}
+
+.sunIcon {
+fill: orange;
+}

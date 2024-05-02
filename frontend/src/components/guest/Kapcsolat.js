@@ -44,10 +44,11 @@ export default function Kapcsolat() {
   };
 
   return (
-    <div>
+    <>
+      <h1>Kérdezz minket</h1>
       <Form onSubmit={handleSubmit}>
         <div>
-          <Form.Group className="mb-3" controlId="name">
+          <Form.Group className="mb-3 mt-4" controlId="name">
             <Form.Label>Név</Form.Label>
             <Form.Control
               type="text"
@@ -88,6 +89,6 @@ export default function Kapcsolat() {
           </Button>
         </div>
       </Form>
-    </div>
+    </>
   );
 }
