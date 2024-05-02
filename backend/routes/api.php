@@ -71,13 +71,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('/arak', [MunkaArController::class, 'store']);
             Route::put('/arak/{elem}', [MunkaArController::class, 'update']);
             Route::delete('/arak/{elem}', [MunkaArController::class, 'destroy']);
-
             // törléshez vezetőszerelő engedélyre van szükség
             Route::delete('/users/{user}', [UserController::class, 'destroy']);
             Route::delete('/autos/{auto}', [AutoController::class, 'destroy']);
             Route::delete('/feladats/{feladat}', [FeladatController::class, 'destroy']);
             Route::delete('/munkalaps/{munkalap}', [MunkalapController::class, 'destroy']);
             Route::delete('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'destroy']);
+           
          
         });
     });
