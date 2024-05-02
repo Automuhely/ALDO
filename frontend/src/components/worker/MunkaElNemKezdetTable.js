@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import { useTable } from "react-table";
 import { Button, Table } from "react-bootstrap";
-import axios from "../api/axios";
-import useAuthContext from "../contexts/AuthContext";
+import axios from "../../api/axios";
+import useAuthContext from "../../contexts/AuthContext";
 
 export default function MunkaElNemKezdetTable({ ElNemKezdetMunkak }) {
   const { csrf} = useAuthContext();

@@ -1,11 +1,11 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
-import useAuthContext from "../contexts/AuthContext";
+import useAuthContext from "../../contexts/AuthContext";
 
-export default function AutoSor(props) {
+export default function UserCarTableRow(props) {
   const [beceneve, setBeceneve] = useState(props.auto.becenev ?? "");
   const [kuldheto, setKuldheto] = useState(false);
 

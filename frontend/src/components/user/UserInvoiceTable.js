@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/esm/Col";
 
-export default function UserSzamlaMezo(props) {
+export default function UserInvoiceTable(props) {
   return (
     <Col
       className="justify-content-center align-items-center p-2 border bg-light"

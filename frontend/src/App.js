@@ -1,19 +1,20 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home.js";
-import Login from "./pages/Login.js";
-import Register from "./pages/Register.js";
-import NoPage from "./pages/NoPage.js";
 import "./App.css";
+import Home from "./pages/guest/Home.js";
+import Login from "./pages/guest/Login.js";
+import Register from "./pages/guest/Register.js";
+import NoPage from "./pages/guest/NoPage.js";
+import AkummulatorCsere from "./pages/guest/szolgaltatasok/AkkumulatorCsere.js";
+import Galeria from "./pages/guest/Galeria.js";
+import Futomu from "./pages/guest/szolgaltatasok/Futomu.js";
+
 import BasicLayout from "./layouts/BasicLayout.js";
-import MunkaAr from "./pages/MunkaAr.js";
-import Email from "./pages/Email.js";
-import Galeria from "./pages/Galeria.js";
+import MunkaAr from "./pages/guest/MunkaAr.js";
+import Email from "./pages/guest/Email.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MunkaFolyamatok from "./pages/MunkaFolyamatok.js";
-import UserProfile from "./pages/UserProfile.js";
-import AkummulatorCsere from "./pages/szolgaltatasok/AkkumulatorCsere.js";
-import Futomu from "./pages/szolgaltatasok/Futomu.js";
-import VezetoSzerelo from "./pages/VezetoSzerelo.js";
+import MunkaFolyamatok from "./pages/worker/MunkaFolyamatok.js";
+import UserProfile from "./pages/user/UserProfile.js";
+import VezetoSzerelo from "./pages/admin/VezetoSzerelo.js";
 
 function App() {
   return (

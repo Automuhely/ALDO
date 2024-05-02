@@ -1,11 +1,11 @@
 import { useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
+import useAuthContext from "../../contexts/AuthContext";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
 export default function UserAutosForm(props) {
   /* Új autó hozzáadásához */

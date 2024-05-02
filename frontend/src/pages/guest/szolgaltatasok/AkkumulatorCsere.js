@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import useAuthContext from "../../contexts/AuthContext";
 import Nav from "react-bootstrap/Nav";
 import { Container } from "react-bootstrap";
-import Footer from "../../components/Footer";
+import useAuthContext from "../../../contexts/AuthContext";
+import Footer from "../../../components/guest/Footer";
 
 export default function AkummulatorCsere() {
   const { user, getUser } = useAuthContext();

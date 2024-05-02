@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useTable } from "react-table";
 import {  Button, Table } from "react-bootstrap";
-import useAuthContext from "../contexts/AuthContext";
+import useAuthContext from "../../contexts/AuthContext";
 
 
 export default function MunkaBefejezettTable({ BefejezettMunkak }) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "../api/axios";
-import MunkaTable from "../components/MunkaTable";
-import useAuthContext from "../contexts/AuthContext";
+import axios from "../../api/axios";
+import MunkaTable from "../../components/worker/MunkaTable";
+import useAuthContext from "../../contexts/AuthContext";
 import { Container } from "react-bootstrap";
 
 export default function MunkaAr() {

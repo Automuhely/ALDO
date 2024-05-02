@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useTable } from "react-table";
-import useAuthContext from "../contexts/AuthContext";
-import axios from "../api/axios";
+import useAuthContext from "../../contexts/AuthContext";
+import axios from "../../api/axios";
 
 export default function MunkaTable({ munkak }) {
   const { csrf,Torles} = useAuthContext();

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { useState } from "react";
 
-export default function EmailForm(props) {
+export default function UserEmailForm(props) {
   const [emailTargy, setEmailTargy] = useState("");
   const [emailUzenet, setEmailUzenet] = useState("");
   const [alvazszamEmailhez, setAlvazszamEmailhez] = useState("");

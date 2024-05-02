@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-import useAuthContext from "../contexts/AuthContext";
-import Footer from "../components/Footer";
-import Container from "react-bootstrap/esm/Container";
-import { Link } from "react-router-dom";
-import Kepek from "../components/Kepek";
+import useAuthContext from "../../contexts/AuthContext";
+import Kepek from "../../components/guest/Kepek";
+import Footer from "../../components/guest/Footer";
 
 export default function Home() {
   const { user, getUser } = useAuthContext();

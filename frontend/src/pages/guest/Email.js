@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
-import Kapcsolat from "../components/Kapcsolat";
-import TerkepElerhetoseg from "../components/TerkepElerhetoseg";
+import useAuthContext from "../../contexts/AuthContext";
+import Kapcsolat from "../../components/guest/Kapcsolat";
+import TerkepElerhetoseg from "../../components/guest/TerkepElerhetoseg";
 
 export default function Emial() {
   const { csrf ,user,getUser} = useAuthContext();

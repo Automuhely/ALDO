@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
+import useAuthContext from "../../contexts/AuthContext";
 
 export default function VezetoSzerelo(){
     const { csrf ,user,getUser} = useAuthContext();

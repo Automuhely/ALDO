@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import useAuthContext from "../contexts/AuthContext";
-import PhotoAlbum from "react-photo-album";
 import { Container } from "react-bootstrap";
+import PhotoAlbum from "react-photo-album";
+import useAuthContext from "../../contexts/AuthContext";
 
 
 export default function Galeria() {

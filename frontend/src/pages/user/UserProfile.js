@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
+import useAuthContext from "../../contexts/AuthContext";
+import axios from "../../api/axios";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import axios from "../api/axios";
-import UserProfileForm from "../components/UserProfileForm";
-import UserAutosForm from "../components/UserAutosForm";
-import UserAutoMezo from "../components/UserAutoMezo";
-import EmailForm from "../components/EmailForm";
-import UserSzamlaMezo from "../components/UserSzamlaMezo";
+import UserProfileForm from "../../components/user/UserProfileForm";
+import UserAutosForm from "../../components/user/UserCarForm";
+import UserEmailForm from "../../components/user/UserEmailForm";
+import UserCarTable from "../../components/user/UserCarTable";
+import UserInvoiceTable from "../../components/user/UserInvoiceTable";
 
 export default function UserProfile() {
   /* Profilhoz tartozó elemek, táblák */
@@ -61,32 +62,31 @@ export default function UserProfile() {
         <>
           <Container>
             <Row>
-
-             <Col sm={12} md={6} className=" mt-3">
-                  <UserProfileForm />
-             </Col>
-            <Col sm={12} md={6} className="mt-3">
-                  <UserAutosForm markak={markak} />
-            </Col>
+              <Col sm={12} md={6} className=" mt-3">
+                <UserProfileForm />
+              </Col>
+              <Col sm={12} md={6} className="mt-3">
+                <UserAutosForm markak={markak} />
+              </Col>
             </Row>
-              <Row>
-                <Col className="col-sm-12 m-auto mt-3 p-2" id="autokMezo">
-                  <UserAutoMezo autoim={autoim} />
-                </Col>
-              </Row>
-              <Row>
-                <Col className="col-sm-12 m-auto mt-3 p-2" id="szamlakMezo">
-                  <UserSzamlaMezo szamlaim={szamlaim} />
-                </Col>
-              </Row>
-              <Row>
-                <Col
-                  className="col-sm-12 col-md-10 col-lg-6 m-auto mt-3 p-2 mb-5 "
-                  id="emailForm"
-                >
-                  <EmailForm user={user} autoim={autoim} />
-                </Col>
-              </Row>
+            <Row>
+              <Col className="col-sm-12 m-auto mt-3 p-2" id="autokMezo">
+                <UserCarTable autoim={autoim} />
+              </Col>
+            </Row>
+            <Row>
+              <Col className="col-sm-12 m-auto mt-3 p-2" id="szamlakMezo">
+                <UserInvoiceTable szamlaim={szamlaim} />
+              </Col>
+            </Row>
+            <Row>
+              <Col
+                className="col-sm-12 col-md-10 col-lg-6 m-auto mt-3 p-2 mb-5 "
+                id="userEmailForm"
+              >
+                <UserEmailForm user={user} autoim={autoim} />
+              </Col>
+            </Row>
           </Container>
         </>
       ) : (

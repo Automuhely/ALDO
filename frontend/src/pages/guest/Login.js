@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
+import useAuthContext from "../../contexts/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");

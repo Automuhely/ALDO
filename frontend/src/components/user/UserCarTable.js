@@ -1,9 +1,9 @@
-import AutoSor from "../components/AutoSor";
+import AutoSor from "./UserCarTableRow";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/esm/Col";
 
-export default function UserAutoMezo(props) {
+export default function UserCarTable(props) {
   return (
     <Col
       className="justify-content-center align-items-center p-2 border bg-light"

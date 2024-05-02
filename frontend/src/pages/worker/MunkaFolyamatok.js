@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "../api/axios";
-import useAuthContext from "../contexts/AuthContext";
-import MunkaFolyTable from "../components/MunkaFolyTable";
-import MunkaElNemKezdetTable from "../components/MunkaElNemKezdetTable";
-import MunkaBefejezettTable from "../components/MunkaBefejezettTable";
+import axios from "../../api/axios";
+import useAuthContext from "../../contexts/AuthContext";
+import MunkaFolyTable from "../../components/worker/MunkaFolyTable";
+import MunkaElNemKezdetTable from "../../components/worker/MunkaElNemKezdetTable";
+import MunkaBefejezettTable from "../../components/worker/MunkaBefejezettTable";
 import { Container } from "react-bootstrap";
 
 export default function MunkaFolyamatok() {

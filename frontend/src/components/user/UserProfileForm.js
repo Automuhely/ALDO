@@ -2,8 +2,8 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
-import useAuthContext from "../contexts/AuthContext";
-import axios from "../api/axios";
+import useAuthContext from "../../contexts/AuthContext";
+import axios from "../../api/axios";
 import Col from "react-bootstrap/esm/Col";
 
 export default function UserProfileForm() {
