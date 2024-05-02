@@ -104,7 +104,6 @@ export default function MyNav() {
                   </>
                 )}
                 <Nav.Link href="#" onClick={logout} className="">
-                  {" "}
                   Kijelentkezés
                 </Nav.Link>
               </>
@@ -120,20 +119,21 @@ export default function MyNav() {
                   Bejelentkezés
                 </Nav.Link>
                 <Nav.Link href="/register">Regisztráció </Nav.Link>
-                <div className="me-0  ms-0 sm-lg-5 mx-3 h3 d-flex">
+               
+              </>
+            )}
+          </Nav>
+          {user && (
+            <Nav.Link href="/profil" className="text-nowrap ms-md-2 ms-lg-2 link-info">
+              {user.name}
+            </Nav.Link>
+          )}
+           <div className="me-0 ms-sm-0 ms-md-3 sm-lg-5 h3 d-flex">
                   <Form onClick={toggleTheme}>
                     <Form.Check type="switch" id="custom-switch" />
                   </Form>
                   {isDarkTheme ? <MoonIcon /> : <SunIcon />}
                 </div>
-              </>
-            )}
-          </Nav>
-          {user && (
-            <Nav.Link href="/profil" className="text-nowrap link-info">
-              {user.name}
-            </Nav.Link>
-          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

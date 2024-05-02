@@ -11,6 +11,7 @@ import UserAutosForm from "../../components/user/UserCarForm";
 import UserEmailForm from "../../components/user/UserEmailForm";
 import UserCarTable from "../../components/user/UserCarTable";
 import UserInvoiceTable from "../../components/user/UserInvoiceTable";
+import useThemeContext from "../../contexts/ThemeContext";
 
 export default function UserProfile() {
   /* Profilhoz tartozó elemek, táblák */
@@ -20,6 +21,7 @@ export default function UserProfile() {
 
   /* Contextek */
   const { user, getUser } = useAuthContext();
+  const { darkTheme } = useThemeContext();
 
   useEffect(() => {
     if (!user) {
@@ -60,7 +62,8 @@ export default function UserProfile() {
     <>
       {user ? (
         <>
-          <Container>
+          <Container fluid className={`${darkTheme.bg}`}>
+            <Container>
             <Row>
               <Col sm={12} md={6} className=" mt-3">
                 <UserProfileForm />
@@ -87,6 +90,7 @@ export default function UserProfile() {
                 <UserEmailForm user={user} autoim={autoim} />
               </Col>
             </Row>
+            </Container>
           </Container>
         </>
       ) : (
