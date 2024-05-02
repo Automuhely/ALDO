@@ -33,9 +33,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     /*  ______________________________________________________________________________________________________________________________________________________SZERELŐ__________ */
     Route::middleware(['szerelo'])->group(function () {
         Route::get('/ugyfel-tortenet/{azon}', [MunkalapController::class, 'ugyfel']);        // adott ügyfélnek kiállított összes munkalap
+      
         Route::get('/folyamatmunka', [MunkalapController::class, 'folyamatmunka']);         // munkalapok státuszok szerinti lekérése
         Route::get('/befejezettmunka', [MunkalapController::class, 'befejezettmunka']);
         Route::get('/elnemkezdetmunka', [MunkalapController::class, 'elnemkezdetmunka']);
+
+        Route::get("/munkalapok/{statusz}", [MunkalapController::class, "munkalapok"]);
 
         Route::get('/szerelomunkak/{szerelo}', [UserController::class, 'szerlmunk']);       // adott szerelő munkái
         Route::post('/folyamatmunkapost', [MunkalapController::class, 'folyamatmunkapost']);
@@ -58,7 +61,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/users', [UserController::class, 'store']);        // ha nem regisztrálásról van szó, hanem manuálisan felvinni egy ügyfelet...
 
         // munkával kapcsolatos műveletek elvégzése... munkalapfelvitel, módosítás, új tétel felvitele
-        Route::put('/munkalaps/{munkalap}', [MunkalapController::class, 'update']);
+        Route::put('/munkalaps/{munkalap', [MunkalapController::class, 'update']);
         Route::put('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'update']);
         Route::put('/feladats/{feladat}', [FeladatController::class, 'update']);
         Route::post('/munkalaps', [MunkalapController::class, 'store']);

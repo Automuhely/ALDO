@@ -79,6 +79,17 @@ class MunkalapController extends Controller
             ->get();
     }
 
+    public function munkalapok($statusz)
+    {
+        return DB::table('munkalaps as m')
+            ->join('users as u', 'u.id', '=', 'm.ugyfel')
+            ->join('autos as a', 'a.id', '=', 'm.auto')
+            ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
+            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes', 'm.munkavezeto')
+            ->where('m.statusz', '=', $statusz)
+            ->get();
+    }
+
     public function befejezettmunka()
     {
 

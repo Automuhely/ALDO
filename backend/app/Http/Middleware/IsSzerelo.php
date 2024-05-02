@@ -15,7 +15,7 @@ class IsSzerelo
      */
     public function handle($request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->szerepkor == 'szerelo') {   //átengedi a kérést
+        if (Auth::user() && Auth::user()->szerepkor == 'szerelo' ||  Auth::user()->szerepkor == 'vezetoszerelo') {   //átengedi a kérést
             return $next($request);
             /* $response = $next($request)
              Log::info('valami');
