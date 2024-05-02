@@ -31,7 +31,7 @@ export default function UserSzamlaMezo(props) {
               <th className="hiddenOnSmall" style={{ width: "3em" }}>
                 Leírás
               </th>
-              <th colSpan={2} className="hiddenOnSmall">
+              <th colspan={2} className="hiddenOnSmall">
                 Módosult
               </th>
             </tr>
@@ -40,13 +40,13 @@ export default function UserSzamlaMezo(props) {
             {Object.values(props.szamlaim).map((e, i) => {
               return (
                 <tr key={i}>
-                  <td className="hiddenOnSmall">{e.szamlaszam}</td>
-                  <td className="hiddenOnSmall">{e.becenev}</td>
-                  <td className="hiddenOnSmall text-uppercase">{e.rendszam}</td>
-                  <td className="hiddenOnSmall d-md-none">
+                  <td className="hiddenOnSmall"  style={{width: "10%"}}>{e.szamlaszam}</td>
+                  <td className="hiddenOnSmall"  style={{width: "10%"}}>{e.becenev}</td>
+                  <td className="hiddenOnSmall text-uppercase"  style={{width: "10%"}}>{e.rendszam}</td>
+                  <td className="hiddenOnSmall d-md-none"  style={{width: "10%"}}>
                     {e.munkavezeto_nev}
                   </td>
-                  <td className="hiddenOnSmall">
+                  <td className="hiddenOnSmall" style={{width: "40%"}}>
                     {e.altalanosLeiras}
                     <span className="d-md-block">
                       <br />
@@ -57,7 +57,7 @@ export default function UserSzamlaMezo(props) {
                       </span>
                     </span>
                   </td>
-                  <td className="hiddenOnSmall">{e.updated_at}</td>
+                  <td className="hiddenOnSmall" style={{width: "20%"}}>{(e.updated_at).slice(0,11)}</td>
                   <td className="showOnSmall">
                     <span className="d-block text-bg-secondary rounded-5">
                       {e.becenev} <br />
@@ -78,7 +78,7 @@ export default function UserSzamlaMezo(props) {
                       Megnéz
                     </Button>
                   </td>
-                  <td className="hiddenOnSmall">
+                  <td className="hiddenOnSmall" style={{width: "10%"}}>
                     <Button className="btn-success">Megnéz</Button>
                   </td>
                 </tr>
