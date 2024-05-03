@@ -18,8 +18,6 @@ Route::middleware('cors')->group(function () {
     Route::post('/emailkuld', [MailController::class, 'store']);
 });
 
-
-
 /*  _____________________________________________________________________________________________________________________________________________________________USER_________ */
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/autos', [AutoController::class, 'store']);
