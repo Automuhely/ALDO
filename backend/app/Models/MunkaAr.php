@@ -12,18 +12,6 @@ class MunkaAr extends Model
         'ara'
     ];
 
-    public $appends = "megnevezes";
-
-    public function getMegnevezesAttribute()
-    {
-        return $this->megnevezes();
-    }
-
-    public function megnevezes()
-    {
-        return $this->belongsTo(MunkaAr::class, 'megnevezes');
-    }
-
     public static $megnevezesek = [
         'Motorolaj cseréje',
         'Fékolaj cseréje',
