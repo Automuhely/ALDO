@@ -3,29 +3,19 @@ import { useTable } from "react-table";
 import { Button, Table } from "react-bootstrap";
 import axios from "../../api/axios";
 import useAuthContext from "../../contexts/AuthContext";
+import useThemeContext from "../../contexts/ThemeContext";
 
 export default function MunkaElNemKezdetTable({ ElNemKezdetMunkak }) {
-  const { csrf} = useAuthContext();
+  const { csrf,user} = useAuthContext();
+  const { darkTheme } = useThemeContext();
 
-  const columns = useMemo(
-    () => [
+  let columns = [
       { Header: "Munkalapszám", accessor: "munkalapszam" },
       { Header: "Autó", accessor: "marka" },
       { Header: "Rendszám", accessor: "rendszam" },
-      { Header: "Ügyfél", accessor: "name" },
-      { Header: "Leírás", accessor: "megnevezes" },
-      {
-        Header: " ",
-        accessor: "kezdes",
-        Cell: ({ row }) => (
-          <Button variant="primary" onClick={() => kezdesgomb(row.original.munkalapszam)}>
-            Kezdés
-          </Button>
-        ),
-      },
-    ],
-    []
-  );
+      { Header: "Ügyfél", accessor: "ugyfel_nev" },
+      { Header: "Leírás", accessor: "altalanosLeiras" },
+    ]
 
   const kezdesgomb = async (munkalapszam) => {
     try {
@@ -41,35 +31,48 @@ export default function MunkaElNemKezdetTable({ ElNemKezdetMunkak }) {
     }
   };
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: ElNemKezdetMunkak });
 
   return (
     <div>
       <h3>Felvett munkák</h3>
-      <Table striped bordered hover {...getTableProps()} style={{ textAlign:"center" }}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
+      <Table className={`${darkTheme.tableTheme}`}>
+      <thead>
+        <tr>
+          {columns.map((columns, index) => (
+            <th key={index} scope="col">
+              {columns.Header}
+            </th>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} key={row.id}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+          {user && user.szerepkor === "vezetoszerelo" && (
+            <>
+              <th> </th>
+            </>
+          )}
+        </tr>
+      </thead>
+      <tbody>
+        {ElNemKezdetMunkak.map((munka, index) => (
+          <tr key={index}>
+            {columns.map((columns, columnIndex) => (
+              <td key={columnIndex}>{munka[columns.accessor]}</td>
+            ))}
+            {user && user.szerepkor === "vezetoszerelo" && (
+              <>
+                <td>
+                <Button
+                    variant="primary"
+                    onClick={() => {kezdesgomb(munka.munkalapszam)}
+                  }
+                  >
+                    Kezdés
+                  </Button>
+                </td>
+              </>
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </Table>
     </div>
   );
 }

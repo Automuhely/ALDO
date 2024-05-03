@@ -5,91 +5,71 @@ import MunkaFolyTable from "../../components/worker/MunkaFolyTable";
 import MunkaElNemKezdetTable from "../../components/worker/MunkaElNemKezdetTable";
 import MunkaBefejezettTable from "../../components/worker/MunkaBefejezettTable";
 import { Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import useThemeContext from "../../contexts/ThemeContext";
+import WorkSheetForm from "../../components/worker/WorkSheetForm";
 
 export default function MunkaFolyamatok() {
   const [ElKezdettMunkak, setElKezdettMunkak] = useState([]);
   const [ElNemKezdetMunkak, setElNemKezdetMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
-  const { csrf ,user,getUser} = useAuthContext();
+  const { csrf, user, getUser } = useAuthContext();
   const [token, setToken] = useState();
-
+  const { darkTheme } = useThemeContext();
+  const [showForm, setShowForm] = useState(false);
   useEffect(() => {
-    const fetchCsrfToken = async () => {
-      if (!user) {
-        getUser();
-        const token = await csrf();
-        setToken(token);
-      }
-    };
-
-    fetchCsrfToken();
-  }, [user, getUser, csrf]);
-
-  useEffect(() => {
-    Promise.all([
-      axios.get("/api/folyamatmunka"),
-      axios.get("/api/befejezettmunka"),
-      axios.get("/api/elnemkezdetmunka")
-    ])
-    .then((responses) => {
-      const elKezdettMunkak = responses[0].data;
-      const befejezettMunkak = responses[1].data;
-      const elNemKezdetMunkak = responses[2].data;
-      setElKezdettMunkak(elKezdettMunkak);
-      setBefejezettMunkak(befejezettMunkak);
-      setElNemKezdetMunkak(elNemKezdetMunkak);
-    })
-    .catch((error) => {
-      console.error("Hiba történt az adatok lekérésekor:", error);
-    });
+    if (!user) {
+      getUser();
+    }
+    fetchData();
   }, []);
-  
-  
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/folyamatmunka")
-  //     .then((response) => {
-  //       setElKezdettMunkak(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Hiba történt az elkezdett munkák lekérésekor:", error);
-  //     });
-  // }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/befejezettmunka")
-  //     .then((response) => {
-  //       setBefejezettMunkak(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Hiba történt a befejezett munkák lekérésekor::", error);
-  //     });
-  // }, []);
+  async function fetchData() {
+    try {
+      const token = await csrf();
+      console.log("Token:", token);
+      const responses = await Promise.all([
+        axios.get("/api/munkalapok/0"),
+        axios.get("/api/munkalapok/1"),
+        axios.get("/api/munkalapok/2"),
+      ]);
+      responses.forEach((response, index) => {
+        if (index === 0) {
+          setElKezdettMunkak(response.data);
+        } else if (index === 1) {
+          setElNemKezdetMunkak(response.data);
+        } else {
+          setBefejezettMunkak(response.data);
+        }
+        console.log("Adatok:", response);
+      });
+    } catch (error) {
+      console.error("Hiba történt a munkalapok lekérésekor:", error);
+    }
+  }
 
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/elnemkezdetmunka")
-  //     .then((response) => {
-  //       setElNemKezdetMunkak(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(
-  //         "Hiba történt az el nem kezdett munkák lekérésekor:",
-  //         error
-  //       );
-  //     });
-  // }, []);
+  const handleToggleForm = () => {
+    setShowForm((prevShowForm) => !prevShowForm);
+  };
 
   return (
-    <div>
-      <Container>
-      <h1 style={{ textAlign:"center" }}>Munkafolyamatok</h1>
-      <MunkaElNemKezdetTable ElNemKezdetMunkak={ElNemKezdetMunkak} />
-      <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak} />
-      <MunkaBefejezettTable BefejezettMunkak={BefejezettMunkak} />
+    <Container fluid className={`${darkTheme.bg}`}>
+      <Container className="p-5 d-flex flex-column align-items-center">
+        <h1 style={{ textAlign: "center" }}>Munkalapok</h1>
+        {user && user.szerepkor === "vezetoszerelo" && (
+          <div className="mt-4 mb-4">
+            <Button onClick={handleToggleForm} variant="primary">
+              {showForm
+                ? "Munkalap felvitele megszakítása"
+                : "Új munkalap felvitele"}
+            </Button>
+          </div>
+        )}
+        {showForm && <WorkSheetForm />}
+        <MunkaElNemKezdetTable ElNemKezdetMunkak={ElNemKezdetMunkak} />
+        <MunkaFolyTable ElKezdettMunkak={ElKezdettMunkak} />
+        <MunkaBefejezettTable BefejezettMunkak={BefejezettMunkak} />
       </Container>
-      
-    </div>
+    </Container>
   );
 }
