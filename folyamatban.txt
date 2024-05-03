@@ -36,3 +36,4 @@ kapcsolati űrlapon a térkép telefon nézetben nem jó
 login register reszponzivitás
 loginnál elfelejtett jelszó mehet kapcsolathoz
 mentés gomb a profilomba
+menűpont vezetőszerelőnél elcsuszott
