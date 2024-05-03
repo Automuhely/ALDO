@@ -1,53 +1,12 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Button, Table } from "react-bootstrap";
-import { useTable } from "react-table";
 import useAuthContext from "../../contexts/AuthContext";
-import axios from "../../api/axios";
 import useThemeContext from "../../contexts/ThemeContext";
+import axios from "../../api/axios";
 
-export default function MunkaTable(props) {
-  const { csrf, Torles } = useAuthContext();
-  const {darkTheme} = useThemeContext()
-
-  const columns = useMemo(
-    () => [
-      {
-        Header: "id",
-        accessor: "id",
-      },
-      {
-        Header: "Munka megnevezése",
-        accessor: "megnevezes",
-      },
-      {
-        Header: "Munka ára",
-        accessor: "ara",
-        Cell: ({ value }) => `${value} Ft`,
-      },
-      {
-        Header: " ",
-        accessor: "Szerkesztés",
-        Cell: ({ row }) => (
-          <Button
-            variant="primary"
-            onClick={() => szerkesztesgomb(row.original.id)}
-          >
-            Szerkesztés
-          </Button>
-        ),
-      },
-      {
-        Header: " ",
-        accessor: "Törlés",
-        Cell: ({ row }) => (
-          <Button variant="primary" onClick={() => torlesgomb(row.original.id)}>
-            Törlés
-          </Button>
-        ),
-      },
-    ],
-    []
-  );
+export default function MunkaTable({ munkak }) {
+  const { csrf, user } = useAuthContext();
+  const { darkTheme } = useThemeContext();
 
   const szerkesztesgomb = async (id) => {
     try {
@@ -58,7 +17,8 @@ export default function MunkaTable(props) {
       console.log("Sikeres munka ár szerkesztése!");
       alert("Sikeres munka ár szerkesztése!");
     } catch (error) {
-      console.error("Hiba történt a státusz megváltoztatása közben:", error);
+      console.error("Hiba történt a munka ár megváltoztatása közben:", error);
+      alert("Hiba történt a munka ár megváltoztatása közben")
     }
   };
 
@@ -67,60 +27,80 @@ export default function MunkaTable(props) {
       const token = await csrf();
       const data = { id, _token: token };
       console.log("Munka ár id:", id);
+      console.log("Felhasználó: ",user)
       const response = await axios.delete(`/api/arak/${id}`, { data });
       console.log("Sikeres munka ár törlése!");
       window.location.reload();
       alert("Sikeres munka ár törlése!");
     } catch (error) {
       console.error("Hiba történt a munka törlésekor:", error);
+      alert("Hiba történt a munka törlésekor!");
     }
   };
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: props.munkak });
+
+  let columns = [
+    {
+      Header: "id",
+      accessor: "id",
+    },
+    {
+      Header: "Munka megnevezése",
+      accessor: "megnevezes",
+    },
+    {
+      Header: "Munka ára",
+      accessor: "ara",
+      Cell: ({ value }) => `${value} Ft`,
+    },
+  ];
 
   return (
-    <Table
-      {...getTableProps()}
-      style={{
-        border: "1px solid black",
-        borderCollapse: "collapse",
-        textAlign: "center",
-      }}
-      className={`${darkTheme.tableTheme} table-hover`}
-    >
+    <Table className={`${darkTheme.tableTheme}`}>
       <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps()}
-                style={{ border: "1px solid black", padding: "8px" }}
-              >
-                {column.render("Header")}
-              </th>
+        <tr>
+          {columns.map((column, index) => (
+            <th key={index} scope="col">
+              {column.Header}
+            </th>
+          ))}
+          {user && user.szerepkor === "vezetoszerelo" && (
+            <>
+              <th> </th>
+              <th> </th>
+            </>
+          )}
+        </tr>
+      </thead>
+      <tbody>
+        {munkak.map((munka, index) => (
+          <tr key={index}>
+            {columns.map((column, columnIndex) => (
+              <td key={columnIndex}>{munka[column.accessor]}</td>
             ))}
+            {user && user.szerepkor === "vezetoszerelo" && (
+              <>
+                <td>
+                  <Button
+                    variant="primary"
+                    onClick={() => {szerkesztesgomb(munka.id)}
+                  }
+                  >
+                    Szerkesztés
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    variant="primary"
+                    onClick={() => torlesgomb(munka.id)}
+                  >
+                    Törlés
+                  </Button>
+                </td>
+              </>
+            )}
           </tr>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()} key={row.id}>
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{ border: "1px solid black", padding: "8px" }}
-                  >
-                    {cell.render("Cell")}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
       </tbody>
     </Table>
   );

@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await csrf();
       //console.log(token);
-      //const resp = 
+      //const resp =
       await axios.post("/logout", { _token: token });
       navigate("/");
       //console.log(resp);
@@ -113,21 +113,38 @@ export const AuthProvider = ({ children }) => {
   const Kuldes = async (adat) => {
     try {
       const response = await axios.post("/api/emailkuld", adat);
-      console.log(adat)
-      return response.data; 
-      
-      
+      console.log(adat);
+      return response.data;
     } catch (error) {
       console.error("Hiba történt az e-mail küldése során: " + error.message);
     }
-    
   };
 
+  const ujMunka = async (adat) => {
+    try {
+      const response = await axios.post(`/api/feladats/`, adat);
+      console.log(adat);
+      return response.data;
+    } catch (error) {
+      console.error("Hiba történt az új munka felvitele közben: " + error.message);
+    }
+  };
 
-
+  const ujMunkalap = async (adat) => {
+    try {
+      const response = await axios.post(`/api/munkalaps/`, adat);
+      console.log(adat);
+      return response.data;
+    } catch (error) {
+      console.error("Hiba történt az új munka felvitele közben: " + error.message);
+    }
+  };
+  
 
   return (
-    <AuthContext.Provider value={{ loginReg, logout, errors, getUser, user, csrf,Kuldes}}>
+    <AuthContext.Provider
+      value={{ loginReg, logout, errors, getUser, user, csrf, Kuldes,ujMunka,ujMunkalap }}
+    >
       {children}
     </AuthContext.Provider>
   );
