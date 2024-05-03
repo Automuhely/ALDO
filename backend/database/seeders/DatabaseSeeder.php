@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
     do {
       try {
         Munkalap::factory(20)->create();
-        Feladat::factory(50)->create();
         MunkalapTetel::factory(30)->create();
 
         // ha sikeres kilép
@@ -50,6 +49,5 @@ class DatabaseSeeder extends Seeder
       }
     } while (true);
 
-    //  $this->call(MunkaArSeeder::class);
   }
 }

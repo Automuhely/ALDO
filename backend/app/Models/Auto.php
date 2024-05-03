@@ -46,7 +46,7 @@ class Auto extends Model
         return $this->belongsTo(User::class, 'ugyfel_id');
     }
 
-    public function megnevezes(){
-        return $this->belongsTo(MunkaAr::class,'megnevezes');
-    }
+    // public function megnevezes(){
+    //     return $this->belongsTo(MunkaAr::class,'megnevezes');
+    // }
 }

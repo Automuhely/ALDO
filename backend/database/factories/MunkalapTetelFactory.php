@@ -36,7 +36,7 @@ class MunkalapTetelFactory extends Factory
             'feladat_id' => $feladat_id,
             'munkalapszam' => $munkalapszam,
             'szerelo' => $szerelo,
-            'leiras' => MunkaAr::$megnevezesek[array_rand(MunkaAr::$megnevezesek)],
+            'leiras' => Feladat::$megnevezesek[array_rand(Feladat::$megnevezesek)],
       
         ];
     }

@@ -19,16 +19,24 @@ class FeladatController extends Controller
 
     public function store(Request $request)
     {
-        (new Feladat())->fill($request->all())->save();
+        $fel = new Feladat();
+        $fel->megnevezes = $request->megnevezes;
+        $fel->ara = $request->ara;
+        $fel->save();
     }
 
     public function update(Request $request, $id)
     {
         Feladat::findorFail($id)->fill($request->all())->save();
     }
-    
+
     public function destroy($id)
     {
         Feladat::findOrFail($id)->delete();
     }
+
+    public function getMunkaMegnevezesek(){
+        return Feladat::all()->getMegnevezesAttribute();
+    }
+
 }

@@ -2,15 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Feladat extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
+        'id',
         'megnevezes',
-        'munkadij',
+        'ara'
+    ];
+
+    public static $megnevezesek = [
+        'Motorolaj cseréje',
+        'Fékolaj cseréje',
+        'Légtömegmérő cseréje',
+        'Féktárcsa csere',
+        'Futómű beállítás',
+        'Kipufogórendszer javítás',
+        'Lökhárító festés',
+        'Hűtőfolyadék cseréje',
+        'Fékfolyadék csere',
+        'Vízpumpa cseréje',
+        'Hűtőventillátor cseréje',
+        'Generátor javítása',
+        'Indítómotor javítása',
+        'Fékcső cseréje',
+        'Fékbetét csere',
+        'Légfilter csere',
+        'Üzemanyagszűrő csere',
+        'Kormánymű javítása',
+        'Szélvédőcsere',
+        'Fékrendszer javítása',
     ];
 }

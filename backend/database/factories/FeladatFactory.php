@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Feladat>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MunkaAr>
  */
 class FeladatFactory extends Factory
 {
@@ -17,8 +17,7 @@ class FeladatFactory extends Factory
     public function definition(): array
     {
         return [
-            'megnevezes' => fake()->realText(25, 5),
-            'munkadij' => rand(20000, 100000),
+            //
         ];
     }
 }
