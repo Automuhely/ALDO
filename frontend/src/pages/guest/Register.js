@@ -207,7 +207,7 @@ export default function Register() {
                 Bejelentkezés
               </Link>
             </p> */}
-            <div className="text-center">
+            <div className="text-center mt-2 mb-5">
               <Button variant="primary" type="submit">
                 Regisztráció
               </Button>
