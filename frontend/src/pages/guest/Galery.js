@@ -4,7 +4,7 @@ import PhotoAlbum from "react-photo-album";
 import useAuthContext from "../../contexts/AuthContext";
 import useThemeContext from "../../contexts/ThemeContext";
 
-export default function Galeria() {
+export default function Galery() {
   const { user, getUser } = useAuthContext();
   const { darkTheme } = useThemeContext();
 

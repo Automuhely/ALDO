@@ -1,10 +1,9 @@
 import React from "react";
-import { useTable } from "react-table";
 import { Button, Table } from "react-bootstrap";
 import useAuthContext from "../../contexts/AuthContext";
 import useThemeContext from "../../contexts/ThemeContext";
 
-export default function MunkaBefejezettTable({ BefejezettMunkak }) {
+export default function WorkFinishedTable({ BefejezettMunkak }) {
   const { csrf, user } = useAuthContext();
   const { darkTheme } = useThemeContext();
 

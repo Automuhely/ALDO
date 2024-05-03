@@ -4,7 +4,7 @@ import Row from "react-bootstrap/esm/Row";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 
-export default function Kepek(props) {
+export default function Photos(props) {
   return (
     <Container fluid className="m-auto">
       <Row className="">

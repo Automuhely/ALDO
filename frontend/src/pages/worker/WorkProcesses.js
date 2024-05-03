@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import useAuthContext from "../../contexts/AuthContext";
-import MunkaFolyTable from "../../components/worker/MunkaFolyTable";
-import MunkaElNemKezdetTable from "../../components/worker/MunkaElNemKezdetTable";
-import MunkaBefejezettTable from "../../components/worker/MunkaBefejezettTable";
+import MunkaFolyTable from "../../components/worker/WorkInProgressTable";
+import MunkaElNemKezdetTable from "../../components/worker/WorkPickedUpTable";
+import MunkaBefejezettTable from "../../components/worker/WorkFinishedTable";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import useThemeContext from "../../contexts/ThemeContext";
 import WorkSheetForm from "../../components/worker/WorkSheetForm";
 
-export default function MunkaFolyamatok() {
+export default function WorkProcesses() {
   const [ElKezdettMunkak, setElKezdettMunkak] = useState([]);
   const [ElNemKezdetMunkak, setElNemKezdetMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);

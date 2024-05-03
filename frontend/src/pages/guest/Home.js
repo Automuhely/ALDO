@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useAuthContext from "../../contexts/AuthContext";
-import Kepek from "../../components/guest/Kepek";
+import Kepek from "../../components/guest/Photos";
 import useThemeContext from "../../contexts/ThemeContext";
 import { Container } from "react-bootstrap";
 

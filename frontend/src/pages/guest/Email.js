@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAuthContext from "../../contexts/AuthContext";
-import Kapcsolat from "../../components/guest/Kapcsolat";
-import TerkepElerhetoseg from "../../components/guest/TerkepElerhetoseg";
+import Kapcsolat from "../../components/guest/Contacts";
+import TerkepElerhetoseg from "../../components/guest/MapAvailability";
 import { Col, Container, Row } from "react-bootstrap";
 import useThemeContext from "../../contexts/ThemeContext";
 

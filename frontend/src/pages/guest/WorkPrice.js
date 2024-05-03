@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import useThemeContext from "../../contexts/ThemeContext";
 import WorkTableForm from "../../components/worker/WorkTableForm";
 
-export default function MunkaAr() {
+export default function WorkPrice() {
   const [munkak, setMunkak] = useState([]);
   const { user, getUser } = useAuthContext();
   const { darkTheme } = useThemeContext();
@@ -37,7 +37,7 @@ export default function MunkaAr() {
 
   return (
     <Container fluid className={`${darkTheme.bg}`}>
-    <Container className="p-5 d-flex flex-column align-items-center">
+    <Container className="p-5 d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       <h1>Munkadíjak</h1>
       {user && user.szerepkor === "vezetoszerelo" && (
         <div className="mt-4 mb-4">
@@ -50,6 +50,7 @@ export default function MunkaAr() {
       <MunkaTable munkak={munkak} />
     </Container>
   </Container>
+  
   
   );
 }

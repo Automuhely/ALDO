@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useAuthContext from "../../contexts/AuthContext";
 
-export default function Kapcsolat() {
+export default function Contacts() {
   const { Kuldes, csrf, user, getUser } = useAuthContext(); // csrf függvény hozzáadása
 
   useEffect(() => {

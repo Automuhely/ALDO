@@ -58,7 +58,7 @@ export default function MyNav() {
                       <Dropdown.Menu>
                         <Dropdown.Item href="/">Főoldal</Dropdown.Item>
                         <Dropdown.Item href="/galeria">Galéria</Dropdown.Item>
-                        <Dropdown.Item href="/munkaar">Munka ár</Dropdown.Item>
+                        <Dropdown.Item href="/munkaar">Munkadíj</Dropdown.Item>
                         <Dropdown.Item href="/kapcsolat">
                           Kapcsolat
                         </Dropdown.Item>
@@ -86,7 +86,7 @@ export default function MyNav() {
                       <Dropdown.Menu>
                         <Dropdown.Item href="/">Főoldal</Dropdown.Item>
                         <Dropdown.Item href="/galeria">Galéria</Dropdown.Item>
-                        <Dropdown.Item href="/munkaar">Munka ár</Dropdown.Item>
+                        <Dropdown.Item href="/munkaar">Munkadíj</Dropdown.Item>
                         <Dropdown.Item href="/kapcsolat">
                           Kapcsolat
                         </Dropdown.Item>
