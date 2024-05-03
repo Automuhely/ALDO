@@ -92,12 +92,6 @@ export default function MyNav() {
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
-                    <Nav.Link
-                      href="/vezetoszerelo"
-                      className="ms-sm-0 ms-md-0 ms-lg-auto"
-                    >
-                      Vezetői
-                    </Nav.Link>
                     <Nav.Link href="/munkafolyamatok" className="ms-0 me-auto">
                       Munkafolyamatok
                     </Nav.Link>

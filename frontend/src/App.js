@@ -7,14 +7,12 @@ import NoPage from "./pages/guest/NoPage.js";
 import AkummulatorCsere from "./pages/guest/szolgaltatasok/AkkumulatorCsere.js";
 import Galeria from "./pages/guest/Galeria.js";
 import Futomu from "./pages/guest/szolgaltatasok/Futomu.js";
-
 import BasicLayout from "./layouts/BasicLayout.js";
 import MunkaAr from "./pages/guest/MunkaAr.js";
 import Email from "./pages/guest/Email.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MunkaFolyamatok from "./pages/worker/MunkaFolyamatok.js";
 import UserProfile from "./pages/user/UserProfile.js";
-import VezetoSzerelo from "./pages/admin/VezetoSzerelo.js";
 
 function App() {
   return (
@@ -28,7 +26,6 @@ function App() {
         <Route path="/munkaar" element={<MunkaAr />} />
         <Route path="/kapcsolat" element={<Email />} />
         <Route path="/galeria" element={<Galeria />} />
-        <Route path="/vezetoszerelo" element={<VezetoSzerelo />} />
         <Route path="/akkumulatorcsere" element={<AkummulatorCsere />} />
         <Route path="/futomu" element={<Futomu />} />
         <Route path="*" element={<NoPage />} />
