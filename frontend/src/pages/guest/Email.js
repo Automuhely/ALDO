@@ -5,7 +5,7 @@ import TerkepElerhetoseg from "../../components/guest/TerkepElerhetoseg";
 import { Col, Container, Row } from "react-bootstrap";
 import useThemeContext from "../../contexts/ThemeContext";
 
-export default function Emial() {
+export default function Email() {
   const { csrf, user, getUser } = useAuthContext();
   const { darkTheme } = useThemeContext();
   const [token, setToken] = useState();
