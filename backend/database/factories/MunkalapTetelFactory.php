@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Feladat;
+use App\Models\MunkaAr;
 use App\Models\Munkalap;
 use App\Models\MunkalapTetel;
 use App\Models\User;
@@ -35,7 +36,8 @@ class MunkalapTetelFactory extends Factory
             'feladat_id' => $feladat_id,
             'munkalapszam' => $munkalapszam,
             'szerelo' => $szerelo,
-            'leiras' => fake()->realText(30)
+            'leiras' => MunkaAr::$megnevezesek[array_rand(MunkaAr::$megnevezesek)],
+      
         ];
     }
 }

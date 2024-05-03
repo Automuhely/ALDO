@@ -57,15 +57,22 @@ class MunkalapController extends Controller
             ->get();
     }
 
-    public function elnemkezdetmunka()
+    public function elnemkezdettmunka()
     {
-        return DB::table('munkalaps as m')
-            ->join('users as u', 'u.id', '=', 'm.ugyfel')
-            ->join('autos as a', 'a.id', '=', 'm.auto')
-            ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes')
-            ->where('m.statusz', '=', '0')
-            ->get();
+
+        return DB::table("munkalaps as m")
+        ->join("users as u", "u.id", "m.ugyfel")
+        ->join("autos as a", "a.id", "m.auto" )
+        ->join("munka_ars as ma", "ma.id", "m.altalanosLeiras")
+        ->get();
+
+        // return DB::table('munkalaps as m')
+        //     ->join('users as u', 'u.id', '=', 'm.ugyfel')
+        //     ->join('autos as a', 'a.id', '=', 'm.auto')
+        //     ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
+        //     ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes')
+        //     ->where('m.statusz', '=', '0')
+        //     ->get();
     }
 
     public function folyamatmunka()
@@ -73,8 +80,7 @@ class MunkalapController extends Controller
         return DB::table('munkalaps as m')
             ->join('users as u', 'u.id', '=', 'm.ugyfel')
             ->join('autos as a', 'a.id', '=', 'm.auto')
-            ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes', 'm.munkavezeto')
+            ->select('m.munkalapszam', "a.marka", "a.rendszam", "m.ugyfel", "m.altalanosLeiras", "m.munkavezeto", "m.szamlaszam", "u.name", "m.statusz")
             ->where('m.statusz', '=', '1')
             ->get();
     }
@@ -82,12 +88,19 @@ class MunkalapController extends Controller
     public function munkalapok($statusz)
     {
         return DB::table('munkalaps as m')
-            ->join('users as u', 'u.id', '=', 'm.ugyfel')
-            ->join('autos as a', 'a.id', '=', 'm.auto')
-            ->join('munka_ars as ma', 'ma.id', '=', 'm.altalanosLeiras')
-            ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'u.name', 'ma.megnevezes', 'm.munkavezeto')
-            ->where('m.statusz', '=', $statusz)
-            ->get();
+
+        ->join('users as u', 'u.id', '=', 'm.ugyfel')
+        ->join('autos as a', 'a.id', '=', 'm.auto')
+        ->leftJoin('users as mv', 'mv.id', '=', 'm.munkavezeto') // Left join a munkavezető nevének lekéréséhez
+        ->select('m.munkalapszam', 'a.marka', 'a.rendszam', 'm.altalanosLeiras', 'm.szamlaszam', 'u.name as ugyfel_nev', 'mv.name as munkavezeto_nev', 'm.statusz') // Munkavezető nevét is hozzáadjuk
+        ->where('m.statusz', '=', $statusz)
+        ->get();
+
+            // ->join('users as u', 'u.id', '=', 'm.ugyfel')
+            // ->join('autos as a', 'a.id', '=', 'm.auto')
+            // ->select('m.munkalapszam', "a.marka", "a.rendszam", "m.ugyfel", "m.altalanosLeiras", "m.munkavezeto", "m.szamlaszam", "u.name", "m.statusz")
+            // ->where('m.statusz', '=', $statusz)
+            // ->get();
     }
 
     public function befejezettmunka()

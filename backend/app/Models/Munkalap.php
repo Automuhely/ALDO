@@ -24,7 +24,12 @@ class Munkalap extends Model
         'uzembentarto',
         'statusz',
     ];
-
+    public static $altalanosLeirasok = [
+        "Behozta az autóját, mert dörmögött",
+        "Az ügyfél elmondása szerint az autó kopog",
+        "Az ügyfél általános átvizsgálásra hozta be",
+        "Az ügyfél szerint a fék 'csúszik'",
+    ];
      // Az autóhoz tartozó kapcsolat definiálása
      public function auto()
      {
