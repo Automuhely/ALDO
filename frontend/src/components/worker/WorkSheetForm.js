@@ -32,10 +32,11 @@ export default function WorkTableForm() {
       try {
         const token = await csrf();
         const adat = {
-            marka: marka,
-            rendszam: rendszam,
-            ugyfel_nev: ugyfel_nev,
-            altalanosLeiras: altalanosLeiras,
+          marka: marka,
+          rendszam: rendszam,
+          ugyfel_nev: ugyfel_nev,
+          altalanosLeiras: altalanosLeiras,
+          statusz: 0, 
           _token: token,
         };
         console.log("Adatok:", adat);
@@ -48,6 +49,7 @@ export default function WorkTableForm() {
       }
     }
   };
+  
 
   return (
     <Container className="d-flex justify-content-center align-items-center">
