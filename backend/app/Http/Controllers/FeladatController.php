@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feladat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FeladatController extends Controller
 {
@@ -32,8 +33,15 @@ class FeladatController extends Controller
 
     public function destroy($id)
     {
-        Feladat::findOrFail($id)->delete();
+        try {
+            Feladat::findOrFail($id)->delete();
+            return response()->json(['message' => 'Sikeres törlés'], 200);
+        } catch (\Exception $e) {
+            Log::error('Hiba történt a törlés közben: ' . $e->getMessage());
+            return response()->json(['message' => 'Hiba történt a törlés közben'], 500);
+        }
     }
+    
 
     public function getMunkaMegnevezesek(){
         return Feladat::all()->getMegnevezesAttribute();

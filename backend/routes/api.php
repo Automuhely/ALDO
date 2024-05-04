@@ -73,7 +73,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
             // törléshez vezetőszerelő engedélyre van szükség
             Route::delete('/users/{user}', [UserController::class, 'destroy']);
             Route::delete('/autos/{auto}', [AutoController::class, 'destroy']);
-            Route::delete('/feladats/{feladat}', [FeladatController::class, 'destroy']);
+            Route::delete('/feladats/{id}', [FeladatController::class, 'destroy']);
             Route::delete('/munkalaps/{munkalap}', [MunkalapController::class, 'destroy']);
             Route::delete('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'destroy']);
             

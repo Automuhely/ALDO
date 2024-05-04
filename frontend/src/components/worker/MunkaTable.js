@@ -28,7 +28,7 @@ export default function MunkaTable({ munkak }) {
       const data = { id, _token: token };
       console.log("Munka ár id:", id);
       console.log("Felhasználó: ",user)
-      const response = await axios.delete(`/api/arak/${id}`, { data });
+      const response = await axios.delete(`/api/feladats/${id}`, { data }); 
       console.log("Sikeres munka ár törlése!");
       window.location.reload();
       alert("Sikeres munka ár törlése!");
@@ -51,9 +51,10 @@ export default function MunkaTable({ munkak }) {
     {
       Header: "Munka ára",
       accessor: "ara",
-      Cell: ({ value }) => `${value} Ft`,
+      Cell: ({ value }) => `${value} Ft.-`,
     },
   ];
+
 
   return (
     <Table className={`${darkTheme.tableTheme}`}>
