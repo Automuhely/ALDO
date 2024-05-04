@@ -1,11 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import useThemeContext from "../../contexts/ThemeContext";
-import { useEffect, useState } from "react";
 import { jsPDF } from "jspdf";
 
 export default function UserInvoice(props) {
-  const { darkTheme } = useThemeContext();
   console.log(props.szamla);
   function download() {
     /*    console.log("Letöltés");

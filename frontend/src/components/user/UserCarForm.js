@@ -31,7 +31,6 @@ export default function UserAutosForm(props) {
   });
 
   const { user, csrf } = useAuthContext();
-  const { darkTheme } = useThemeContext();
 
   const ujAuto = async (e) => {
     e.preventDefault();
