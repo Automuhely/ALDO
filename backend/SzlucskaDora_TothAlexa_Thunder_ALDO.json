@@ -1,0 +1,84 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "ALDO",
+    "collectionId": "d04ba2f1-a4ed-446c-939b-ad12bf063d16",
+    "dateExported": "2024-05-03T21:37:57.308Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "1a210a56-a56a-41a2-a6be-104ed5eac410",
+            "name": "csrf_nelkuli",
+            "containerId": "",
+            "created": "2024-05-03T21:10:31.498Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "fcf54fc2-6424-49d0-b3c0-a7337c9cc30f",
+            "colId": "d04ba2f1-a4ed-446c-939b-ad12bf063d16",
+            "containerId": "1a210a56-a56a-41a2-a6be-104ed5eac410",
+            "name": "márkák",
+            "url": "/api/auto-markak",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-04-07T11:04:27.729Z",
+            "modified": "2024-04-20T19:57:12.901Z",
+            "headers": []
+        },
+        {
+            "_id": "3aa7c050-3073-453f-99f4-a5f2b2f3394b",
+            "colId": "d04ba2f1-a4ed-446c-939b-ad12bf063d16",
+            "containerId": "1a210a56-a56a-41a2-a6be-104ed5eac410",
+            "name": "/csrf",
+            "url": "/token",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-20T19:49:52.493Z",
+            "modified": "2024-04-20T19:49:52.493Z",
+            "headers": []
+        },
+        {
+            "_id": "88fd8569-7dec-4ef1-b6e3-6162519ef196",
+            "colId": "d04ba2f1-a4ed-446c-939b-ad12bf063d16",
+            "containerId": "1a210a56-a56a-41a2-a6be-104ed5eac410",
+            "name": "csrf-cookie",
+            "url": "/sanctum/csrf-cookie",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-04-20T20:03:59.384Z",
+            "modified": "2024-04-20T20:04:02.500Z",
+            "headers": []
+        },
+        {
+            "_id": "1ea1aa6b-817b-4669-928f-395af2fcddc9",
+            "colId": "d04ba2f1-a4ed-446c-939b-ad12bf063d16",
+            "containerId": "1a210a56-a56a-41a2-a6be-104ed5eac410",
+            "name": "feladats/feladat",
+            "url": "/api/feladats/1",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-03T21:12:14.822Z",
+            "modified": "2024-05-03T21:13:06.644Z",
+            "headers": []
+        },
+        {
+            "_id": "6e241b20-43a3-45a7-9cf3-3daac1326987",
+            "colId": "d04ba2f1-a4ed-446c-939b-ad12bf063d16",
+            "containerId": "1a210a56-a56a-41a2-a6be-104ed5eac410",
+            "name": "feladats",
+            "url": "/api/feladats",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-03T21:12:17.253Z",
+            "modified": "2024-05-03T21:12:47.694Z",
+            "headers": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "http://localhost:8000"
+        }
+    },
+    "ref": "ZXfUq3nnToRXWh_9NAch4-lP3z0csZ0J0qtgYTD00Is51iiZtSELJIWu8q_zbw185Y47G0ZsrtW8cfNOqM40RQ"
+}
