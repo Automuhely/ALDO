@@ -16,6 +16,7 @@ export default function Contacts() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [uzenet, setUzenet] = useState("");
+  const [subject, setSubject] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export default function Contacts() {
         const adat = {
           name: name,
           email: email,
+          subject: subject,
           uzenet: uzenet,
           _token: token, // A token hozzáadása az adatokhoz
         };
@@ -67,6 +69,17 @@ export default function Contacts() {
               placeholder="name@example.com"
               onChange={(e) => {
                 setEmail(e.target.value);
+              }}
+            />
+          </Form.Group>
+        </div>
+        <div>
+          <Form.Group className="mb-3 mt-4" controlId="subject">
+            <Form.Label>Tárgy</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={(e) => {
+                setSubject(e.target.value);
               }}
             />
           </Form.Group>

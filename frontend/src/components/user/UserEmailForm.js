@@ -29,7 +29,8 @@ export default function UserEmailForm(props) {
         name: props.user.name,
         email: props.user.email,
         subject: subject,
-        uzenet: emailUzenet + ` Rendszámom: ${rendszam}`,
+        rendszam:rendszam,
+        uzenet: emailUzenet,
         _token: token,
       };
       console.log(email);
@@ -41,7 +42,7 @@ export default function UserEmailForm(props) {
   };
 
   return (
-    /*     <Container fluid className="text-center pt-2 border m-4 m-auto bg-light">*/
+    /*<Container fluid className="text-center pt-2 border m-4 m-auto bg-light">*/
     <Container fluid>
       <Row className="justify-content-center align-items-center p-2 border bg-light">
         <Form onSubmit={emailKuldes} className="p-3 bg-light">
