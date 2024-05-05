@@ -92,7 +92,7 @@ export default function MyNav() {
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
-                    <Nav.Link href="/munkafolyamatok" className="ms-0 me-auto">
+                    <Nav.Link href="/munkafolyamatok" className="ms-sm-0 ms-md-0 ms-lg-auto me-lg-auto">
                       Munkafolyamatok
                     </Nav.Link>
                   </>
