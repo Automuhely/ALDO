@@ -17,6 +17,7 @@ export default function Contacts() {
   const [email, setEmail] = useState("");
   const [uzenet, setUzenet] = useState("");
   const [subject, setSubject] = useState("");
+  const [rendszam, setRendszam] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +27,10 @@ export default function Contacts() {
       alert("Nincs kitöltve az e-mail cím!");
     } else if (uzenet.length === 0) {
       alert("Nincs kitöltve az üzenet!");
+    } else if (subject.length === 0) {
+      alert("Nincs kitöltve az tárgy!");
+    } else if (rendszam.length === 0) {
+      alert("Nincs kitöltve a rendszám!");
     } else {
       try {
         const token = await csrf(); // Token lekérése
@@ -34,6 +39,7 @@ export default function Contacts() {
           email: email,
           subject: subject,
           uzenet: uzenet,
+          rendszam:rendszam,
           _token: token, // A token hozzáadása az adatokhoz
         };
         console.log("Adatok:", adat);
@@ -69,6 +75,17 @@ export default function Contacts() {
               placeholder="name@example.com"
               onChange={(e) => {
                 setEmail(e.target.value);
+              }}
+            />
+          </Form.Group>
+        </div>
+        <div>
+          <Form.Group className="mb-3 mt-4" controlId="rendszam">
+            <Form.Label>Rendszám</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={(e) => {
+                setRendszam(e.target.value);
               }}
             />
           </Form.Group>
