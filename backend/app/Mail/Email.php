@@ -19,27 +19,24 @@ class Email extends Mailable
     public function __construct($mailData)
     {
         {                                  
-            $this->mailData = $mailData;       
+            $this->mailData = $mailData;    
+            
             } 
+            
     }
-    /**
-     * Get the message envelope.
-     */
+    
+
+
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Email',
+            subject: $this->mailData['subject'],
         );
     }
-    /**
-     * Get the message content definition.
-     */
+
     public function content(): Content
     {
         return new Content( 
-            //resources/views mappán belül 
-            //email nevű mappába a test.blade.php-t keresi 
-            //amit ezután létre is hozunk manuálisan 
             view: 'email.test', 
         ); 
     }
