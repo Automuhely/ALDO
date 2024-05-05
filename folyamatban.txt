@@ -37,3 +37,4 @@ login register reszponzivitás
 loginnál elfelejtett jelszó mehet kapcsolathoz
 mentés gomb a profilomba
 menűpont vezetőszerelőnél elcsuszott
+egyedi tárgy az emaileknél

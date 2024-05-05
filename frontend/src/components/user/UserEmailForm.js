@@ -2,37 +2,49 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAuthContext from "../../contexts/AuthContext";
 
 export default function UserEmailForm(props) {
-  const [emailTargy, setEmailTargy] = useState("");
+  const { Kuldes, csrf, user, getUser } = useAuthContext(); // csrf függvény hozzáadása
+
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    }
+  }, [user, getUser]);
+
+  const [subject, setSubject] = useState("");
   const [emailUzenet, setEmailUzenet] = useState("");
-  const [alvazszamEmailhez, setAlvazszamEmailhez] = useState("");
-  const [fajl, setFajl] = useState("");
+  const [rendszam, setRendszam] = useState("");
 
   const emailKuldes = async (e) => {
+    e.preventDefault();
     console.log("email küldés");
-    const email = {
-      name: props.user.name,
-      email: props.user.email,
-      attachment: fajl,
-      message: emailUzenet,
-      alvazszamEmailhez: alvazszamEmailhez,
-    };
-    console.log(email);
+     
+    
+    try {
+      const token = await csrf(); // Token lekérése
+        const email = {
+        name: props.user.name,
+        email: props.user.email,
+        subject: subject,
+        uzenet: emailUzenet + ` Rendszámom: ${rendszam}`,
+        _token: token,
+      };
+      console.log(email);
+      await Kuldes(email);
+      alert("Email sikeresen elküldve!");
+    } catch (error) {
+      alert("Hiba történt az email küldése során: " + error.message);
+    }
   };
 
   return (
     /*     <Container fluid className="text-center pt-2 border m-4 m-auto bg-light">*/
     <Container fluid>
       <Row className="justify-content-center align-items-center p-2 border bg-light">
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            emailKuldes();
-          }}
-          className="p-3 bg-light"
-        >
+        <Form onSubmit={emailKuldes} className="p-3 bg-light">
           <h4 className="text-center text-bg-primary p-3">Email küldése</h4>
 
           <Form.Group className="mb-1">
@@ -47,9 +59,9 @@ export default function UserEmailForm(props) {
             <Form.Label>Tárgy</Form.Label>
             <Form.Control
               type="text"
-              value={emailTargy}
+              value={subject}
               onChange={(e) => {
-                setEmailTargy(e.target.value);
+                setSubject(e.target.value);
               }}
               placeholder="Tárgy"
             />
@@ -60,28 +72,19 @@ export default function UserEmailForm(props) {
             <Form.Select
               required
               id="emailAuto"
-              value={alvazszamEmailhez}
-              onChange={(e) => setAlvazszamEmailhez(e.target.value)}
+              value={rendszam}
+              onChange={(e) => setRendszam(e.target.value)}
             >
               <option value={""}>Kérlek válassz....</option>
 
               {props.autoim.map((e, i) => {
                 return (
-                  <option key={i} value={e.alvazszam}>
+                  <option key={i} value={e.rendszam}>
                     {e.becenev + " - " + e.rendszam}
                   </option>
                 );
               })}
             </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-1">
-            <Form.Label>Melléklet</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={(e) => {
-                setFajl(e.target.value);
-              }}
-            />
           </Form.Group>
           <Form.Group className="mb-1">
             <Form.Label>Üzenet</Form.Label>

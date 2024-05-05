@@ -3,7 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import { jsPDF } from "jspdf";
 
 export default function UserInvoice(props) {
-  console.log(props.szamla);
   function download() {
     /*    console.log("Letöltés");
     const testLink = document.createElement("a");
@@ -40,7 +39,7 @@ Az esetleges pontatlanságokért vagy téves információkért semmilyen felelő
     doc.save("szamla.pdf");
   }
   if (props.szamlaim) {
-    console.log(props.szamla.altalanosLeiras);
+   // console.log(props.szamla.altalanosLeiras);
   }
 
   return (
