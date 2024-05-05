@@ -80,7 +80,7 @@ export default function WorkFinishedTable({ BefejezettMunkak }) {
                         szamlagomb(munka.munkalapszam);
                       }}
                     >
-                      Befejezés
+                      Számla megtekint
                     </Button>
                   </td>
                 </>
