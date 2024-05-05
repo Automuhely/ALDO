@@ -14,15 +14,19 @@ class MailController extends Controller
         $mailData = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'subject' => $request->input('subject'),
+            'rendszam' => $request->input('rendszam'),
             'uzenet' => $request->input('uzenet'),
         ];
 
         // Küldd el az emailt
-        Mail::to('aldo.szerviz@gmail.com')->send(new Email($mailData));
+        $email = new Email($mailData);
+        $email->subject($mailData['subject']);
+        $email->from($mailData['email'], $mailData['name']);
+
+        Mail::to('aldo.szerviz@gmail.com')->send($email);
 
         // Visszajelzés a sikeres kérésekről
         return response()->json(['message' => 'Email sikeresen elküldve!'], 200);
     }
 }
-
-
