@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Table, Form } from "react-bootstrap";
 import useAuthContext from "../../contexts/AuthContext";
 import useThemeContext from "../../contexts/ThemeContext";
 import axios from "../../api/axios";
@@ -8,14 +8,33 @@ export default function MunkaTable({ munkak }) {
   const { csrf, user } = useAuthContext();
   const { darkTheme } = useThemeContext();
 
+  const [editedRows, setEditedRows] = useState([]);
+  const [editedAra, setEditedAra] = useState({});
+
+  const toggleEditing = (id) => {
+    if (editedRows.includes(id)) {
+      setEditedRows(editedRows.filter((rowId) => rowId !== id));
+    } else {
+      setEditedRows([...editedRows, id]);
+    }
+  };
+
+  const isRowEdited = (id) => editedRows.includes(id);
+
+  const handleAraChange = (id, newValue) => {
+    setEditedAra({ ...editedAra, [id]: newValue });
+  };
+
   const szerkesztesgomb = async (id) => {
     try {
       const token = await csrf();
-      const data = { id, _token: token };
+      const data = { id, ara: editedAra[id], _token: token };
       console.log("Munka megnevezése:", id);
-      const response = await axios.put("/api/arak/{id}", data);
+      const response = await axios.put(`/api/feladats/${id}`, data);
       console.log("Sikeres munka ár szerkesztése!");
       alert("Sikeres munka ár szerkesztése!");
+      toggleEditing(id);
+      window.location.reload();
     } catch (error) {
       console.error("Hiba történt a munka ár megváltoztatása közben:", error);
       alert("Hiba történt a munka ár megváltoztatása közben")
@@ -38,71 +57,70 @@ export default function MunkaTable({ munkak }) {
     }
   };
 
-
-  let columns = [
-    {
-      Header: "id",
-      accessor: "id",
-    },
-    {
-      Header: "Munka megnevezése",
-      accessor: "megnevezes",
-    },
-    {
-      Header: "Munka ára",
-      accessor: "ara",
-      Cell: ({ value }) => `${value} Ft.-`,
-    },
-  ];
-
-
   return (
-    <Table className={`${darkTheme.tableTheme}`}>
-      <thead>
-        <tr>
-          {columns.map((column, index) => (
-            <th key={index} scope="col">
-              {column.Header}
-            </th>
-          ))}
-          {user && user.szerepkor === "vezetoszerelo" && (
-            <>
-              <th> </th>
-              <th> </th>
-            </>
+    <Table className={`${darkTheme.tableTheme} text-center worktable`}>
+  <thead className="text-center">
+    <tr className="text-center">
+      <th>ID</th>
+      <th>Munka megnevezése</th>
+      <th>Munka ára</th>
+      {user && user.szerepkor === "vezetoszerelo" && (
+        <>
+          <th> </th>
+          <th> </th>
+        </>
+      )}
+    </tr>
+  </thead>
+  <tbody className="text-center">
+    {munkak.map((munka, index) => (
+      <tr key={index} className="text-center">
+        <td>{munka.id}</td>
+        <td>{munka.megnevezes}</td>
+        <td>
+          {isRowEdited(munka.id) ? (
+            <Form.Control
+              type="text"
+              value={editedAra[munka.id] ?? munka.ara}
+              onChange={(e) => handleAraChange(munka.id, e.target.value)}
+            />
+          ) : (
+            `${munka.ara.toLocaleString()} Ft.-`
           )}
-        </tr>
-      </thead>
-      <tbody>
-        {munkak.map((munka, index) => (
-          <tr key={index}>
-            {columns.map((column, columnIndex) => (
-              <td key={columnIndex}>{munka[column.accessor]}</td>
-            ))}
-            {user && user.szerepkor === "vezetoszerelo" && (
-              <>
-                <td>
-                  <Button
-                    variant="primary"
-                    onClick={() => {szerkesztesgomb(munka.id)}
-                  }
-                  >
-                    Szerkesztés
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    variant="primary"
-                    onClick={() => torlesgomb(munka.id)}
-                  >
-                    Törlés
-                  </Button>
-                </td>
-              </>
-            )}
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+        </td>
+        {user && user.szerepkor === "vezetoszerelo" && (
+          <>
+            <td >
+              {isRowEdited(munka.id) ? (
+                <Button
+                  variant="danger"
+                  onClick={() => szerkesztesgomb(munka.id)}
+                >
+                  Mentés
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  onClick={() => toggleEditing(munka.id)}
+                >
+                  Szerkesztés
+                </Button>
+              )}
+            </td>
+            <td>
+              <Button
+                variant="primary"
+                onClick={() => torlesgomb(munka.id)}
+              >
+                Törlés
+              </Button>
+            </td>
+          </>
+        )}
+      </tr>
+    ))}
+  </tbody>
+</Table>
+
   );
 }

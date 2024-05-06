@@ -37,7 +37,7 @@ export default function WorkPrice() {
 
   return (
     <Container fluid className={`${darkTheme.bg}`}>
-    <Container className="p-5 d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
+    <Container className="p-2 d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       <h1>Munkadíjak</h1>
       {user && user.szerepkor === "vezetoszerelo" && (
         <div className="mt-4 mb-4">

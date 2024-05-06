@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Button, Row, Form, Col } from "react-bootstrap";
 import useAuthContext from "../../contexts/AuthContext";
 import useThemeContext from "../../contexts/ThemeContext";
 import { Container } from "react-bootstrap";
@@ -45,34 +44,43 @@ export default function WorkTableForm() {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center">
-      <Container className="p-3 text-center">
+    <Container className="d-flex justify-content-center align-items-center worktable">
+      <Container className="p-3 mb-3 mt-1  text-center ">
         <h3>Új munka felvitele</h3>
-        <Form
-          onSubmit={handleSubmit}
-          className="d-flex flex-column align-items-center"
-        >
-          <Form.Group className="mb-3 mt-4" controlId="megnevezes">
-            <Form.Label>Munka megnevezése</Form.Label>
-            <Form.Control
-              type="text"
-              onChange={(e) => {
-                setMegnevezes(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="ara">
-            <Form.Label>Munkadíj</Form.Label>
-            <Form.Control
-              type="munkaar"
-              onChange={(e) => {
-                setMunkaar(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Mentés
-          </Button>
+        <Form onSubmit={handleSubmit} className="d-flex flex-column align-items-center">
+          <Row className="mb-3 text-center">
+            <Form.Group controlId="megnevezes" style={{ maxWidth: "400px" }}>
+              <Form.Label className="text-center">Munka megnevezése</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={(e) => {
+                  setMegnevezes(e.target.value);
+                }}
+              />
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group controlId="ara"  style={{ maxWidth: "400px" }}>
+              <Form.Label>Munkadíj</Form.Label>
+              <Form.Control
+                type="munkaar"
+                onChange={(e) => {
+                  setMunkaar(e.target.value);
+                }}
+              />
+            </Form.Group>
+          </Row>
+          <Row className="mb-3 mt-4">
+            <Col className="d-flex justify-content-center">
+              <Button
+                variant="primary"
+                type="submit"
+                style={{ maxWidth: "100px" }}
+              >
+                Mentés
+              </Button>
+            </Col>
+          </Row>
         </Form>
       </Container>
     </Container>
