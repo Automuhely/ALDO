@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {  Container } from "react-bootstrap";
 import useAuthContext from "../../contexts/AuthContext";
 
 export default function Contacts() {
@@ -53,7 +54,8 @@ export default function Contacts() {
 
   return (
     <>
-      <h1>Kérdezz minket</h1>
+    <Container>
+    <h1  className="text-center">Kérdezz minket</h1>
       <Form onSubmit={handleSubmit}>
         <div>
           <Form.Group className="mb-3 mt-4" controlId="name">
@@ -113,12 +115,16 @@ export default function Contacts() {
             />
           </Form.Group>
         </div>
-        <div>
-          <Button variant="primary" type="submit">
+        <div className="text-center my-3">
+          <Button variant="primary" type="submit"  >
             Küldés
           </Button>
         </div>
       </Form>
+
+    </Container>
+     
     </>
   );
+    
 }
