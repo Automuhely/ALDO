@@ -21,15 +21,14 @@ export default function UserEmailForm(props) {
   const emailKuldes = async (e) => {
     e.preventDefault();
     console.log("email küldés");
-     
-    
+
     try {
       const token = await csrf(); // Token lekérése
-        const email = {
+      const email = {
         name: props.user.name,
         email: props.user.email,
         subject: subject,
-        rendszam:rendszam,
+        rendszam: rendszam,
         uzenet: emailUzenet,
         _token: token,
       };
@@ -43,7 +42,7 @@ export default function UserEmailForm(props) {
 
   return (
     /*<Container fluid className="text-center pt-2 border m-4 m-auto bg-light">*/
-    <Container fluid>
+    <Container fluid className="urlap">
       <Row className="justify-content-center align-items-center p-2 border bg-light">
         <Form onSubmit={emailKuldes} className="p-3 bg-light">
           <h4 className="text-center text-bg-primary p-3">Email küldése</h4>
