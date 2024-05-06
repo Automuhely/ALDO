@@ -25,9 +25,9 @@ export default function WorkTableForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (marka.length === 0) {
-      alert("Nincs kitöltve a megnevezés!");
+      alert("Nincs kitöltve a márka!");
     } else if (rendszam.length === 0) {
-      alert("Nincs kitöltve a munkadíj!");
+      alert("Nincs kitöltve a rendszám!");
     } else {
       try {
         const token = await csrf();

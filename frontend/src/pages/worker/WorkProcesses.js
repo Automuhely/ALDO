@@ -35,9 +35,9 @@ export default function WorkProcesses() {
       ]);
       responses.forEach((response, index) => {
         if (index === 0) {
-          setElKezdettMunkak(response.data);
-        } else if (index === 1) {
           setElNemKezdetMunkak(response.data);
+        } else if (index === 1) {
+          setElKezdettMunkak(response.data);
         } else {
           setBefejezettMunkak(response.data);
         }

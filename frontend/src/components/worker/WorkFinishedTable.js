@@ -50,29 +50,31 @@ export default function WorkFinishedTable({ BefejezettMunkak }) {
   return (
     <div>
       <h3>Befejezett munkák</h3>
-      <Table className={`${darkTheme.tableTheme}`}>
+      <Table className={`${darkTheme.tableTheme} responsive-table`}>
         <thead>
           <tr>
-            {columns.map((columns, index) => (
+            <th></th>
+            {columns.map((column, index) => (
               <th key={index} scope="col">
-                {columns.Header}
+                {column.Header}
               </th>
             ))}
             {user && user.szerepkor === "vezetoszerelo" && (
-              <>
-                <th> </th>
-              </>
+              <th></th>
             )}
           </tr>
         </thead>
         <tbody>
           {BefejezettMunkak.map((munka, index) => (
-            <tr key={index}>
-              {columns.map((columns, columnIndex) => (
-                <td key={columnIndex}>{munka[columns.accessor]}</td>
-              ))}
+           <tr key={index}>
+           <th></th>
+           {columns.map((column, columnIndex) => (
+             <td key={columnIndex} data-label={column.Header}>
+               {munka[column.accessor]}
+             </td>
+           ))}
               {user && user.szerepkor === "vezetoszerelo" && (
-                <>
+                
                   <td>
                     <Button
                       variant="primary"
@@ -83,7 +85,7 @@ export default function WorkFinishedTable({ BefejezettMunkak }) {
                       Számla megtekint
                     </Button>
                   </td>
-                </>
+                
               )}
             </tr>
           ))}
