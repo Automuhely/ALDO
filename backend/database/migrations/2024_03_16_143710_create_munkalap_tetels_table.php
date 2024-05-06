@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('munkalap_tetels', function (Blueprint $table) {
             // $table->string('sorszam');
             $table->primary(['feladat_id', 'munkalapszam']);
-            $table->foreignId('feladat_id')->references('id')->on('feladats');
+            $table->foreignId('feladat_id')->references('id')->on('feladats')->onDelete('cascade');
+
             $table->foreignId('munkalapszam')->references('munkalapszam')->on('munkalaps');
             $table->foreignId('szerelo')->references('id')->on('users');
             $table->string('leiras', 100);
