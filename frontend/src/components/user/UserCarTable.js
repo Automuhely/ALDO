@@ -1,6 +1,5 @@
 import AutoSor from "./UserCarTableRow";
 import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/esm/Col";
 
 export default function UserCarTable(props) {
@@ -9,7 +8,7 @@ export default function UserCarTable(props) {
       className="justify-content-center align-items-center p-2 border bg-light"
     >
       <h4 className="text-bg-primary p-3">Autóim</h4>
-      {!props.autoim !==null  ? (
+      {!props.autoim.length  ? (
         <>
           <div className="text-center">Nincs még autód rögzítve.</div>
         </>
