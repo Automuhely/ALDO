@@ -75,7 +75,7 @@ export default function Login() {
               <p>
                 <Link
                   className="nav-link text-black text-center"
-                  to="/register"
+                  to="/kapcsolat"
                 >
                   Elfelejtett jelszó
                 </Link>
