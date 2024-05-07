@@ -4,12 +4,6 @@ import { jsPDF } from "jspdf";
 
 export default function UserInvoice(props) {
   function download() {
-    /*    console.log("Letöltés");
-    const testLink = document.createElement("a");
-    testLink.href = "path/to/your/file.pdf";
-    testLink.download = "szamla1.pdf";
-    testLink.click();
- */
     const doc = new jsPDF({
       orientation: "p",
       unit: "mm",
@@ -31,15 +25,15 @@ export default function UserInvoice(props) {
     doc.text(`Munkalap nyitása: ${props.szamla.created_at}`, 10, 110);
 
     const informacioText = `Ez a dokumentum kizárólag tájékoztatás céljából készült és nem minősül hivatalos vagy jogilag kötelező dokumentumnak.
-Az itt található információk csak tájékoztató jellegűek, és nem helyettesítik semmilyen hivatalos dokumentumot vagy tanácsadást.
-Az esetleges pontatlanságokért vagy téves információkért semmilyen felelősség nem terhelhető. Kérjük, vegye figyelembe, hogy a hivatalos
-ügyintézéshez vagy jogi célokra szükséges dokumentumokat kérje hivatalos forrásokból.`;
+    Az itt található információk csak tájékoztató jellegűek, és nem helyettesítik semmilyen hivatalos dokumentumot vagy tanácsadást.
+    Az esetleges pontatlanságokért vagy téves információkért semmilyen felelősség nem terhelhető. Kérjük, vegye figyelembe, hogy a hivatalos
+    ügyintézéshez vagy jogi célokra szükséges dokumentumokat kérje hivatalos forrásokból.`;
 
     doc.text(informacioText, 10, 120);
     doc.save("szamla.pdf");
   }
   if (props.szamlaim) {
-   // console.log(props.szamla.altalanosLeiras);
+    // console.log(props.szamla.altalanosLeiras);
   }
 
   return (

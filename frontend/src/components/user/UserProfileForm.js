@@ -64,7 +64,7 @@ export default function UserProfileForm() {
       console.log("Profil Beküldés....", adat);
 
       let vegpont = "/api/users/" + user.id;
-      const response = await axios.put(vegpont, adat);
+      await axios.put(vegpont, adat);
       // console.log("Profil beküldés SIKERES");
       setIsProfilSzerkesztheto(false);
       setProfilErrors("");
