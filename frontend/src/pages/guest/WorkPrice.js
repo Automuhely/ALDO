@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
 import MunkaTable from "../../components/worker/MunkaTable";
 import useAuthContext from "../../contexts/AuthContext";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import useThemeContext from "../../contexts/ThemeContext";
 import WorkTableForm from "../../components/worker/WorkTableForm";
@@ -47,7 +47,14 @@ export default function WorkPrice() {
         </div>
       )}
       {showForm && <WorkTableForm />}
-      <MunkaTable munkak={munkak} />
+      <Row>
+        <Col xs={12} md={6} className="">
+          <MunkaTable munkak={munkak} />
+        </Col>
+        <Col xs={12} md={6} className="d-flex align-items-center justify-content-center worktableimg">
+          <img src="/img/dhiva-krishna-YApS6TjKJ9c-unsplash.jpg" alt="" className="img-fluid" />
+        </Col>
+      </Row>
     </Container>
   </Container>
   
