@@ -58,69 +58,69 @@ export default function MunkaTable({ munkak }) {
   };
 
   return (
-    <Table className={`${darkTheme.tableTheme} text-center worktable`}>
-  <thead className="text-center">
-    <tr className="text-center">
-      <th>ID</th>
-      <th>Munka megnevezése</th>
-      <th>Munka ára</th>
-      {user && user.szerepkor === "vezetoszerelo" && (
-        <>
-          <th> </th>
-          <th> </th>
-        </>
-      )}
-    </tr>
-  </thead>
-  <tbody className="text-center">
-    {munkak.map((munka, index) => (
-      <tr key={index} className="text-center">
-        <td>{munka.id}</td>
-        <td>{munka.megnevezes}</td>
-        <td>
-          {isRowEdited(munka.id) ? (
-            <Form.Control
-              type="text"
-              value={editedAra[munka.id] ?? munka.ara}
-              onChange={(e) => handleAraChange(munka.id, e.target.value)}
-            />
-          ) : (
-            `${munka.ara.toLocaleString()} Ft.-`
+    <Table className={`${darkTheme.tableTheme} text-center worktable mt-4`}>
+      <thead className="text-center">
+        <tr className="text-center">
+          {user && user.szerepkor === "vezetoszerelo" && <th>ID</th>}
+          <th>Munka megnevezése</th>
+          <th>Munka ára</th>
+          {user && user.szerepkor === "vezetoszerelo" && (
+            <>
+              <th> </th>
+              <th> </th>
+            </>
           )}
-        </td>
-        {user && user.szerepkor === "vezetoszerelo" && (
-          <>
-            <td >
+        </tr>
+      </thead>
+      <tbody className="text-center">
+        {munkak.map((munka, index) => (
+          <tr key={index} className="text-center">
+            {user && user.szerepkor === "vezetoszerelo" && <td>{munka.id}</td>}
+            <td>{munka.megnevezes}</td>
+            <td>
               {isRowEdited(munka.id) ? (
-                <Button
-                  variant="danger"
-                  onClick={() => szerkesztesgomb(munka.id)}
-                >
-                  Mentés
-                </Button>
+                <Form.Control
+                  type="text"
+                  value={editedAra[munka.id] ?? munka.ara}
+                  onChange={(e) => handleAraChange(munka.id, e.target.value)}
+                />
               ) : (
-                <Button
-                  variant="primary"
-                  onClick={() => toggleEditing(munka.id)}
-                >
-                  Szerkesztés
-                </Button>
+                `${munka.ara.toLocaleString()} Ft.-`
               )}
             </td>
-            <td>
-              <Button
-                variant="primary"
-                onClick={() => torlesgomb(munka.id)}
-              >
-                Törlés
-              </Button>
-            </td>
-          </>
-        )}
-      </tr>
-    ))}
-  </tbody>
-</Table>
-
+            {user && user.szerepkor === "vezetoszerelo" && (
+              <>
+                <td>
+                  {isRowEdited(munka.id) ? (
+                    <Button
+                      variant="danger"
+                      onClick={() => szerkesztesgomb(munka.id)}
+                    >
+                      Mentés
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      onClick={() => toggleEditing(munka.id)}
+                    >
+                      Szerkesztés
+                    </Button>
+                  )}
+                </td>
+                <td>
+                  <Button
+                    variant="primary"
+                    onClick={() => torlesgomb(munka.id)}
+                  >
+                    Törlés
+                  </Button>
+                </td>
+              </>
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   );
+  
 }
