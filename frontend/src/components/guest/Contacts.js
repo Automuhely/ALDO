@@ -34,14 +34,14 @@ export default function Contacts() {
       alert("Nincs kitöltve a rendszám!");
     } else {
       try {
-        const token = await csrf(); // Token lekérése
+        const token = await csrf(); 
         const adat = {
           name: name,
           email: email,
           subject: subject,
           uzenet: uzenet,
           rendszam:rendszam,
-          _token: token, // A token hozzáadása az adatokhoz
+          _token: token, 
         };
         console.log("Adatok:", adat);
         await Kuldes(adat);

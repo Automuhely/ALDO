@@ -41,7 +41,6 @@ export default function WorkProcesses() {
         } else {
           setBefejezettMunkak(response.data);
         }
-        console.log("Adatok:", response);
       });
     } catch (error) {
       console.error("Hiba történt a munkalapok lekérésekor:", error);

@@ -24,7 +24,6 @@ export default function WorkPrice() {
   async function fetchMunkak() {
     try {
       const response = await axios.get("/api/feladats");
-      console.log(response)
       setMunkak(response.data);
     } catch (error) {
       console.error("Hiba történt a munkadíjak lekérésekor:", error.data);
