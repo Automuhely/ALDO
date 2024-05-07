@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import useAuthContext from "../../../contexts/AuthContext";
+import useThemeContext from "../../../contexts/ThemeContext";
 
 export default function Futomu() {
   const { user, getUser } = useAuthContext();
-
+  const { darkTheme } = useThemeContext();
   useEffect(() => {
     console.log(user);
     if (!user) {
@@ -12,8 +13,8 @@ export default function Futomu() {
     }
   }, [user, getUser]);
   return (
-    <div style={{ textAlign: "center" }}>
-      <Container>
+    <div style={{ textAlign: "center" }} className={`${darkTheme.bg}`}>
+      <Container >
         <h1>FUTÓMŰ</h1>
         <h3>
           Mi utal arra, hogy baj van a futóművekkel? Ha furcsa, kopogó hangot

@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import { Container } from "react-bootstrap";
 import useAuthContext from "../../../contexts/AuthContext";
+import useThemeContext from "../../../contexts/ThemeContext";
 
 export default function AkummulatorCsere() {
   const { user, getUser } = useAuthContext();
-
+  const { darkTheme } = useThemeContext();
   useEffect(() => {
     console.log(user);
     if (!user) {
@@ -14,8 +15,8 @@ export default function AkummulatorCsere() {
   }, [user, getUser]);
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <Container>
+    <div style={{ textAlign: "center" }} className={`${darkTheme.bg}`}>
+      <Container >
         <h1>Akummulátor</h1>
         
         <h3>
