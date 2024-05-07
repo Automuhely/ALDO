@@ -122,7 +122,7 @@ export const AuthProvider = ({ children }) => {
 
   const ujMunka = async (adat) => {
     try {
-      const response = await axios.post(`/api/feladats/`, adat);
+      const response = await axios.post(`/api/munkaars`, adat);
       console.log(adat);
       return response.data;
     } catch (error) {
