@@ -118,11 +118,11 @@ export default function MyNav() {
             )}
           </Nav>
           {user && (
-            <Nav.Link href="/profil" className="text-nowrap ms-md-2 ms-lg-2 link-info">
+            <Nav.Link href="/profil" className="text-nowrap ms-sm-0 ms-md-0 ms-lg-2 link-info">
               {user.name}
             </Nav.Link>
           )}
-           <div className="me-0 ms-sm-0 ms-md-3 sm-lg-5 h3 d-flex">
+           <div className="me-0 ms-sm-0 ms-md-0 sm-lg-5 h3 d-flex">
                   <Form onClick={toggleTheme}>
                     <Form.Check type="switch" id="custom-switch" />
                   </Form>
