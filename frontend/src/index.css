@@ -89,8 +89,9 @@ li {
     width: 900px;
   }
 
+ 
   .worktableimg{
-    
+    display: none;
   }
 }
 
@@ -151,7 +152,8 @@ li {
     width: 100%;
   }
 
-  .worktable thead,
+
+  /* .worktable thead,
   .worktable tbody,
   .worktable th,
   .worktable td,
@@ -207,5 +209,5 @@ li {
   .worktable td button {
     max-width: 200px;
     width: 100%; 
-  }
+  } */
 }
