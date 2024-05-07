@@ -14,7 +14,6 @@ export default function WorkProcesses() {
   const [ElNemKezdetMunkak, setElNemKezdetMunkak] = useState([]);
   const [BefejezettMunkak, setBefejezettMunkak] = useState([]);
   const { csrf, user, getUser } = useAuthContext();
-  const [token, setToken] = useState();
   const { darkTheme } = useThemeContext();
   const [showForm, setShowForm] = useState(false);
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function WorkProcesses() {
       getUser();
     }
     fetchData();
-  }, []);
+  }, [user]);
 
   async function fetchData() {
     try {

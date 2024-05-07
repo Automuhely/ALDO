@@ -18,12 +18,12 @@ export default function WorkPrice() {
       getUser();
     }
     fetchMunkak();
-  }, []);
+  }, [getUser, user]);
   
  
   async function fetchMunkak() {
     try {
-      const response = await axios.get("/api/feladats");
+      const response = await axios.get("/api/munkaars");
       setMunkak(response.data);
     } catch (error) {
       console.error("Hiba történt a munkadíjak lekérésekor:", error.data);

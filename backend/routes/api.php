@@ -67,15 +67,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
             // árakat és feladatokat csak a vezetőszerelő tud módosítani
             
             //Route::put('/feladats/{feladat}', [FeladatController::class, 'update']);
-            Route::put('/munkaarak/{id}', [MunkaArController::class, 'update']);
+            Route::put('/munkaars/{id}', [MunkaArController::class, 'update']);
             Route::post('/feladats', [FeladatController::class, 'store']);
-            Route::post('/munkaarak', [MunkaArController::class, 'store']);
+            Route::post('/munkaars', [MunkaArController::class, 'store']);
 
             // törléshez vezetőszerelő engedélyre van szükség
             Route::delete('/users/{user}', [UserController::class, 'destroy']);
             Route::delete('/autos/{auto}', [AutoController::class, 'destroy']);
            // Route::delete('/feladats/{id}', [FeladatController::class, 'destroy']);
-            Route::delete('/munkaarak/{id}', [MunkaArController::class, 'destroy']);
+            Route::delete('/munkaars/{id}', [MunkaArController::class, 'destroy']);
             Route::delete('/munkalaps/{munkalap}', [MunkalapController::class, 'destroy']);
             Route::delete('/munkalaptetels/{munkalaptetel}', [MunkalapTetelController::class, 'destroy']);
             
@@ -85,8 +85,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::get('/feladats/{feladat}', [FeladatController::class, 'show']);
 Route::get('/feladats', [FeladatController::class, 'index']);
-Route::get('/munkaarak/{id}', [MunkaArController::class, 'show']);
-Route::get('/munkaarak', [MunkaArController::class, 'index']);
+Route::get('/munkaars/{id}', [MunkaArController::class, 'show']);
+Route::get('/munkaars', [MunkaArController::class, 'index']);
 
 Route::post('/emailkuld', [MailController::class, 'store']);
 // Route::post('/send_mail', [MailController::class]);
