@@ -47,11 +47,11 @@ export default function WorkPrice() {
       )}
       {showForm && <WorkTableForm />}
       <Row>
-        <Col xs={12} md={6} className="">
+        <Col xs={12} md={8} className="">
           <MunkaTable munkak={munkak} />
         </Col>
-        <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
-          <img src="/img/dhiva-krishna-YApS6TjKJ9c-unsplash.jpg" alt="" className="img-fluid worktableimg" />
+        <Col xs={12} md={4} className="d-flex align-items-center justify-content-center worktableimg">
+          <img src="/img/dhiva-krishna-YApS6TjKJ9c-unsplash.jpg" alt="" className="img-fluid " />
         </Col>
       </Row>
     </Container>
