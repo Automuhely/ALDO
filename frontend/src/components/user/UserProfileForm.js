@@ -92,7 +92,7 @@ export default function UserProfileForm() {
   return (
     <Col
       className="justify-content-center align-items-center p-2 border bg-light"
-      style={{ minHeight: "35em" }}
+      style={{ minHeight: "35em"}}
     >
       <h4 className="text-center text-bg-primary p-3">Profil</h4>
       <Table id="userForm">
@@ -113,9 +113,13 @@ export default function UserProfileForm() {
                 style={{
                   visibility: isProfilSzerkesztheto ? "visible" : "hidden",
                   position: "absolute",
-                  right: 100,
+                  right: "2.1em",
                   top: "50%",
                   transform: "translateY(-50%)",
+                  width: "4em",
+                  fontSize: "1.5em",
+                  margin: "0",
+                  padding: "0",                  
                 }}
               >
                 Mentés
