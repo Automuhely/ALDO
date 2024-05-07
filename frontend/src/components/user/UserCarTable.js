@@ -9,7 +9,7 @@ export default function UserCarTable(props) {
       className="justify-content-center align-items-center p-2 border bg-light"
     >
       <h4 className="text-bg-primary p-3">Autóim</h4>
-      {!props.autoim ? (
+      {!props.autoim !==null  ? (
         <>
           <div className="text-center">Nincs még autód rögzítve.</div>
         </>
