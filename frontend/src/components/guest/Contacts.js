@@ -43,7 +43,7 @@ export default function Contacts() {
           rendszam:rendszam,
           _token: token, 
         };
-        console.log("Adatok:", adat);
+       // console.log("Adatok:", adat);
         await Kuldes(adat);
         alert("Email sikeresen elküldve!");
       } catch (error) {
