@@ -47,7 +47,6 @@ export default function UserProfileForm() {
         setSzulido(user.szulido);
       }
     }
-    console.log("profileform");
   }, [user, getUser]);
 
   const bekuld = async (e) => {
@@ -66,7 +65,7 @@ export default function UserProfileForm() {
 
       let vegpont = "/api/users/" + user.id;
       const response = await axios.put(vegpont, adat);
-      console.log("Profil beküldés SIKERES", response.data);
+      // console.log("Profil beküldés SIKERES");
       setIsProfilSzerkesztheto(false);
       setProfilErrors("");
       alert("Sikeres beküldés.");
