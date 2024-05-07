@@ -32,9 +32,9 @@ háttérképek
 számla megtekintése
 képfeltöltési lehetőség
 számla szerkesztése ?
-kapcsolati űrlapon a térkép telefon nézetben nem jó
-login register reszponzivitás
-loginnál elfelejtett jelszó mehet kapcsolathoz
+kapcsolati űrlapon a térkép telefon nézetben nem jó                               x
+login register reszponzivitás                                                     x
+loginnál elfelejtett jelszó mehet kapcsolathoz                                    x
 mentés gomb a profilomba
 menűpont vezetőszerelőnél elcsuszott
-egyedi tárgy az emaileknél
+egyedi tárgy az emaileknél                                                        x
