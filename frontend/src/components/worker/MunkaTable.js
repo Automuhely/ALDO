@@ -30,7 +30,7 @@ export default function MunkaTable({ munkak }) {
       const token = await csrf();
       const data = { id, ara: editedAra[id], _token: token };
       console.log("Munka megnevezése:", id);
-      const response = await axios.put(`/api/feladats/${id}`, data);
+      const response = await axios.put(`/api/munkaarak/${id}`, data);
       console.log("Sikeres munka ár szerkesztése!");
       alert("Sikeres munka ár szerkesztése!");
       toggleEditing(id);
@@ -47,7 +47,7 @@ export default function MunkaTable({ munkak }) {
       const data = { id, _token: token };
       console.log("Munka ár id:", id);
       console.log("Felhasználó: ",user)
-      const response = await axios.delete(`/api/feladats/${id}`, { data }); 
+      const response = await axios.delete(`/api/munkaarak/${id}`, { data }); 
       console.log("Sikeres munka ár törlése!");
       window.location.reload();
       alert("Sikeres munka ár törlése!");
