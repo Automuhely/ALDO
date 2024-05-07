@@ -30,7 +30,6 @@ export default function UserProfile() {
       szamlakBetolt();
       markakBetolt();
     }
-    console.log("render");
   }, [user, getUser]);
 
   async function markakBetolt() {

@@ -45,7 +45,7 @@ export default function UserAutosForm(props) {
       evjarat: evjarat,
       _token: token,
     };
-    console.log("Új autó beküldés...", adat);
+    // console.log("Új autó beküldés...", adat);
 
     try {
       const response = await axios.post("/api/autos", adat);
