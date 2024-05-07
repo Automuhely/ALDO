@@ -21,7 +21,7 @@ export default function Home() {
       src: "img/Akkumulator_csere.jpg",
       title: "Akkumulátor csere",
     },
-    { link: "#Futómű", src: "img/futomubeallítas.jpg", title: "Futómű" },
+    { link: "/Futomu", src: "img/futomubeallítas.jpg", title: "Futómű" },
     {
       link: "#Időszakos szerviz",
       src: "img/időszakos szerviz.jpg",
